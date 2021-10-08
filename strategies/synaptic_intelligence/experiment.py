@@ -39,10 +39,10 @@ default_cifar10_eval_transform = transforms.Compose([
 ])
 
 
-class TestSI(unittest.TestCase):
-    def test_smnist(self):
+class SynapticIntelligence(unittest.TestCase):
+    def test_smnist(self, override_args=None):
         args = create_default_args({'cuda': 0, 'si_lambda': 1, 'si_eps': 0.001, 'epochs': 10,
-                                    'learning_rate': 0.001, 'train_mb_size': 64})
+                                    'learning_rate': 0.001, 'train_mb_size': 64}, override_args)
 
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
@@ -73,11 +73,12 @@ class TestSI(unittest.TestCase):
         print(f"SI-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('si', 'smnist'))
-        self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+        if args.check:
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
-    def test_pmnist(self):
+    def test_pmnist(self, override_args=None):
         args = create_default_args({'cuda': 0, 'si_lambda': 0.1, 'si_eps': 0.1, 'epochs': 20,
-                                    'learning_rate': 0.001, 'train_mb_size': 256})
+                                    'learning_rate': 0.001, 'train_mb_size': 256}, override_args)
 
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
@@ -107,11 +108,12 @@ class TestSI(unittest.TestCase):
         print(f"SI-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('si', 'pmnist'))
-        self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+        if args.check:
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
-    # def test_scifar(self):
+    # def test_scifar(self, override_args=None):
     #     args = create_default_args({'cuda': 0, 'si_lambda': 0.1, 'si_eps': 0.001, 'epochs': 60,
-    #                                 'learning_rate': 0.001, 'train_mb_size': 256})
+    #                                 'learning_rate': 0.001, 'train_mb_size': 256}, override_args)
     #
     #     device = torch.device(f"cuda:{args.cuda}"
     #                           if torch.cuda.is_available() and
@@ -158,4 +160,5 @@ class TestSI(unittest.TestCase):
     #     print(f"SI-SCIFAR Average Stream Accuracy: {avg_stream_acc:.2f}")
     #
     #     target_acc = float(get_target_result('si', 'scifar'))
-    #     self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+    #     if args.check:
+    #         self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
