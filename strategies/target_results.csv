@@ -1,0 +1,4 @@
+strategy,benchmark,result
+si,smnist,0.99
+si,pmnist,0.99
+si,scifar,[0.99 0.98]
