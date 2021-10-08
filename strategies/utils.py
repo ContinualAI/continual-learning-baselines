@@ -10,7 +10,7 @@ from pandas import read_csv
 
 def get_target_result(strat_name, bench_name):
     p = os.path.join(Path(inspect.getabsfile(strategies)).parent, 'target_results.csv')
-    data = read_csv(p, sep=',')
+    data = read_csv(p, sep=',', comment='#')
     target = data[(data['strategy'] == strat_name) & (data['benchmark'] == bench_name)]['result'].values[0].strip()
     if isinstance(target, str) and target.startswith('[') and target.endswith(']'):
         target = pandas_to_list(target)
