@@ -2,5 +2,5 @@
 # or a list in the format [number number number ...]
 # use spaces, not commas, to separate elements of the list
 strategy,benchmark,result
-si,smnist,0.99
-si,pmnist,0.99
+si,smnist,0.97
+si,pmnist,0.94

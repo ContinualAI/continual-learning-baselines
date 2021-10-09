@@ -19,7 +19,7 @@ def get_target_result(strat_name: str, bench_name: str):
 
     p = os.path.join(Path(inspect.getabsfile(strategies)).parent, 'target_results.csv')
     data = read_csv(p, sep=',', comment='#')
-    target = data[(data['strategy'] == strat_name) & (data['benchmark'] == bench_name)]['result'].values[0].strip()
+    target = data[(data['strategy'] == strat_name) & (data['benchmark'] == bench_name)]['result'].values[0]
     if isinstance(target, str) and target.startswith('[') and target.endswith(']'):
         target = pandas_to_list(target)
     else:
@@ -28,7 +28,7 @@ def get_target_result(strat_name: str, bench_name: str):
 
 
 def pandas_to_list(input_str):
-    return [float(el) for el in input_str.strip('[]').split(' ')]
+    return [float(el) for el in input_str.strip('[] ').split(' ')]
 
 
 def get_average_metric(metric_dict: dict, metric_name: str = 'Top1_Acc_Stream'):
