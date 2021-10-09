@@ -46,13 +46,14 @@ class COPE(unittest.TestCase):
         cope = avl.training.plugins.CoPEPlugin(mem_size=args.mem_size, alpha=args.alpha,
                                                p_size=args.featsize, n_classes=n_classes)
 
-        cl_strategy = avl.training.Naive(model, torch.optim.SGD(model.parameters(), lr=0.01),
-                            cope.ppp_loss,  # CoPE PPP-Loss
-                            train_mb_size=args.batch_size, train_epochs=args.epochs,
-                            eval_mb_size=100, device=device,
-                            plugins=[cope],
-                            evaluator=eval_plugin
-                            )
+        cl_strategy = avl.training.Naive(
+            model, torch.optim.SGD(model.parameters(), lr=0.01),
+            cope.ppp_loss,  # CoPE PPP-Loss
+            train_mb_size=args.batch_size, train_epochs=args.epochs,
+            eval_mb_size=100, device=device,
+            plugins=[cope],
+            evaluator=eval_plugin
+            )
 
         cl_strategy.train(benchmark.train_stream)
         res = cl_strategy.eval(benchmark.test_stream)
