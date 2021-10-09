@@ -7,9 +7,9 @@ from avalanche.benchmarks.datasets.dataset_utils import default_dataset_location
 from avalanche.benchmarks.utils.dataset_utils import SubsetWithTargets
 from torchvision.datasets import CIFAR10, CIFAR100
 from torchvision import transforms
-
 from avalanche.evaluation import metrics as metrics
-from strategies.utils import create_default_args, MultiHeadMLP, get_average_metric, SI_CNN, get_target_result
+from models import MultiHeadMLP, SI_CNN
+from strategies.utils import create_default_args, get_average_metric, get_target_result
 
 
 def get_cifar_dataset(get_10=True):
@@ -40,7 +40,14 @@ default_cifar10_eval_transform = transforms.Compose([
 
 
 class SynapticIntelligence(unittest.TestCase):
+    """
+    Reproducing Synaptic Intelligence experiments from paper
+    "Continual Learning Through Synaptic Intelligence" by Zenke et. al. (2017).
+    http://proceedings.mlr.press/v70/zenke17a.html
+    """
+
     def test_smnist(self, override_args=None):
+        """Split MNIST benchmark"""
         args = create_default_args({'cuda': 0, 'si_lambda': 1, 'si_eps': 0.001, 'epochs': 10,
                                     'learning_rate': 0.001, 'train_mb_size': 64}, override_args)
 
@@ -57,7 +64,7 @@ class SynapticIntelligence(unittest.TestCase):
 
         evaluation_plugin = avl.training.plugins.EvaluationPlugin(
             metrics.accuracy_metrics(epoch=True, experience=True, stream=True),
-            loggers=[interactive_logger])
+            loggers=[interactive_logger], benchmark=benchmark)
 
         cl_strategy = avl.training.SynapticIntelligence(
             model, Adam(model.parameters(), lr=args.learning_rate), criterion,
@@ -77,6 +84,7 @@ class SynapticIntelligence(unittest.TestCase):
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
     def test_pmnist(self, override_args=None):
+        """Permuted MNIST benchmark"""
         args = create_default_args({'cuda': 0, 'si_lambda': 0.1, 'si_eps': 0.1, 'epochs': 20,
                                     'learning_rate': 0.001, 'train_mb_size': 256}, override_args)
 
@@ -92,7 +100,7 @@ class SynapticIntelligence(unittest.TestCase):
 
         evaluation_plugin = avl.training.plugins.EvaluationPlugin(
             metrics.accuracy_metrics(epoch=True, experience=True, stream=True),
-            loggers=[interactive_logger])
+            loggers=[interactive_logger], benchmark=benchmark)
 
         cl_strategy = avl.training.SynapticIntelligence(
             model, Adam(model.parameters(), lr=args.learning_rate), criterion,
@@ -112,6 +120,7 @@ class SynapticIntelligence(unittest.TestCase):
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
     # def test_scifar(self, override_args=None):
+    #     """Split CIFAR 10/100 benchmark"""
     #     args = create_default_args({'cuda': 0, 'si_lambda': 0.1, 'si_eps': 0.001, 'epochs': 60,
     #                                 'learning_rate': 0.001, 'train_mb_size': 256}, override_args)
     #
@@ -144,7 +153,7 @@ class SynapticIntelligence(unittest.TestCase):
     #
     #     evaluation_plugin = avl.training.plugins.EvaluationPlugin(
     #         metrics.accuracy_metrics(epoch=True, experience=True, stream=True),
-    #         loggers=[interactive_logger])
+    #         loggers=[interactive_logger], benchmark=benchmark)
     #
     #     cl_strategy = avl.training.SynapticIntelligence(
     #         model, Adam(model.parameters(), lr=args.learning_rate), criterion,

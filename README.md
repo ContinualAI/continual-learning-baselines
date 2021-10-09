@@ -32,6 +32,7 @@ Strategy | Benchmark | Command (`strategies.`) | Metrics
 ---|---|---|---
 Synaptic Intelligence | Split MNIST | SynapticIntelligence.test_smnist | Stream Accuracy
 Synaptic Intelligence | Permuted MNIST | SynapticIntelligence.test_pmnist | Stream Accuracy
+CoPE | Split MNIST | COPE.test_smnist | Stream Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
