@@ -9,7 +9,7 @@ from torchvision.datasets import CIFAR10, CIFAR100
 from torchvision import transforms
 
 from avalanche.evaluation import metrics as metrics
-from strategies.utils import create_default_args, MultiHeadMLP, get_average_stream_acc, SI_CNN, get_target_result
+from strategies.utils import create_default_args, MultiHeadMLP, get_average_metric, SI_CNN, get_target_result
 
 
 def get_cifar_dataset(get_10=True):
@@ -69,7 +69,7 @@ class SynapticIntelligence(unittest.TestCase):
             cl_strategy.train(experience)
             res = cl_strategy.eval(benchmark.test_stream)
 
-        avg_stream_acc = get_average_stream_acc(res)
+        avg_stream_acc = get_average_metric(res)
         print(f"SI-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('si', 'smnist'))
@@ -104,7 +104,7 @@ class SynapticIntelligence(unittest.TestCase):
             cl_strategy.train(experience)
             res = cl_strategy.eval(benchmark.test_stream)
 
-        avg_stream_acc = get_average_stream_acc(res)
+        avg_stream_acc = get_average_metric(res)
         print(f"SI-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('si', 'pmnist'))
@@ -156,7 +156,7 @@ class SynapticIntelligence(unittest.TestCase):
     #         cl_strategy.train(experience)
     #         res = cl_strategy.eval(benchmark.test_stream)
     #
-    #     avg_stream_acc = get_average_stream_acc(res)
+    #     avg_stream_acc = get_average_metric(res)
     #     print(f"SI-SCIFAR Average Stream Accuracy: {avg_stream_acc:.2f}")
     #
     #     target_acc = float(get_target_result('si', 'scifar'))
