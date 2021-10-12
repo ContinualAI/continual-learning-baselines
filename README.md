@@ -24,7 +24,7 @@ Feel free to check it out and support the project!
 The table below describes all the experiments currently implemented.
 
 The `Command` column refers to the console command needed to reproduce experiments
-from that strategy and benchmark. Please, remember to prepend `strategies.` to the command when executing it
+from that strategy and benchmark. Please, remember to prepend `python -m unittest strategies.` to the command when executing it
 from the project root directory.
 
 
