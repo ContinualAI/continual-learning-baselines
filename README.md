@@ -24,7 +24,7 @@ Feel free to check it out and support the project!
 The table below describes all the experiments currently implemented.
 
 The `Command` column refers to the console command needed to reproduce experiments
-from that strategy and benchmark. Please, remember to prepend `python -m unittest strategies.` to the command when executing it
+from that strategy and benchmark. Please, remember to prepend `strategies.` to the command when executing it
 from the project root directory.
 
 
@@ -33,6 +33,7 @@ Strategy | Benchmark | Command (`strategies.`) | Metrics
 Synaptic Intelligence | Split MNIST | SynapticIntelligence.test_smnist | Stream Accuracy
 Synaptic Intelligence | Permuted MNIST | SynapticIntelligence.test_pmnist | Stream Accuracy
 CoPE | Split MNIST | COPE.test_smnist | Stream Accuracy
+Deep Streaming LDA | CORe50 | DSLDA.test_core50 | Stream Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 

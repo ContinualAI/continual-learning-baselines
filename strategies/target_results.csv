@@ -5,3 +5,4 @@ strategy,benchmark,result
 si,smnist,0.97
 si,pmnist,0.94
 cope,smnist,0.93
+dslda,core50,0.79
