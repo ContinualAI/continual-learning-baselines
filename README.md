@@ -34,6 +34,7 @@ Synaptic Intelligence | Split MNIST | SynapticIntelligence.test_smnist | Stream 
 Synaptic Intelligence | Permuted MNIST | SynapticIntelligence.test_pmnist | Stream Accuracy
 CoPE | Split MNIST | COPE.test_smnist | Stream Accuracy
 Deep Streaming LDA | CORe50 | DSLDA.test_core50 | Stream Accuracy
+Elastic Weight Consolidation | Permuted MNIST | EWC.test_pmnist | Stream Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
