@@ -33,6 +33,12 @@ Strategy | Benchmark | Command (`strategies.`) | Metrics
 Synaptic Intelligence | Split MNIST | SynapticIntelligence.test_smnist | Stream Accuracy
 Synaptic Intelligence | Permuted MNIST | SynapticIntelligence.test_pmnist | Stream Accuracy
 CoPE | Split MNIST | COPE.test_smnist | Stream Accuracy
+Deep Streaming LDA | CORe50 | DSLDA.test_core50 | Stream Accuracy
+Elastic Weight Consolidation | Permuted MNIST | EWC.test_pmnist | Stream Accuracy
+Average GEM | Permuted MNIST | AGEM.test_pmnist | Stream Accuracy
+Average GEM | Split CIFAR 100 | AGEM.test_scifar100 | Stream Accuracy
+GEM | Permuted MNIST | GEM.test_pmnist | Stream Accuracy
+GEM | Split CIFAR 100 | GEM.test_scifar100 | Stream Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
@@ -81,7 +87,8 @@ to the community. Would you like to join us? The steps are easy!
 ### Write an experiment
 1. Create a folder with appropriate name (e.g., strategy name)
 2. Fill the `experiment.py` file with your code (one method per benchmark) and place it under the newly created directory
-3. Make the main class of your experiment visible from outside the folder (in `__init__.py` within your folder add `from .experiment import YourClassName`)
+3. Make the main class of your experiment visible from outside the folder (in `__init__.py` within your folder add `from .experiment import YourClassName`). Check if other `__init__` files need similar modifications.
 4. Add to `target_results.csv` the expected result for your experiment. You can add a number or a list of numbers.
+5. Update table in `README.md`.
 
-Check out the synaptic intelligence example to better understand the logic of experiments.
+Check out one of the existing strategies to better understand the logic of the experiments.

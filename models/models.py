@@ -85,4 +85,4 @@ class SI_CNN(MultiTaskModule):
         return x
 
 
-__all__ = ['MultiHeadMLP', 'MLP', 'SI_CNN', ]
+__all__ = ['MultiHeadMLP', 'MLP', 'SI_CNN']
