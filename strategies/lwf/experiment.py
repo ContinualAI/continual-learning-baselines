@@ -102,7 +102,7 @@ class LwF(unittest.TestCase):
 
     def test_stinyimagenet(self, override_args=None):
         """Split Tiny ImageNet benchmark"""
-        args = create_default_args({'cuda': 3,
+        args = create_default_args({'cuda': 0,
                                     'lwf_alpha': 10, 'lwf_temperature': 2, 'epochs': 70,
                                     'learning_rate': 0.0001, 'train_mb_size': 200}, override_args)
 
