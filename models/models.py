@@ -4,18 +4,18 @@ from torch import nn
 
 class MultiHeadMLP(MultiTaskModule):
     def __init__(self, input_size=28 * 28, hidden_size=256, hidden_layers=2,
-                 drop_rate=0):
+                 drop_rate=0, relu_act=True):
         super().__init__()
         self._input_size = input_size
 
         layers = nn.Sequential(*(nn.Linear(input_size, hidden_size),
-                                 nn.ReLU(inplace=True),
+                                 nn.ReLU(inplace=True) if relu_act else nn.Tanh(),
                                  nn.Dropout(p=drop_rate)))
         for layer_idx in range(hidden_layers - 1):
             layers.add_module(
                 f"fc{layer_idx + 1}", nn.Sequential(
                     *(nn.Linear(hidden_size, hidden_size),
-                      nn.ReLU(inplace=True),
+                      nn.ReLU(inplace=True) if relu_act else nn.Tanh(),
                       nn.Dropout(p=drop_rate))))
 
         self.features = nn.Sequential(*layers)
@@ -31,18 +31,18 @@ class MultiHeadMLP(MultiTaskModule):
 
 class MLP(nn.Module):
     def __init__(self, input_size=28 * 28, hidden_size=256, hidden_layers=2,
-                 output_size=10, drop_rate=0):
+                 output_size=10, drop_rate=0, relu_act=True):
         super().__init__()
         self._input_size = input_size
 
         layers = nn.Sequential(*(nn.Linear(input_size, hidden_size),
-                                 nn.ReLU(inplace=True),
+                                 nn.ReLU(inplace=True) if relu_act else nn.Tanh(),
                                  nn.Dropout(p=drop_rate)))
         for layer_idx in range(hidden_layers - 1):
             layers.add_module(
                 f"fc{layer_idx + 1}", nn.Sequential(
                     *(nn.Linear(hidden_size, hidden_size),
-                      nn.ReLU(inplace=True),
+                      nn.ReLU(inplace=True) if relu_act else nn.Tanh(),
                       nn.Dropout(p=drop_rate))))
 
         self.features = nn.Sequential(*layers)

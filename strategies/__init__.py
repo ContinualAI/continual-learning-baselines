@@ -5,3 +5,4 @@ from .dslda import DSLDA
 from .ewc import EWC
 from .agem import AGEM
 from .gem import GEM
+from .lwf import LwF

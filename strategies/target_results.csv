@@ -11,3 +11,6 @@ agem,pmnist,0.81
 agem,scifar100,0.57
 gem,pmnist,0.83
 gem,scifar100,0.63
+lwf,smnist,0.31
+lwf,pmnist,0.51
+lwf,stiny-imagenet,0.42
