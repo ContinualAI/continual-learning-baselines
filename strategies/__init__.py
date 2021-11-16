@@ -6,3 +6,4 @@ from .ewc import EWC
 from .agem import AGEM
 from .gem import GEM
 from .lwf import LwF
+from .gss import GSS

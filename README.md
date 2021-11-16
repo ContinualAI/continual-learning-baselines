@@ -42,6 +42,7 @@ GEM | Split CIFAR 100 | GEM.test_scifar100 | Stream Accuracy
 LwF | Split MNIST | LwF.test_smnist | Stream Accuracy
 LwF | Permuted MNIST | LwF.test_pmnist | Stream Accuracy
 LwF | Split Tiny ImageNet | LwF.test_stinyimagenet | Stream Accuracy
+GSS | Split MNIST | GSS.test_smnist | Stream Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
