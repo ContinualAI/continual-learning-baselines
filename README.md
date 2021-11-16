@@ -39,6 +39,7 @@ Average GEM | Permuted MNIST | AGEM.test_pmnist | Stream Accuracy
 Average GEM | Split CIFAR 100 | AGEM.test_scifar100 | Stream Accuracy
 GEM | Permuted MNIST | GEM.test_pmnist | Stream Accuracy
 GEM | Split CIFAR 100 | GEM.test_scifar100 | Stream Accuracy
+GSS-greedy | Split MNIST | GSS.test_smnist | Stream Accuracy
 LwF | Split MNIST | LwF.test_smnist | Stream Accuracy
 LwF | Permuted MNIST | LwF.test_pmnist | Stream Accuracy
 LwF | Split Tiny ImageNet | LwF.test_stinyimagenet | Stream Accuracy
