@@ -14,3 +14,4 @@ gem,scifar100,0.63
 lwf,smnist,0.31
 lwf,pmnist,0.51
 lwf,stiny-imagenet,0.42
+gss,smnist,0.78
