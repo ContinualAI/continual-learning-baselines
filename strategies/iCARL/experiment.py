@@ -26,9 +26,6 @@ from avalanche.training.strategies.icarl import ICaRL
 
 
 def get_dataset_per_pixel_mean(dataset):
-    """
-        TODO: comment, param, output
-    """
     result = None
     patterns_count = 0
 
@@ -48,9 +45,6 @@ def get_dataset_per_pixel_mean(dataset):
 
 
 def icarl_cifar100_augment_data(img):
-    """
-        TODO: comment, param, out
-    """
     img = img.numpy()
     padded = np.pad(img, ((0, 0), (4, 4), (4, 4)), mode='constant')
     random_cropped = np.zeros(img.shape, dtype=np.float32)
@@ -68,10 +62,6 @@ def icarl_cifar100_augment_data(img):
 
 
 class Config(dict):
-    """
-        TODO: comment
-    """
-
     def __getattribute__(self, key):
         try:
             return self[key]
@@ -94,7 +84,7 @@ class iCARL(unittest.TestCase):
 
     def test_iCIFAR100_batch10(self, override_args=None):
         """
-            iCIFAR-100 with 10 number of experiences - benchmark
+            iCIFAR-100 with 10 batches - benchmark
         """
         # config
         config = Config()
@@ -198,4 +188,4 @@ class iCARL(unittest.TestCase):
         print("dict_iCaRL_aia= ", dict_iCaRL_aia)
         print(f"iCIFAR100-batch=10 Average Incremental Accuracy: {avg_ia:.5f}")
 
-        self.assertAlmostEqual(target_acc, avg_ia, delta=0.03)
+        self.assertAlmostEqual(target_acc, avg_ia, delta=0.02)
