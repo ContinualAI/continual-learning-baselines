@@ -15,8 +15,7 @@ from torch.optim import SGD
 from torchvision import transforms
 from avalanche.benchmarks.generators import nc_benchmark
 from avalanche.training.plugins import EvaluationPlugin
-from avalanche.evaluation.metrics import ExperienceAccuracy, StreamAccuracy, \
-    EpochAccuracy
+from avalanche.evaluation.metrics import ExperienceAccuracy, StreamAccuracy
 from avalanche.logging.interactive_logging import InteractiveLogger
 import random
 import numpy as np
@@ -93,7 +92,7 @@ class iCARL(unittest.TestCase):
         https://openaccess.thecvf.com/content_cvpr_2017/html/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.html
     """
 
-    def test_iCIFAR100_batch10(self):
+    def test_iCIFAR100_batch10(self, override_args=None):
         """
             iCIFAR-100 with 10 number of experiences - benchmark
         """
@@ -164,7 +163,7 @@ class iCARL(unittest.TestCase):
             shuffle=False,
             fixed_class_order=config.fixed_class_order)
 
-        evaluator = EvaluationPlugin(EpochAccuracy(), ExperienceAccuracy(),
+        evaluator = EvaluationPlugin(ExperienceAccuracy(),
                                      StreamAccuracy(),
                                      loggers=[InteractiveLogger()])
 
@@ -185,14 +184,18 @@ class iCARL(unittest.TestCase):
             plugins=[sched], device=device, evaluator=evaluator
         )
 
+        # Dict to iCaRL Evaluation Protocol: Average Incremental Accuracy
+        dict_iCaRL_aia = {}
         # Training and eval
         for i, exp in enumerate(scenario.train_stream):
             eval_exps = [e for e in scenario.test_stream][:i + 1]
             strategy.train(exp, num_workers=4)
             res = strategy.eval(eval_exps, num_workers=4)
+            dict_iCaRL_aia['Top1_Acc_Stream/Exp'+str(i)] = res['Top1_Acc_Stream/eval_phase/test_stream/Task000']
 
-        avg_stream_acc = get_average_metric(res)
-        print(f"iCIFAR100-batch=10 Average Incremental Accuracy: {avg_stream_acc:.2f}")
-        target_acc = 64.1  # get_target_result('iCaRL', 'benchmark')
+        avg_ia = get_average_metric(dict_iCaRL_aia)
+        target_acc = 0.641  # get_target_result('iCaRL', 'benchmark')
+        print("dict_iCaRL_aia= ", dict_iCaRL_aia)
+        print(f"iCIFAR100-batch=10 Average Incremental Accuracy: {avg_ia:.5f}")
 
-        self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
+        self.assertAlmostEqual(target_acc, avg_ia, delta=0.03)
