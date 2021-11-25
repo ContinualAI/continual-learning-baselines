@@ -44,6 +44,7 @@ LwF | Split MNIST | LwF.test_smnist | Stream Accuracy
 LwF | Permuted MNIST | LwF.test_pmnist | Stream Accuracy
 LwF | Split Tiny ImageNet | LwF.test_stinyimagenet | Stream Accuracy
 GSS | Split MNIST | GSS.test_smnist | Stream Accuracy
+iCaRL | scifar100 | iCARL.test_scifar100 | Average Incremental Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
