@@ -82,9 +82,9 @@ class iCARL(unittest.TestCase):
         https://openaccess.thecvf.com/content_cvpr_2017/html/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.html
     """
 
-    def test_iCIFAR100_batch10(self, override_args=None):
+    def test_scifar100(self, override_args=None):
         """
-            iCIFAR-100 with 10 batches - benchmark
+            scifar100 with 10 batches
         """
         # config
         config = Config()
@@ -186,6 +186,6 @@ class iCARL(unittest.TestCase):
         avg_ia = get_average_metric(dict_iCaRL_aia)
         target_acc = 0.641  # get_target_result('iCaRL', 'benchmark')
         print("dict_iCaRL_aia= ", dict_iCaRL_aia)
-        print(f"iCIFAR100-batch=10 Average Incremental Accuracy: {avg_ia:.5f}")
+        print(f"scifar100-batch=10 Average Incremental Accuracy: {avg_ia:.5f}")
 
         self.assertAlmostEqual(target_acc, avg_ia, delta=0.02)

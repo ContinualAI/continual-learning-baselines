@@ -15,4 +15,4 @@ lwf,smnist,0.31
 lwf,pmnist,0.51
 lwf,stiny-imagenet,0.42
 gss,smnist,0.78
-iCaRL, iCIFAR100, 0.62
+iCaRL,scifar100, 0.62
