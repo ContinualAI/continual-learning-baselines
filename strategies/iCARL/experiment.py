@@ -1,6 +1,3 @@
-import sys
-sys.path.append(r'/disk1/semola/avalanche')
-
 import unittest
 
 from os.path import expanduser
