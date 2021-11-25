@@ -62,7 +62,7 @@ class iCARL(unittest.TestCase):
                                     98, 13, 99, 7, 34, 55, 54, 26, 35, 39]
         # config (NOTE: memory_size==k)
         args = create_default_args({'cuda': 0, 'batch_size': 128, 'nb_exp': 10,
-                                    'memory_size': 2000, 'epochs': 1, 'lr_base': 2.,
+                                    'memory_size': 2000, 'epochs': 70, 'lr_base': 2.,
                                     'lr_milestones': [49, 63], 'lr_factor': 5.,
                                     'wght_decay': 0.00001, 'train_mb_size': 256,
                                     'fixed_class_order': fixed_class_order, 'seed': 2222}, override_args)
