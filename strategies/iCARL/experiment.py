@@ -12,13 +12,13 @@ from torch.optim import SGD
 from torchvision import transforms
 from avalanche.benchmarks.generators import nc_benchmark
 from avalanche.training.plugins import EvaluationPlugin
-from avalanche.evaluation.metrics import ExperienceAccuracy, StreamAccuracy
+from avalanche.evaluation.metrics import *
 from avalanche.logging.interactive_logging import InteractiveLogger
 import random
 import numpy as np
 from torch.optim.lr_scheduler import MultiStepLR
 
-from strategies.utils import get_average_metric
+from strategies.utils import get_average_metric, create_default_args
 from avalanche.training.strategies.icarl import ICaRL
 
 
@@ -58,17 +58,6 @@ def icarl_cifar100_augment_data(img):
     return t
 
 
-class Config(dict):
-    def __getattribute__(self, key):
-        try:
-            return self[key]
-        except KeyError:
-            raise AttributeError(key)
-
-    def __setattr__(self, key, value):
-        self[key] = value
-
-
 class iCARL(unittest.TestCase):
     """
         Reproducing iCaRL experiments from paper
@@ -83,18 +72,8 @@ class iCARL(unittest.TestCase):
         """
             scifar100 with 10 batches
         """
-        # config
-        config = Config()
-        config.batch_size = 128
-        config.nb_exp = 10
-        config.memory_size = 2000  # K
-        config.epochs = 70
-        config.lr_base = 2.
-        config.lr_milestones = [49, 63]
-        config.lr_factor = 5.
-        config.wght_decay = 0.00001
         # class incremental learning: classes mutual exclusive
-        config.fixed_class_order = [87, 0, 52, 58, 44, 91, 68, 97, 51, 15,
+        fixed_class_order = [87, 0, 52, 58, 44, 91, 68, 97, 51, 15,
                                     94, 92, 10, 72, 49, 78, 61, 14, 8, 86,
                                     84, 96, 18, 24, 32, 45, 88, 11, 4, 67,
                                     69, 66, 77, 47, 79, 93, 29, 50, 57, 83,
@@ -104,16 +83,16 @@ class iCARL(unittest.TestCase):
                                     60, 19, 70, 90, 89, 43, 5, 42, 65, 76,
                                     40, 30, 23, 85, 2, 95, 56, 48, 71, 64,
                                     98, 13, 99, 7, 34, 55, 54, 26, 35, 39]
-        config.seed = 2222
-
+        # config (NOTE: memory_size==k)
+        args = create_default_args({'cuda': 0, 'batch_size': 128, 'nb_exp': 10,
+                                    'memory_size': 2000, 'epochs': 1, 'lr_base': 2.,
+                                    'lr_milestones': [49, 63], 'lr_factor': 5.,
+                                    'wght_decay': 0.00001, 'train_mb_size': 256,
+                                    'fixed_class_order': fixed_class_order, 'seed': 2222}, override_args)
         #
-        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        torch.manual_seed(config.seed)
-        torch.cuda.manual_seed(config.seed)
-        np.random.seed(config.seed)
-        random.seed(config.seed)
-        torch.backends.cudnn.enabled = False
-        torch.backends.cudnn.deterministic = True
+        device = torch.device(f"cuda:{args.cuda}"
+                              if torch.cuda.is_available() and
+                                 args.cuda >= 0 else "cpu")
 
         per_pixel_mean = get_dataset_per_pixel_mean(
             CIFAR100(expanduser("~") + "/.avalanche/data/cifar100/",
@@ -145,30 +124,31 @@ class iCARL(unittest.TestCase):
         scenario = nc_benchmark(
             train_dataset=train_set,
             test_dataset=test_set,
-            n_experiences=config.nb_exp,
-            task_labels=False, seed=config.seed,
+            n_experiences=args.nb_exp,
+            task_labels=False, seed=args.seed,
             shuffle=False,
-            fixed_class_order=config.fixed_class_order)
-
-        evaluator = EvaluationPlugin(ExperienceAccuracy(),
-                                     StreamAccuracy(),
-                                     loggers=[InteractiveLogger()])
+            fixed_class_order=args.fixed_class_order)
 
         model: IcarlNet = make_icarl_net(num_classes=100)
         model.apply(initialize_icarl_net)
 
-        optim = SGD(model.parameters(), lr=config.lr_base,
-                    weight_decay=config.wght_decay, momentum=0.9)
+        optim = SGD(model.parameters(), lr=args.lr_base,
+                    weight_decay=args.wght_decay, momentum=0.9)
         sched = LRSchedulerPlugin(
-            MultiStepLR(optim, config.lr_milestones, gamma=1.0 / config.lr_factor))
+            MultiStepLR(optim, args.lr_milestones, gamma=1.0 / args.lr_factor))
+
+        interactive_logger = InteractiveLogger()
+        eval_plugin = EvaluationPlugin(
+            accuracy_metrics(experience=True, stream=True),
+            loggers=[interactive_logger])
 
         strategy = ICaRL(
             model.feature_extractor, model.classifier, optim,
-            config.memory_size,
+            args.memory_size,
             buffer_transform=transforms.Compose([icarl_cifar100_augment_data]),
-            fixed_memory=True, train_mb_size=config.batch_size,
-            train_epochs=config.epochs, eval_mb_size=config.batch_size,
-            plugins=[sched], device=device, evaluator=evaluator
+            fixed_memory=True, train_mb_size=args.batch_size,
+            train_epochs=args.epochs, eval_mb_size=args.batch_size,
+            plugins=[sched], device=device, evaluator=eval_plugin
         )
 
         # Dict to iCaRL Evaluation Protocol: Average Incremental Accuracy
