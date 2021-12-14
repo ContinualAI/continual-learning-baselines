@@ -28,23 +28,24 @@ from that strategy and benchmark. Please, remember to prepend `strategies.` to t
 from the project root directory.
 
 
-Strategy | Benchmark | Command (`strategies.`) | Metrics 
----|---|---|---
-Synaptic Intelligence | Split MNIST | SynapticIntelligence.test_smnist | Stream Accuracy
-Synaptic Intelligence | Permuted MNIST | SynapticIntelligence.test_pmnist | Stream Accuracy
-CoPE | Split MNIST | COPE.test_smnist | Stream Accuracy
-Deep Streaming LDA | CORe50 | DSLDA.test_core50 | Stream Accuracy
-Elastic Weight Consolidation | Permuted MNIST | EWC.test_pmnist | Stream Accuracy
-Average GEM | Permuted MNIST | AGEM.test_pmnist | Stream Accuracy
-Average GEM | Split CIFAR 100 | AGEM.test_scifar100 | Stream Accuracy
-GEM | Permuted MNIST | GEM.test_pmnist | Stream Accuracy
-GEM | Split CIFAR 100 | GEM.test_scifar100 | Stream Accuracy
-GSS-greedy | Split MNIST | GSS.test_smnist | Stream Accuracy
-LwF | Split MNIST | LwF.test_smnist | Stream Accuracy
-LwF | Permuted MNIST | LwF.test_pmnist | Stream Accuracy
-LwF | Split Tiny ImageNet | LwF.test_stinyimagenet | Stream Accuracy
-GSS | Split MNIST | GSS.test_smnist | Stream Accuracy
-iCaRL | Split CIFAR 100 | iCARL.test_scifar100 | Average Incremental Accuracy
+Strategy | Benchmark           | Command (`strategies.`)          | Metrics 
+---|---------------------|----------------------------------|---
+Synaptic Intelligence | Split MNIST         | SynapticIntelligence.test_smnist | Stream Accuracy
+Synaptic Intelligence | Permuted MNIST      | SynapticIntelligence.test_pmnist | Stream Accuracy
+CoPE | Split MNIST         | COPE.test_smnist                 | Stream Accuracy
+Deep Streaming LDA | CORe50              | DSLDA.test_core50                | Stream Accuracy
+Elastic Weight Consolidation | Permuted MNIST      | EWC.test_pmnist                  | Stream Accuracy
+Average GEM | Permuted MNIST      | AGEM.test_pmnist                 | Stream Accuracy
+Average GEM | Split CIFAR 100     | AGEM.test_scifar100              | Stream Accuracy
+GEM | Permuted MNIST      | GEM.test_pmnist                  | Stream Accuracy
+GEM | Split CIFAR 100     | GEM.test_scifar100               | Stream Accuracy
+GSS-greedy | Split MNIST         | GSS.test_smnist                  | Stream Accuracy
+LwF | Split MNIST         | LwF.test_smnist                  | Stream Accuracy
+LwF | Permuted MNIST      | LwF.test_pmnist                  | Stream Accuracy
+LwF | Split Tiny ImageNet | LwF.test_stinyimagenet           | Stream Accuracy
+GSS | Split MNIST         | GSS.test_smnist                  | Stream Accuracy
+iCaRL | Split CIFAR 100     | iCARL.test_scifar100             | Average Incremental Accuracy
+GDumb | Split MNIST         | GDumb.test_smnist                | Stream Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
