@@ -49,6 +49,13 @@ GDumb | Split MNIST         | GDumb.test_smnist                | Stream Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
+## Python dependencies for experiments
+Outside Python standard library, the main packages required to run the experiments are PyTorch, Avalanche and Pandas. 
+* **Avalanche**: `pip install avalanche-lib`. You can check out the guide on how to install Avalanche [here](https://avalanche.continualai.org/getting-started/how-to-install).
+* **PyTorch**: we recommend to follow [the official guide](https://pytorch.org/get-started/locally/).
+* **Pandas**: `pip install pandas`. [Official guide](https://pandas.pydata.org/docs/getting_started/install.html#installing-pandas).
+
+
 ## Run custom experiments with Python (recommended)
 Experiments can be run with a python script by simply:
 1. Creating an instance of the strategy object
