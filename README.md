@@ -51,7 +51,7 @@ The file `strategies/target_results.csv` lists the target metric value(s) for ea
 
 ## Python dependencies for experiments
 Outside Python standard library, the main packages required to run the experiments are PyTorch, Avalanche and Pandas. 
-* **Avalanche**: `pip install avalanche-lib`. You can check out the guide on how to install Avalanche [here](https://avalanche.continualai.org/getting-started/how-to-install).
+* **Avalanche**: `pip install avalanche-lib` (stable version). Alternatively, you can install the latest version of Avalanche directly from the master branch of github with `pip install git+https://github.com/ContinualAI/avalanche.git`. For more details, please check out the complete guide on how to install Avalanche [here](https://avalanche.continualai.org/getting-started/how-to-install). 
 * **PyTorch**: we recommend to follow [the official guide](https://pytorch.org/get-started/locally/).
 * **Pandas**: `pip install pandas`. [Official guide](https://pandas.pydata.org/docs/getting_started/install.html#installing-pandas).
 
