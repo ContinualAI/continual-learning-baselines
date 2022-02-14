@@ -30,19 +30,19 @@ from the project root directory.
 
 Strategy | Benchmark           | Command (`strategies.`)          | Metrics 
 ---|---------------------|----------------------------------|---
-Synaptic Intelligence | Split MNIST         | SynapticIntelligence.test_smnist | Stream Accuracy
-Synaptic Intelligence | Permuted MNIST      | SynapticIntelligence.test_pmnist | Stream Accuracy
+Synaptic Intelligence (SI) | Split MNIST         | SynapticIntelligence.test_smnist | Stream Accuracy
+Synaptic Intelligence (SI) | Permuted MNIST      | SynapticIntelligence.test_pmnist | Stream Accuracy
 CoPE | Split MNIST         | COPE.test_smnist                 | Stream Accuracy
-Deep Streaming LDA | CORe50              | DSLDA.test_core50                | Stream Accuracy
-Elastic Weight Consolidation | Permuted MNIST      | EWC.test_pmnist                  | Stream Accuracy
-Average GEM | Permuted MNIST      | AGEM.test_pmnist                 | Stream Accuracy
-Average GEM | Split CIFAR 100     | AGEM.test_scifar100              | Stream Accuracy
+Deep Streaming LDA (DSLDA) | CORe50              | DSLDA.test_core50                | Stream Accuracy
+Elastic Weight Consolidation (EWC) | Permuted MNIST      | EWC.test_pmnist                  | Stream Accuracy
+Average GEM (AGEM) | Permuted MNIST      | AGEM.test_pmnist                 | Stream Accuracy
+Average GEM (AGEM) | Split CIFAR 100     | AGEM.test_scifar100              | Stream Accuracy
 GEM | Permuted MNIST      | GEM.test_pmnist                  | Stream Accuracy
 GEM | Split CIFAR 100     | GEM.test_scifar100               | Stream Accuracy
 GSS-greedy | Split MNIST         | GSS.test_smnist                  | Stream Accuracy
-LwF | Split MNIST         | LwF.test_smnist                  | Stream Accuracy
-LwF | Permuted MNIST      | LwF.test_pmnist                  | Stream Accuracy
-LwF | Split Tiny ImageNet | LwF.test_stinyimagenet           | Stream Accuracy
+Learning without Forgetting (LwF) | Split MNIST         | LwF.test_smnist                  | Stream Accuracy
+Learning without Forgetting (LwF) | Permuted MNIST      | LwF.test_pmnist                  | Stream Accuracy
+Learning without Forgetting (LwF) | Split Tiny ImageNet | LwF.test_stinyimagenet           | Stream Accuracy
 GSS | Split MNIST         | GSS.test_smnist                  | Stream Accuracy
 iCaRL | Split CIFAR 100     | iCARL.test_scifar100             | Average Incremental Accuracy
 GDumb | Split MNIST         | GDumb.test_smnist                | Stream Accuracy
