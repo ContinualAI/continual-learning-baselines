@@ -60,7 +60,7 @@ class LwF(unittest.TestCase):
         print(f"LwF-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('lwf', 'smnist'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
     def test_pmnist(self, override_args=None):
@@ -97,7 +97,7 @@ class LwF(unittest.TestCase):
         print(f"LwF-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('lwf', 'pmnist'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
     def test_stinyimagenet(self, override_args=None):
@@ -134,5 +134,5 @@ class LwF(unittest.TestCase):
         print(f"LwF-SplitTinyImageNet Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('lwf', 'stiny-imagenet'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)

@@ -66,7 +66,7 @@ class GEM(unittest.TestCase):
         print(f"GEM-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('gem', 'pmnist'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
     def test_scifar100(self, override_args=None):
@@ -102,5 +102,5 @@ class GEM(unittest.TestCase):
         print(f"GEM-SCIFAR100 Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('gem', 'scifar100'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)

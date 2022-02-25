@@ -80,7 +80,7 @@ class SynapticIntelligence(unittest.TestCase):
         print(f"SI-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('si', 'smnist'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
     def test_pmnist(self, override_args=None):
@@ -116,7 +116,7 @@ class SynapticIntelligence(unittest.TestCase):
         print(f"SI-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('si', 'pmnist'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
     # def test_scifar(self, override_args=None):

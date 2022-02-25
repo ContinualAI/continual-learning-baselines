@@ -62,5 +62,5 @@ class COPE(unittest.TestCase):
         print(f"COPE-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('cope', 'smnist'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)

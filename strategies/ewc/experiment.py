@@ -51,5 +51,5 @@ class EWC(unittest.TestCase):
         print(f"EWC-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('ewc', 'pmnist'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)

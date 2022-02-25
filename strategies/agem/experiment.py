@@ -55,7 +55,7 @@ class AGEM(unittest.TestCase):
         print(f"AGEM-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('agem', 'pmnist'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
     def test_scifar100(self, override_args=None):
@@ -91,5 +91,5 @@ class AGEM(unittest.TestCase):
         print(f"AGEM-SCIFAR100 Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('agem', 'scifar100'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)

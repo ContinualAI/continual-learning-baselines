@@ -68,5 +68,5 @@ class DSLDA(unittest.TestCase):
         print(f"DSLDA-CORe50 Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('dslda', 'core50'))
-        if args.check:
+        if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
