@@ -100,7 +100,7 @@ class LwF(unittest.TestCase):
         if args.check and target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
 
-    def test_stinyimagenet(self, override_args=None):
+    def test_stinyimagenet(self, override_args=None, dataset_root=None):
         """Split Tiny ImageNet benchmark"""
         args = create_default_args({'cuda': 0,
                                     'lwf_alpha': 10, 'lwf_temperature': 2, 'epochs': 70,
@@ -110,7 +110,8 @@ class LwF(unittest.TestCase):
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
 
-        benchmark = avl.benchmarks.SplitTinyImageNet(10, return_task_id=True)
+        benchmark = avl.benchmarks.SplitTinyImageNet(
+            10, return_task_id=True, dataset_root=dataset_root)
         model = MultiHeadVGGSmall(n_classes=20)
         criterion = CrossEntropyLoss()
 
