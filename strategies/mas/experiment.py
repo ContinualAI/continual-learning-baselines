@@ -17,7 +17,7 @@ class MAS(unittest.TestCase):
     Reproducing Memory Aware Synapses experiments from paper
     "A continual learning survey: Defying forgetting in classification tasks"
     by De Lange et al.
-    https://www.pnas.org/content/114/13/3521
+    https://doi.org/10.1109/TPAMI.2021.3057446
     """
 
     def test_stinyimagenet(self, override_args=None, dataset_root=None):
