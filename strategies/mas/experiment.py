@@ -23,8 +23,8 @@ class MAS(unittest.TestCase):
     def test_stinyimagenet(self, override_args=None, dataset_root=None):
         """Split Tiny ImageNet benchmark"""
         args = create_default_args(
-            {'cuda': 0, 'lambda_reg': 1., 'alpha': 0.5,
-             'verbose': True, 'learning_rate': 0.0001,
+            {'cuda': 0, 'lambda_reg': 3., 'alpha': 0.5,
+             'verbose': True, 'learning_rate': 0.005,
              'train_mb_size': 200, 'epochs': 70}, override_args)
 
         device = torch.device(f"cuda:{args.cuda}"
@@ -63,23 +63,23 @@ class MAS(unittest.TestCase):
             cl_strategy.train(experience)
             res = cl_strategy.eval(benchmark.test_stream)
 
-        # if res is None:
-        #     raise Exception("No results found")
+        if res is None:
+            raise Exception("No results found")
 
-        # avg_stream_acc = get_average_metric(res)
-        # print("MAS-SplitTinyImageNet Average "
-        #       f"Stream Accuracy: {avg_stream_acc:.2f}")
+        avg_stream_acc = get_average_metric(res)
+        print("MAS-SplitTinyImageNet Average "
+              f"Stream Accuracy: {avg_stream_acc:.2f}")
 
-        # # Recover target from CSV
-        # target = get_target_result('mas', 'stiny-imagenet')
-        # if isinstance(target, list):
-        #     target_acc = target[0]
-        # else:
-        #     target_acc = target
-        # target_acc = float(target_acc)
+        # Recover target from CSV
+        target = get_target_result('mas', 'stiny-imagenet')
+        if isinstance(target, list):
+            target_acc = target[0]
+        else:
+            target_acc = target
+        target_acc = float(target_acc)
 
-        # print(f"The target value was {target_acc:.2f}")
+        print(f"The target value was {target_acc:.2f}")
 
-        # # Check if the result is close to the target
-        # if args.check and target_acc > avg_stream_acc:
-        #     self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+        # Check if the result is close to the target
+        if args.check and target_acc > avg_stream_acc:
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
