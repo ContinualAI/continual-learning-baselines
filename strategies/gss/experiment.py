@@ -13,7 +13,7 @@ from avalanche.evaluation.metrics import \
     loss_metrics
 from avalanche.logging import InteractiveLogger
 from avalanche.training.plugins import EvaluationPlugin
-from avalanche.training.strategies import GSS_greedy
+from avalanche.training import GSS_greedy
 import unittest
 import torch
 from avalanche.benchmarks.utils import AvalancheSubset

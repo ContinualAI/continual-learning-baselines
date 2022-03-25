@@ -8,14 +8,14 @@ from torchvision import transforms
 
 from strategies.utils import get_target_result, get_average_metric, create_default_args
 
-from avalanche.benchmarks.classic.ccifar100 import SplitCIFAR100
+from avalanche.benchmarks import SplitCIFAR100
 from avalanche.models import IcarlNet, make_icarl_net, initialize_icarl_net
 from avalanche.training.plugins.lr_scheduling import LRSchedulerPlugin
 from avalanche.training.plugins import EvaluationPlugin
 from avalanche.evaluation.metrics import *
 from avalanche.logging.interactive_logging import InteractiveLogger
 
-from avalanche.training.strategies.icarl import ICaRL
+from avalanche.training import ICaRL
 
 
 def icarl_cifar100_augment_data(img):
