@@ -4,7 +4,11 @@ import torch
 from torch.nn import CrossEntropyLoss
 from torch.optim import SGD
 
-from avalanche.evaluation import metrics as metrics
+from avalanche.evaluation.metrics import (
+    accuracy_metrics,
+    forgetting_metrics,
+    loss_metrics
+)
 from avalanche.training.plugins import EvaluationPlugin
 from models import MultiHeadVGGSmall
 from strategies.utils import create_default_args, get_average_metric
@@ -23,7 +27,7 @@ class MAS(unittest.TestCase):
     def test_stinyimagenet(self, override_args=None, dataset_root=None):
         """Split Tiny ImageNet benchmark"""
         args = create_default_args(
-            {'cuda': 0, 'lambda_reg': 3., 'alpha': 0.5,
+            {'cuda': 0, 'lambda_reg': 2., 'alpha': 0.5,
              'verbose': True, 'learning_rate': 0.005,
              'train_mb_size': 200, 'epochs': 70}, override_args)
 
@@ -47,7 +51,15 @@ class MAS(unittest.TestCase):
         interactive_logger = avl.logging.InteractiveLogger()
 
         evaluation_plugin = EvaluationPlugin(
-            metrics.accuracy_metrics(epoch=True, experience=True, stream=True),
+            accuracy_metrics(
+                epoch=True, experience=True, stream=True
+            ),
+            loss_metrics(
+                epoch=True, experience=True, stream=True
+            ),
+            forgetting_metrics(
+                experience=True, stream=True
+            ),
             loggers=[interactive_logger], benchmark=benchmark)
 
         cl_strategy = avl.training.MAS(
