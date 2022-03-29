@@ -12,7 +12,7 @@ from avalanche.evaluation.metrics import (
 from avalanche.training.plugins import EvaluationPlugin
 from models import MultiHeadVGGSmall
 from strategies.utils import create_default_args, get_average_metric
-from strategies.utils import get_target_result
+from strategies.utils import get_target_result, set_seed
 import avalanche as avl
 
 
@@ -29,9 +29,9 @@ class MAS(unittest.TestCase):
         args = create_default_args(
             {'cuda': 0, 'lambda_reg': 2., 'alpha': 0.5,
              'verbose': True, 'learning_rate': 0.005,
-             'train_mb_size': 200, 'epochs': 70,
+             'train_mb_size': 200, 'epochs': 70, 'seed': 0,
              'dataset_root': None}, override_args)
-
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
