@@ -46,6 +46,7 @@ Learning without Forgetting (LwF) | Split Tiny ImageNet | LwF.test_stinyimagenet
 GSS | Split MNIST         | GSS.test_smnist                  | Stream Accuracy
 iCaRL | Split CIFAR 100     | iCARL.test_scifar100             | Average Incremental Accuracy
 GDumb | Split MNIST         | GDumb.test_smnist                | Stream Accuracy
+Memory Aware Synapses | Split Tiny ImageNet | MAS.test_stinyimagenet | Stream Accuracy
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
