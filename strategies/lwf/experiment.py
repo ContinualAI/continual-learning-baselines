@@ -104,13 +104,15 @@ class LwF(unittest.TestCase):
         """Split Tiny ImageNet benchmark"""
         args = create_default_args({'cuda': 0,
                                     'lwf_alpha': 10, 'lwf_temperature': 2, 'epochs': 70,
-                                    'learning_rate': 0.0001, 'train_mb_size': 200, 'seed': 0}, override_args)
+                                    'learning_rate': 0.0001, 'train_mb_size': 200, 'seed': 0,
+                                    'dataset_root': None}, override_args)
         set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
 
-        benchmark = avl.benchmarks.SplitTinyImageNet(10, return_task_id=True)
+        benchmark = avl.benchmarks.SplitTinyImageNet(
+            10, return_task_id=True, dataset_root=args.dataset_root)
         model = MultiHeadVGGSmall(n_classes=20)
         criterion = CrossEntropyLoss()
 
