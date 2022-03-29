@@ -24,12 +24,13 @@ class MAS(unittest.TestCase):
     https://doi.org/10.1109/TPAMI.2021.3057446
     """
 
-    def test_stinyimagenet(self, override_args=None, dataset_root=None):
+    def test_stinyimagenet(self, override_args=None):
         """Split Tiny ImageNet benchmark"""
         args = create_default_args(
             {'cuda': 0, 'lambda_reg': 2., 'alpha': 0.5,
              'verbose': True, 'learning_rate': 0.005,
-             'train_mb_size': 200, 'epochs': 70}, override_args)
+             'train_mb_size': 200, 'epochs': 70,
+             'dataset_root': None}, override_args)
 
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
@@ -44,7 +45,7 @@ class MAS(unittest.TestCase):
         interpretation of the results easier."
         """
         benchmark = avl.benchmarks.SplitTinyImageNet(
-            10, return_task_id=True, dataset_root=dataset_root)
+            10, return_task_id=True, dataset_root=args.dataset_root)
         model = MultiHeadVGGSmall(n_classes=20)
         criterion = CrossEntropyLoss()
 
