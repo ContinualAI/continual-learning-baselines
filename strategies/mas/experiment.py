@@ -95,4 +95,4 @@ class MAS(unittest.TestCase):
 
         # Check if the result is close to the target
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
