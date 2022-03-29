@@ -9,7 +9,7 @@ from torchvision.datasets import CIFAR10, CIFAR100
 from torchvision import transforms
 from avalanche.evaluation import metrics as metrics
 from models import MultiHeadMLP, SI_CNN
-from strategies.utils import create_default_args, get_average_metric, get_target_result
+from strategies.utils import create_default_args, get_average_metric, get_target_result, set_seed
 
 
 def get_cifar_dataset(get_10=True):
@@ -49,8 +49,9 @@ class SynapticIntelligence(unittest.TestCase):
     def test_smnist(self, override_args=None):
         """Split MNIST benchmark"""
         args = create_default_args({'cuda': 0, 'si_lambda': 1, 'si_eps': 0.001, 'epochs': 10,
-                                    'learning_rate': 0.001, 'train_mb_size': 64}, override_args)
+                                    'learning_rate': 0.001, 'train_mb_size': 64, 'seed': 0}, override_args)
 
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
@@ -81,13 +82,13 @@ class SynapticIntelligence(unittest.TestCase):
 
         target_acc = float(get_target_result('si', 'smnist'))
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
     def test_pmnist(self, override_args=None):
         """Permuted MNIST benchmark"""
         args = create_default_args({'cuda': 0, 'si_lambda': 0.1, 'si_eps': 0.1, 'epochs': 20,
-                                    'learning_rate': 0.001, 'train_mb_size': 256}, override_args)
-
+                                    'learning_rate': 0.001, 'train_mb_size': 256, 'seed': 0}, override_args)
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
@@ -117,13 +118,13 @@ class SynapticIntelligence(unittest.TestCase):
 
         target_acc = float(get_target_result('si', 'pmnist'))
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
     # def test_scifar(self, override_args=None):
     #     """Split CIFAR 10/100 benchmark"""
     #     args = create_default_args({'cuda': 0, 'si_lambda': 0.1, 'si_eps': 0.001, 'epochs': 60,
-    #                                 'learning_rate': 0.001, 'train_mb_size': 256}, override_args)
-    #
+    #                                 'learning_rate': 0.001, 'train_mb_size': 256, 'seed': 0}, override_args)
+    #     set_seed(args.seed)
     #     device = torch.device(f"cuda:{args.cuda}"
     #                           if torch.cuda.is_available() and
     #                           args.cuda >= 0 else "cpu")

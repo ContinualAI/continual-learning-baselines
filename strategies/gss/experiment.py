@@ -19,7 +19,7 @@ import torch
 from avalanche.benchmarks.utils import AvalancheSubset
 from torch.nn import CrossEntropyLoss
 from torch.optim import SGD
-from strategies.utils import create_default_args, get_average_metric, get_target_result
+from strategies.utils import create_default_args, get_average_metric, get_target_result, set_seed
 
 
 class GSS(unittest.TestCase):
@@ -37,8 +37,9 @@ class GSS(unittest.TestCase):
             'cuda': 0, 'lr': 0.05,
             'train_mb_size': 10, 'mem_strength': 10,
             'input_size': [1, 28, 28], 'train_epochs': 3, 'eval_mb_size': 10,
-            'mem_size': 300}, override_args)
+            'mem_size': 300, 'seed': 0}, override_args)
 
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
@@ -69,7 +70,7 @@ class GSS(unittest.TestCase):
 
         target_acc = float(get_target_result('gss', 'smnist'))
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
 
 class FlattenP(nn.Module):

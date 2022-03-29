@@ -7,7 +7,7 @@ from torch.nn import CrossEntropyLoss
 from torch.optim import SGD
 from avalanche.evaluation import metrics as metrics
 from models import MLP, MultiHeadReducedResNet18
-from strategies.utils import create_default_args, get_average_metric, get_target_result
+from strategies.utils import create_default_args, get_average_metric, get_target_result, set_seed
 
 
 class GEM_reduced(avl.training.GEM):
@@ -35,8 +35,8 @@ class GEM(unittest.TestCase):
         args = create_default_args({'cuda': 0, 'patterns_per_exp': 1000, 'hidden_size': 100,
                                     'hidden_layers': 2, 'epochs': 1, 'dropout': 0,
                                     'mem_strength': 0.5,
-                                    'learning_rate': 0.1, 'train_mb_size': 10}, override_args)
-
+                                    'learning_rate': 0.1, 'train_mb_size': 10, 'seed': 0}, override_args)
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
@@ -67,13 +67,14 @@ class GEM(unittest.TestCase):
 
         target_acc = float(get_target_result('gem', 'pmnist'))
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
     def test_scifar100(self, override_args=None):
         """Split CIFAR-100 benchmark"""
         args = create_default_args({'cuda': 0, 'patterns_per_exp': 256, 'epochs': 1,
-                                    'mem_strength': 0.5, 'learning_rate': 0.1, 'train_mb_size': 10}, override_args)
-
+                                    'mem_strength': 0.5, 'learning_rate': 0.1, 'train_mb_size': 10,
+                                    'seed': 0}, override_args)
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
@@ -103,4 +104,4 @@ class GEM(unittest.TestCase):
 
         target_acc = float(get_target_result('gem', 'scifar100'))
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)

@@ -5,7 +5,7 @@ from torch.nn import CrossEntropyLoss
 from torch.optim import Adam, SGD
 from avalanche.evaluation import metrics as metrics
 from models import MLP, MultiHeadVGGSmall
-from strategies.utils import create_default_args, get_average_metric, get_target_result
+from strategies.utils import create_default_args, get_average_metric, get_target_result, set_seed
 
 
 class LwF(unittest.TestCase):
@@ -30,8 +30,8 @@ class LwF(unittest.TestCase):
         args = create_default_args({'cuda': 0, 'lwf_alpha': 1,
                                     'lwf_temperature': 1, 'epochs': 10,
                                     'layers': 1, 'hidden_size': 256,
-                                    'learning_rate': 0.001, 'train_mb_size': 128}, override_args)
-
+                                    'learning_rate': 0.001, 'train_mb_size': 128, 'seed': 0}, override_args)
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
@@ -61,14 +61,14 @@ class LwF(unittest.TestCase):
 
         target_acc = float(get_target_result('lwf', 'smnist'))
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
     def test_pmnist(self, override_args=None):
         """Permuted MNIST benchmark"""
         args = create_default_args({'cuda': 0, 'lwf_alpha': 1, 'lwf_temperature': 1, 'epochs': 5,
                                     'layers': 2, 'hidden_size': 1000,
-                                    'learning_rate': 0.001, 'train_mb_size': 256}, override_args)
-
+                                    'learning_rate': 0.001, 'train_mb_size': 256, 'seed': 0}, override_args)
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
@@ -98,14 +98,14 @@ class LwF(unittest.TestCase):
 
         target_acc = float(get_target_result('lwf', 'pmnist'))
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
     def test_stinyimagenet(self, override_args=None):
         """Split Tiny ImageNet benchmark"""
         args = create_default_args({'cuda': 0,
                                     'lwf_alpha': 10, 'lwf_temperature': 2, 'epochs': 70,
-                                    'learning_rate': 0.0001, 'train_mb_size': 200}, override_args)
-
+                                    'learning_rate': 0.0001, 'train_mb_size': 200, 'seed': 0}, override_args)
+        set_seed(args.seed)
         device = torch.device(f"cuda:{args.cuda}"
                               if torch.cuda.is_available() and
                               args.cuda >= 0 else "cpu")
@@ -135,4 +135,4 @@ class LwF(unittest.TestCase):
 
         target_acc = float(get_target_result('lwf', 'stiny-imagenet'))
         if args.check and target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.02)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
