@@ -50,6 +50,10 @@ Memory Aware Synapses | Split Tiny ImageNet | MAS.test_stinyimagenet | Stream Ac
 
 The file `strategies/target_results.csv` lists the target metric value(s) for each experiment.
 
+The `StreamAccuracy` metric refers to the one computed by the Avalanche library. 
+It represents the average test accuracy across all experiences 
+at the end of the training on the last experience in the stream. It is often called ACC in the literature. 
+
 ## Python dependencies for experiments
 Outside Python standard library, the main packages required to run the experiments are PyTorch, Avalanche and Pandas. 
 * **Avalanche**: `pip install avalanche-lib` (stable version). Alternatively, you can install the latest version of Avalanche directly from the master branch of github with `pip install git+https://github.com/ContinualAI/avalanche.git`. For more details, please check out the complete guide on how to install Avalanche [here](https://avalanche.continualai.org/getting-started/how-to-install). 
