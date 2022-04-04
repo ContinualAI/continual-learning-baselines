@@ -18,3 +18,5 @@ gss,smnist,0.78
 iCaRL,scifar100,0.62
 gdumb,smnist,0.97
 mas,stiny-imagenet,0.51
+lamaml,scifar100,0.69
+lamaml,stinyimagenet,0.64
