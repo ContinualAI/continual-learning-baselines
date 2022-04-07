@@ -111,3 +111,16 @@ to the community. Would you like to join us? The steps are easy!
 5. Update table in `README.md`.
 
 Check out one of the existing strategies to better understand the logic of the experiments.
+
+### Find the avalanche commit which produced a regression
+1. Place yourself into the avalanche folder and make sure you are using the avalanche version from that repository 
+in your python environment (it is usually enough to add `/path/to/avalanche` to your `PYTHONPATH`). 
+2. Use the `gitbisect_test.sh` (provided in this repository) in combination with `git bisect` to retrieve the avalanche commit introducing the regression.  
+`git bisect start HEAD v0.1.0 -- # HEAD (current version) is bad, v0.1.0 is good`  
+`git bisect run /path/to/gitbisect_test.sh /path/to/reproducible-cl optional_test_name`  
+`git bisect reset`
+3. The `gitbisect_test.sh` script requires a mandatory parameter pointing to the `reproducible-continual-learning`
+directory and an optional parameter specifying the path to a particular unittest (e.g., `strategies.EWC.test_pmnist`).
+If the second parameter is not given, all the unit tests will be run.
+4. The terminal output will tell you which commit introduced the bug
+5. You can change the `HEAD` and `v0.1.0` ref to any avalanche commit.
