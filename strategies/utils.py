@@ -14,11 +14,12 @@ def set_seed(seed):
         return
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
     np.random.seed(seed)
     random.seed(seed)
-    torch.backends.cudnn.benchmark = True
-    torch.backends.cudnn.deterministic = True
+    if torch.cuda.is_available():
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.enabled = True
+        torch.backends.cudnn.benchmark = False
 
 
 def get_target_result(strat_name: str, bench_name: str):
