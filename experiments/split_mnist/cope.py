@@ -51,3 +51,8 @@ def cope_smnist(override_args=None):
     cl_strategy.train(benchmark.train_stream)
     res = cl_strategy.eval(benchmark.test_stream)
     return res
+
+
+if __name__ == '__main__':
+    res = cope_smnist()
+    print(res)

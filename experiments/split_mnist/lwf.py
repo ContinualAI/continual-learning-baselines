@@ -39,3 +39,8 @@ def lwf_smnist(override_args=None):
         res = cl_strategy.eval(benchmark.test_stream)
 
     return res
+
+
+if __name__ == '__main__':
+    res = lwf_smnist()
+    print(res)

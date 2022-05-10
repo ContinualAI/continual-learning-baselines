@@ -115,3 +115,8 @@ def setup_mnist():
     model = MLP([n_inputs] + [nh] * nl + [n_outputs])
 
     return model, scenario
+
+
+if __name__ == '__main__':
+    res = gss_smnist()
+    print(res)

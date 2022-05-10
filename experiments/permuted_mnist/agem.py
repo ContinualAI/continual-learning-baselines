@@ -40,3 +40,8 @@ def agem_pmnist(override_args=None):
         cl_strategy.train(experience)
         res = cl_strategy.eval(benchmark.test_stream)
     return res
+
+
+if __name__ == '__main__':
+    res = agem_pmnist()
+    print(res)

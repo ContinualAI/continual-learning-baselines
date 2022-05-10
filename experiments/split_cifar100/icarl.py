@@ -88,3 +88,8 @@ def icarl_scifar100(override_args=None):
         dict_iCaRL_aia['Top1_Acc_Stream/Exp'+str(i)] = res['Top1_Acc_Stream/eval_phase/test_stream/Task000']
 
     return dict_iCaRL_aia
+
+
+if __name__ == '__main__':
+    res = icarl_scifar100()
+    print(res)
