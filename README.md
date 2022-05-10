@@ -1,6 +1,6 @@
 <div align="center">
     
-# Reproducible Continual Learning
+# Continual Learning Baselines
 **[Avalanche Website](https://avalanche.continualai.org)** | **[Avalanche Repository](https://github.com/ContinualAI/avalanche)**
 
 </div>
@@ -72,11 +72,11 @@ You should add the project root folder to your PYTHONPATH.
 
 For example, on Linux you can set it up globally:
 ```bash
-export PYTHONPATH=${PYTHONPATH}:/path/to/reproducible-continual-learning
+export PYTHONPATH=${PYTHONPATH}:/path/to/continual-learning-baselines
 ```
 or just for the current command:
 ```bash
-PYTHONPATH=${PYTHONPATH}:/path/to/reproducible-continual-learning command to be executed
+PYTHONPATH=${PYTHONPATH}:/path/to/continual-learning-baselines command to be executed
 ```
 
 You can run experiments directly through console with the default parameters.  
@@ -128,9 +128,9 @@ to the community. Would you like to join us? The steps are easy!
 in your python environment (it is usually enough to add `/path/to/avalanche` to your `PYTHONPATH`). 
 2. Use the `gitbisect_test.sh` (provided in this repository) in combination with `git bisect` to retrieve the avalanche commit introducing the regression.  
 `git bisect start HEAD v0.1.0 -- # HEAD (current version) is bad, v0.1.0 is good`  
-`git bisect run /path/to/gitbisect_test.sh /path/to/reproducible-cl optional_test_name`  
+`git bisect run /path/to/gitbisect_test.sh /path/to/continual-learning-baselines optional_test_name`  
 `git bisect reset`
-3. The `gitbisect_test.sh` script requires a mandatory parameter pointing to the `reproducible-continual-learning`
+3. The `gitbisect_test.sh` script requires a mandatory parameter pointing to the `continual-learning-baselines`
 directory and an optional parameter specifying the path to a particular unittest (e.g., `tests.EWC.test_pmnist`).
 If the second parameter is not given, all the unit tests will be run.
 4. The terminal output will tell you which commit introduced the bug
