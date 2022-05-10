@@ -85,4 +85,34 @@ class SI_CNN(MultiTaskModule):
         return x
 
 
-__all__ = ['MultiHeadMLP', 'MLP', 'SI_CNN']
+class FlattenP(nn.Module):
+    '''A nn-module to flatten a multi-dimensional tensor to 2-dim tensor.'''
+
+    def forward(self, x):
+        batch_size = x.size(0)   # first dimenstion should be batch-dimension.
+        return x.view(batch_size, -1)
+
+    def __repr__(self):
+        tmpstr = self.__class__.__name__ + '()'
+        return tmpstr
+
+
+class MLP_gss(nn.Module):
+    def __init__(self, sizes, bias=True):
+        super(MLP_gss, self).__init__()
+        layers = []
+
+        for i in range(0, len(sizes) - 1):
+            if i < (len(sizes)-2):
+                layers.append(nn.Linear(sizes[i], sizes[i + 1]))
+                layers.append(nn.ReLU())
+            else:
+                layers.append(nn.Linear(sizes[i], sizes[i + 1], bias=bias))
+
+        self.net = nn.Sequential(FlattenP(), *layers)
+
+    def forward(self, x):
+        return self.net(x)
+
+
+__all__ = ['MultiHeadMLP', 'MLP', 'SI_CNN', 'MLP_gss']
