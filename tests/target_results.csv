@@ -1,0 +1,20 @@
+# result column can be either a number (int/float)
+# or a list in the format [number number number ...]
+# use spaces, not commas, to separate elements of the list
+strategy,benchmark,result
+si,smnist,0.97
+si,pmnist,0.94
+cope,smnist,0.93
+dslda,core50,0.79
+ewc,pmnist,0.83
+agem,pmnist,0.81
+agem,scifar100,0.57
+gem,pmnist,0.83
+gem,scifar100,0.63
+lwf,smnist,0.31
+lwf,pmnist,0.51
+lwf,stiny-imagenet,0.42
+gss,smnist,0.78
+iCaRL,scifar100,0.62
+gdumb,smnist,0.97
+mas,stiny-imagenet,0.51
