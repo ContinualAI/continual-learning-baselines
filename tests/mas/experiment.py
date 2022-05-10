@@ -1,7 +1,5 @@
 import unittest
-
-from tests.utils import get_average_metric
-from tests.utils import get_target_result
+from tests.utils import get_average_metric, get_target_result
 from experiments.split_tiny_imagenet import mas_stinyimagenet
 
 
@@ -16,7 +14,6 @@ class MAS(unittest.TestCase):
     def test_stinyimagenet(self):
         """Split Tiny ImageNet benchmark"""
         res = mas_stinyimagenet()
-
         avg_stream_acc = get_average_metric(res)
         print("MAS-SplitTinyImageNet Average "
               f"Stream Accuracy: {avg_stream_acc:.2f}")
