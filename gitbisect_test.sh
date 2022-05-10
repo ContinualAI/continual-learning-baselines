@@ -1,5 +1,5 @@
 #!/bin/bash
-# first mandatory argument with path to reproducible-continual-learning repository
+# first mandatory argument with path to continual-learning-baselines repository
 # second optional argument with the test name to run. If not provided, all tests will be run
 
 cd $1
