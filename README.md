@@ -45,6 +45,8 @@ Outside Python standard library, the main packages required to run the experimen
 
 
 ## Run experiments with Python
+Place yourself into the project root folder.
+
 Experiments can be run with a python script by simply importing the function from the `experiments` folder and executing it.  
 By default, experiments will run on GPU, when available.
 
@@ -65,16 +67,43 @@ print(result)
 ```
 
 ## Command line experiments
-You can run experiments directly through console with the default parameters.  
-Open the console and go to the target experiment folder, then run the python file you want.
+Place yourself into the project root folder.   
+You should add the project root folder to your PYTHONPATH. 
 
-For example, to run Synaptic Intelligence on Split MNIST (from project root folder): 
+For example, on Linux you can set it up globally:
 ```bash
-cd experiments/split_mnist
-python synaptic_intelligence.py
+export PYTHONPATH=${PYTHONPATH}:/path/to/reproducible-continual-learning
+```
+or just for the current command:
+```bash
+PYTHONPATH=${PYTHONPATH}:/path/to/reproducible-continual-learning command to be executed
+```
+
+You can run experiments directly through console with the default parameters.  
+Open the console and run the python file you want by specifying its path.
+
+For example, to run Synaptic Intelligence on Split MNIST: 
+```bash
+python experiments/split_mnist/synaptic_intelligence.py
 ```
 
 To execute experiment with custom parameters, please refer to the previous section.
+
+
+## Run tests
+Place yourself into the project root folder.
+
+You can run all tests with
+```bash
+python -m unittest
+```
+
+or you can specify a test by providing the test name in the format `tests.strategy_class_name.test_benchmarkname`.
+
+For example to run Synaptic Intelligence on Split MNIST you can run:
+```bash
+python -m unittest tests.SynapticIntelligence.test_smnist
+```
 
 ## Contribute to the project
 We are always looking for new contributors willing to help us in the challenging mission of providing robust experiments
