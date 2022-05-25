@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-from avalanche.benchmarks import Experience
+from avalanche.benchmarks import CLExperience
 from avalanche.benchmarks.classic import SplitMNIST
 from avalanche.benchmarks.generators.benchmark_generators import \
     data_incremental_benchmark
@@ -54,7 +54,7 @@ def gss_smnist(override_args=None):
 
 
 def shrinking_experience_size_split_strategy(
-        experience: Experience):
+        experience: CLExperience):
 
     experience_size = 1000
 
