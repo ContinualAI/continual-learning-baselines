@@ -1,7 +1,7 @@
 import unittest
 import torch
 import avalanche as avl
-from utils import get_average_metric, get_target_result
+from tests.utils import get_average_metric, get_target_result
 
 
 @unittest.skip("Just a template, skipping this test.")  # remove this when implementing the test
