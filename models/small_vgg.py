@@ -61,9 +61,9 @@ class MultiHeadVGGClassifier(MultiTaskModule):
             nn.Linear(512, self.n_classes))
         self.classifiers['0'] = first_head
 
-    def adaptation(self, dataset):
-        super().adaptation(dataset)
-        task_labels = dataset.targets_task_labels
+    def adaptation(self, experience):
+        super().adaptation(experience)
+        task_labels = experience.dataset.targets_task_labels
         if isinstance(task_labels, ConstantSequence):
             # task label is unique. Don't check duplicates.
             task_labels = [task_labels[0]]
