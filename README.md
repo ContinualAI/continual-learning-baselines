@@ -39,7 +39,8 @@ The table below describes all the experiments currently implemented in the `expe
 
 ## Python dependencies for experiments
 Outside Python standard library, the main packages required to run the experiments are PyTorch, Avalanche and Pandas. 
-* **Avalanche**: `pip install avalanche-lib` (stable version). Alternatively, you can install the latest version of Avalanche directly from the master branch of github with `pip install git+https://github.com/ContinualAI/avalanche.git`. For more details, please check out the complete guide on how to install Avalanche [here](https://avalanche.continualai.org/getting-started/how-to-install). 
+* **Avalanche**: The latest version of this repo requires the latest Avalanche version (from master branch): `pip install git+https://github.com/ContinualAI/avalanche.git`. The CL baselines repo is tagged with the supported Avalanche version (you can browse the tags to check out all the versions). You can install the corresponding Avalanche versions with `pip install avalanche-lib==[version number]`, where `[version number]` is of the form `0.1.0`.  
+For more details on how to install Avalanche, please check out the complete guide on how to install Avalanche [here](https://avalanche.continualai.org/getting-started/how-to-install). 
 * **PyTorch**: we recommend to follow [the official guide](https://pytorch.org/get-started/locally/).
 * **Pandas**: `pip install pandas`. [Official guide](https://pandas.pydata.org/docs/getting_started/install.html#installing-pandas).
 
