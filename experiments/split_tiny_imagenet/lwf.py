@@ -9,8 +9,8 @@ from experiments.utils import set_seed, create_default_args
 
 def lwf_stinyimagenet(override_args=None):
     args = create_default_args({'cuda': 0,
-                                'lwf_alpha': 10, 'lwf_temperature': 2, 'epochs': 70,
-                                'learning_rate': 0.0001, 'train_mb_size': 200, 'seed': 0,
+                                'lwf_alpha': 10, 'lwf_temperature': 2, 'epochs': 20,
+                                'learning_rate': 0.01, 'train_mb_size': 200, 'seed': 0,
                                 'dataset_root': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
@@ -40,3 +40,8 @@ def lwf_stinyimagenet(override_args=None):
         res = cl_strategy.eval(benchmark.test_stream)
 
     return res
+
+
+if __name__ == "__main__":
+    res = lwf_stinyimagenet()
+    print(res)
