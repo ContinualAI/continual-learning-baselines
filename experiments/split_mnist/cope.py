@@ -6,7 +6,7 @@ from models import MLP
 
 def cope_smnist(override_args=None):
     args = create_default_args({'cuda': 0, 'nb_tasks': 5, 'batch_size': 10, 'epochs': 1,
-                                'mem_size': 2000, 'alpha': 0.99, 'featsize': 32,
+                                'mem_size': 2000, 'alpha': 0.99, 'T': 0.1, 'featsize': 32,
                                 'seed': 0}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
@@ -37,7 +37,8 @@ def cope_smnist(override_args=None):
         benchmark=benchmark)
 
     cope = avl.training.plugins.CoPEPlugin(mem_size=args.mem_size, alpha=args.alpha,
-                                           p_size=args.featsize, n_classes=n_classes)
+                                           p_size=args.featsize, n_classes=n_classes,
+                                           T=args.T)
 
     cl_strategy = avl.training.Naive(
         model, torch.optim.SGD(model.parameters(), lr=0.01),

@@ -27,10 +27,10 @@ def agem_scifar100(override_args=None):
         loggers=[interactive_logger], benchmark=benchmark)
 
     cl_strategy = avl.training.AGEM(
-        model, SGD(model.parameters(), lr=args.learning_rate, momentum=0.9), criterion,
+        model, SGD(model.parameters(), lr=args.learning_rate, momentum=0.), criterion,
         patterns_per_exp=args.patterns_per_exp, sample_size=args.sample_size,
         train_mb_size=args.train_mb_size, train_epochs=args.epochs, eval_mb_size=128,
-        device=device, evaluator=evaluation_plugin)
+        device=device, evaluator=evaluation_plugin, plugins=[])
 
     res = None
     for experience in benchmark.train_stream:

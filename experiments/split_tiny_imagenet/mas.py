@@ -66,3 +66,8 @@ def mas_stinyimagenet(override_args=None):
         res = cl_strategy.eval(benchmark.test_stream)
 
     return res
+
+
+if __name__ == "__main__":
+    res = mas_stinyimagenet()
+    print(res)

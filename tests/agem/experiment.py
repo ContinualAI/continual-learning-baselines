@@ -33,4 +33,4 @@ class AGEM(unittest.TestCase):
 
         target_acc = float(get_target_result('agem', 'scifar100'))
         if target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.04)
