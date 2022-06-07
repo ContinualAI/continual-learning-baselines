@@ -40,7 +40,7 @@ class LwF(unittest.TestCase):
 
         target_acc = float(get_target_result('lwf', 'pmnist'))
         if target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.05)
 
     def test_stinyimagenet(self):
         """Split Tiny ImageNet benchmark"""
