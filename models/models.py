@@ -1,4 +1,4 @@
-from avalanche.models import MultiHeadClassifier, MultiTaskModule
+from avalanche.models import MultiHeadClassifier, MultiTaskModule, BaseModel
 from torch import nn
 
 
@@ -29,7 +29,7 @@ class MultiHeadMLP(MultiTaskModule):
         return x
 
 
-class MLP(nn.Module):
+class MLP(nn.Module, BaseModel):
     def __init__(self, input_size=28 * 28, hidden_size=256, hidden_layers=2,
                  output_size=10, drop_rate=0, relu_act=True):
         super().__init__()
@@ -54,6 +54,11 @@ class MLP(nn.Module):
         x = self.features(x)
         x = self.classifier(x)
         return x
+
+    def get_features(self, x):
+        x = x.contiguous()
+        x = x.view(x.size(0), self._input_size)
+        return self.features(x)
 
 
 class SI_CNN(MultiTaskModule):

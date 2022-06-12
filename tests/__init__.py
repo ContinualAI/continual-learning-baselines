@@ -9,4 +9,5 @@ from .lwf import LwF
 from .gss import GSS
 from .iCARL import iCARL
 from .gdumb import GDumb
+from .lfl import LFL
 from . import utils

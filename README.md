@@ -33,7 +33,8 @@ The table below describes all the experiments currently implemented in the `expe
  | Learning without Forgetting (LwF)  | Split MNIST, Permuted MNIST, Split Tiny ImageNet  |
  | GSS                                | Split MNIST                                       |
  | iCaRL                              | Split CIFAR-100                                   |
- | GDumb                              | Split MNIST                                       |
+ | GDumb                              | Split MNIST        
+ | LFL                                | Permuted MNIST
  | Memory Aware Synapses              | Split Tiny ImageNet                               |
 
 
