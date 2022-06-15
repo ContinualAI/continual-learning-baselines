@@ -31,22 +31,11 @@ class VGGSmall(torchvision.models.VGG):
                 layers += [conv2d, nn.ReLU(inplace=True)]
                 in_channels = v
 
-        super(VGGSmall, self).__init__(nn.Sequential(*layers), init_weights=False)
+        super(VGGSmall, self).__init__(nn.Sequential(*layers), init_weights=True)
 
         if hasattr(self, 'avgpool'):  # Compat Pytorch>1.0.0
             self.avgpool = torch.nn.Identity()
 
-        for m in self.modules():
-            if isinstance(m, nn.Conv2d):
-                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
-                if m.bias is not None:
-                    nn.init.constant_(m.bias, 0)
-            elif isinstance(m, nn.BatchNorm2d):
-                nn.init.constant_(m.weight, 1)
-                nn.init.constant_(m.bias, 0)
-            elif isinstance(m, nn.Linear):
-                nn.init.normal_(m.weight, 0, 0.01)
-                nn.init.constant_(m.bias, 0)
         del self.classifier
 
     def forward(self, x):
