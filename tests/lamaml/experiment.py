@@ -6,7 +6,7 @@ from experiments.split_tiny_imagenet import lamaml_stinyimagenet
 
 class LaMAML(unittest.TestCase):
     """
-        Reproducing iCaRL experiments from paper
+        Reproducing LaMAML experiments from paper
         "La-MAML: Look-ahead Meta Learning for Continual Learning",
         Gunshi Gupta, Karmesh Yadav, Liam Paull;
         NeurIPS, 2020
