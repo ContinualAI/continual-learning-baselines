@@ -33,6 +33,13 @@ def icarl_cifar100_augment_data(img):
 
 
 def icarl_scifar100(override_args=None):
+    """
+    "iCaRL: Incremental Classifier and Representation Learning",
+    Sylvestre-Alvise Rebuffi, Alexander Kolesnikov, Georg Sperl, Christoph H. Lampert;
+    Proceedings of the IEEE Conference on
+    Computer Vision and Pattern Recognition (CVPR), 2017, pp. 2001-2010
+    https://openaccess.thecvf.com/content_cvpr_2017/html/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.html
+    """
     args = create_default_args({'cuda': 0, 'batch_size': 128, 'nb_exp': 10,
                                 'memory_size': 2000, 'epochs': 70, 'lr_base': 2.,
                                 'lr_milestones': [49, 63], 'lr_factor': 5.,

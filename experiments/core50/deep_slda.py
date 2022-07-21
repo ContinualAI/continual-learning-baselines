@@ -8,6 +8,11 @@ from experiments.utils import set_seed, create_default_args
 
 
 def deep_slda_core50(override_args=None):
+    """
+    "Lifelong Machine Learning with Deep Streaming Linear Discriminant Analysis"
+    by Hayes et. al. (2020).
+    https://arxiv.org/abs/1909.01520
+    """
     args = create_default_args({'cuda': 0, 'feature_size': 512, 'batch_size': 512,
                                 'shrinkage': 1e-4, 'plastic_cov': True, 'seed': 0}, override_args)
     set_seed(args.seed)

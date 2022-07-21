@@ -8,6 +8,15 @@ from experiments.utils import set_seed, create_default_args
 
 
 def lwf_stinyimagenet(override_args=None):
+    """
+    "Learning without Forgetting" by Li et. al. (2016).
+    http://arxiv.org/abs/1606.09282
+    Since experimental setup of the paper is quite outdated and not
+    easily reproducible, this experiment is based on
+    "A continual learning survey: Defying forgetting in classification tasks"
+    De Lange et. al. (2021).
+    https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9349197
+    """
     args = create_default_args({'cuda': 0,
                                 'lwf_alpha': 10, 'lwf_temperature': 2, 'epochs': 20,
                                 'learning_rate': 0.01, 'train_mb_size': 200, 'seed': 0,

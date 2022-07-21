@@ -7,7 +7,9 @@ from experiments.utils import set_seed, create_default_args
 
 def lfl_pmnist(override_args=None):
     """
-    LFL on Permuted MNIST.
+    "Less-forgetting Learning in Deep Neural Networks"
+    Heechul Jung, Jeongwoo Ju, Minju Jung and Junmo Kim;
+    arXiv, 2016, https://arxiv.org/pdf/1607.00122.pdf
 
     Note that the model must be a subclass of Avalanche `BaseModel` and must implement
     the `get_features` method which, given an input `x`, returns the model hidden features

@@ -8,6 +8,10 @@ from experiments.utils import set_seed, create_default_args
 
 
 def agem_scifar100(override_args=None):
+    """
+    "Efficient Lifelong Learning with A-GEM" by Chaudhry et. al. (2019).
+    https://openreview.net/pdf?id=Hkf2_sC5FX
+    """
     args = create_default_args({'cuda': 0, 'patterns_per_exp': 65, 'epochs': 1,
                                 'sample_size': 1300, 'learning_rate': 0.03, 'train_mb_size': 10,
                                 'seed': 0}, override_args)

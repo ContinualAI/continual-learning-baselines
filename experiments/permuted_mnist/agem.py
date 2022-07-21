@@ -8,6 +8,10 @@ from experiments.utils import set_seed, create_default_args
 
 
 def agem_pmnist(override_args=None):
+    """
+    "Efficient Lifelong Learning with A-GEM" by Chaudhry et. al. (2019).
+    https://openreview.net/pdf?id=Hkf2_sC5FX
+    """
     args = create_default_args({'cuda': 0, 'patterns_per_exp': 250, 'hidden_size': 256,
                                 'hidden_layers': 2, 'epochs': 1, 'dropout': 0,
                                 'sample_size': 256,

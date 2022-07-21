@@ -8,6 +8,14 @@ from experiments.utils import set_seed, create_default_args
 
 
 def lwf_smnist(override_args=None):
+    """
+    "Learning without Forgetting" by Li et. al. (2016).
+    http://arxiv.org/abs/1606.09282
+    Since experimental setup of the paper is quite outdated and not
+    easily reproducible, this experiment is based on
+    "Three scenarios for continual learning" by van de Ven et. al. (2018).
+    https://arxiv.org/pdf/1904.07734.pdf
+    """
     args = create_default_args({'cuda': 0, 'lwf_alpha': 1,
                                 'lwf_temperature': 1, 'epochs': 10,
                                 'layers': 1, 'hidden_size': 256,

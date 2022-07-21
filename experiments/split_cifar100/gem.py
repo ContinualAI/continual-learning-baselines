@@ -8,6 +8,10 @@ from experiments.utils import set_seed, create_default_args
 
 
 def gem_scifar100(override_args=None):
+    """
+    "Gradient Episodic Memory for Continual Learning" by Lopez-paz et. al. (2017).
+    https://proceedings.neurips.cc/paper/2017/hash/f87522788a2be2d171666752f97ddebb-Abstract.html
+    """
     args = create_default_args({'cuda': 0, 'patterns_per_exp': 256, 'epochs': 1,
                                 'mem_strength': 0.5, 'learning_rate': 0.1, 'train_mb_size': 10,
                                 'seed': 0}, override_args)

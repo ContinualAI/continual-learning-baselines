@@ -8,6 +8,10 @@ from experiments.utils import set_seed, create_default_args
 
 
 def synaptic_intelligence_smnist(override_args=None):
+    """
+    "Continual Learning Through Synaptic Intelligence" by Zenke et. al. (2017).
+    http://proceedings.mlr.press/v70/zenke17a.html
+    """
     args = create_default_args({'cuda': 0, 'si_lambda': 1, 'si_eps': 0.001, 'epochs': 10,
                                 'learning_rate': 0.001, 'train_mb_size': 64, 'seed': 0}, override_args)
     set_seed(args.seed)

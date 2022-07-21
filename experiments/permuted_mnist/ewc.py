@@ -8,6 +8,10 @@ from experiments.utils import set_seed, create_default_args
 
 
 def ewc_pmnist(override_args=None):
+    """
+    "Overcoming catastrophic forgetting in neural networks" by Kirkpatrick et. al. (2017).
+    https://www.pnas.org/content/114/13/3521
+    """
     args = create_default_args({'cuda': 0, 'ewc_lambda': 1, 'hidden_size': 1000,
                                 'hidden_layers': 2, 'epochs': 30, 'dropout': 0,
                                 'ewc_mode': 'separate', 'ewc_decay': None,

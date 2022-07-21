@@ -23,6 +23,10 @@ class GEM_reduced(avl.training.GEM):
 
 
 def gem_pmnist(override_args=None):
+    """
+    "Gradient Episodic Memory for Continual Learning" by Lopez-paz et. al. (2017).
+    https://proceedings.neurips.cc/paper/2017/hash/f87522788a2be2d171666752f97ddebb-Abstract.html
+    """
     args = create_default_args({'cuda': 0, 'patterns_per_exp': 1000, 'hidden_size': 100,
                             'hidden_layers': 2, 'epochs': 1, 'dropout': 0,
                             'mem_strength': 0.5,

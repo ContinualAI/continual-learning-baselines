@@ -12,6 +12,12 @@ from experiments.utils import set_seed, create_default_args
 
 
 def lamaml_scifar100(override_args=None):
+    """
+    "La-MAML: Look-ahead Meta Learning for Continual Learning",
+    Gunshi Gupta, Karmesh Yadav, Liam Paull;
+    NeurIPS, 2020
+    https://arxiv.org/abs/2007.13904
+    """
     # Args
     args = create_default_args(
         {'cuda': 0, 'n_inner_updates': 5, 'second_order': True,
