@@ -7,7 +7,7 @@ from avalanche.training.storage_policy import ReservoirSamplingBuffer
 from avalanche.training.plugins import ReplayPlugin
 from avalanche.training.supervised.lamaml import LaMAML
 
-from models.models_lamaml import ConvCIFAR
+from models.models_lamaml import MTConvCIFAR
 from experiments.utils import set_seed, create_default_args
 
 
@@ -52,7 +52,7 @@ def lamaml_stinyimagenet(override_args=None):
     )
 
     # Strategy
-    model = ConvCIFAR()
+    model = MTConvCIFAR()
     cl_strategy = LaMAML(
         model,
         torch.optim.SGD(model.parameters(), lr=args.lr),
