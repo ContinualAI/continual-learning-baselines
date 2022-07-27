@@ -26,7 +26,7 @@ ACC means the Average Accuracy on all experiences after training on the last exp
 |        CORe50         |      Deep Streaming LDA (DSLDA)      | Class-Incremental  |   ACC=0.79    |
 |    Permuted MNIST     |      Synaptic Intelligence (SI)      | Domain-Incremental |   ACC=0.94    |
 |    Permuted MNIST     |    Less-Forgetful Learning (LFL)     | Domain-Incremental |   ACC=0.88    |
-|    Permuted MNIST     |  Elastic Weight Consolidation (EWC)  | Domain-Incremental |   ACC=0.83    |
+|    Permuted MNIST     |  Elastic Weight Consolidation (EWC)  | Domain-Incremental |   ACC=0.87    |
 |    Permuted MNIST     |                 GEM                  | Domain-Incremental |   ACC=0.83    |
 |    Permuted MNIST     |          Average GEM (AGEM)          | Domain-Incremental |   ACC=0.81    |
 |    Permuted MNIST     |  Learning without Forgetting (LwF)   | Domain-Incremental |   ACC=0.51    |
