@@ -6,7 +6,7 @@ si,smnist,0.97
 si,pmnist,0.94
 cope,smnist,0.93
 dslda,core50,0.79
-ewc,pmnist,0.83
+ewc,pmnist,0.87
 agem,pmnist,0.81
 agem,scifar100,0.62
 gem,pmnist,0.83
