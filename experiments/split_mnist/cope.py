@@ -38,8 +38,7 @@ def cope_smnist(override_args=None):
         avl.evaluation.metrics.accuracy_metrics(experience=True, stream=True),
         avl.evaluation.metrics.loss_metrics(experience=False, stream=True),
         avl.evaluation.metrics.StreamForgetting(),
-        loggers=[logger],
-        benchmark=benchmark)
+        loggers=[logger])
 
     cope = avl.training.plugins.CoPEPlugin(mem_size=args.mem_size, alpha=args.alpha,
                                            p_size=args.featsize, n_classes=n_classes,

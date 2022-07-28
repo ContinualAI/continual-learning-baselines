@@ -56,7 +56,7 @@ def mas_stinyimagenet(override_args=None):
         forgetting_metrics(
             experience=True, stream=True
         ),
-        loggers=[interactive_logger], benchmark=benchmark)
+        loggers=[interactive_logger])
 
     cl_strategy = avl.training.MAS(
         model,

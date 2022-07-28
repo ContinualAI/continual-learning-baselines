@@ -38,7 +38,7 @@ def lfl_pmnist(override_args=None):
         avl.evaluation.metrics.accuracy_metrics(minibatch=True, epoch=True, experience=True, stream=True),
         avl.evaluation.metrics.loss_metrics(minibatch=True, epoch=True, experience=True, stream=True),
         avl.evaluation.metrics.forgetting_metrics(experience=True),
-        loggers=[interactive_logger], benchmark=benchmark
+        loggers=[interactive_logger]
     )
 
     lambda_e = args.lambda_e[0] if len(args.lambda_e) == 1 else args.lambda_e

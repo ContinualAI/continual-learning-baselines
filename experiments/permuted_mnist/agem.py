@@ -31,7 +31,7 @@ def agem_pmnist(override_args=None):
 
     evaluation_plugin = avl.training.plugins.EvaluationPlugin(
         metrics.accuracy_metrics(epoch=True, experience=True, stream=True),
-        loggers=[interactive_logger], benchmark=benchmark)
+        loggers=[interactive_logger])
 
     cl_strategy = avl.training.AGEM(
         model, SGD(model.parameters(), lr=args.learning_rate), criterion,
