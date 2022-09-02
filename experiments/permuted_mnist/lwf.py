@@ -15,8 +15,12 @@ def lwf_pmnist(override_args=None):
     easily reproducible, this experiment is based on
     "Three scenarios for continual learning" by van de Ven et. al. (2018).
     https://arxiv.org/pdf/1904.07734.pdf
+
+    To reproduce the results of the paper it is needed to add a LwF penalization which grows over time and
+    to diminish over time the cross-entropy contribution. Since this is not a LwF dependant choice,
+    we chose to use more typical values for alpha. Adding these two components should close the gap.
     """
-    args = create_default_args({'cuda': 0, 'lwf_alpha': 1, 'lwf_temperature': 1, 'epochs': 5,
+    args = create_default_args({'cuda': 0, 'lwf_alpha': 1, 'lwf_temperature': 2, 'epochs': 5,
                                 'layers': 2, 'hidden_size': 1000,
                                 'learning_rate': 0.001, 'train_mb_size': 256, 'seed': 0}, override_args)
     set_seed(args.seed)

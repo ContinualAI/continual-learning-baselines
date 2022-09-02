@@ -11,8 +11,8 @@ agem,pmnist,0.81
 agem,scifar100,0.62
 gem,pmnist,0.83
 gem,scifar100,0.63
-lwf,smnist,0.23
-lwf,pmnist,0.72
+lwf,smnist,0.20
+lwf,pmnist,0.5
 lwf,stiny-imagenet,0.44
 gss,smnist,0.78
 iCaRL,scifar100,0.62
