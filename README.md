@@ -21,27 +21,27 @@ Feel free to check it out and support the project!
 The table below describes all the experiments currently implemented in the `experiments` folder, along with their result.  
 ACC means the Average Accuracy on all experiences after training on the last experience.
 
-|      Benchmarks       |               Strategy               |      Scenario      |  Performance  |
-|:---------------------:|:------------------------------------:|:------------------:|:-------------:|
-|        CORe50         |      Deep Streaming LDA (DSLDA)      | Class-Incremental  |   ACC=0.79    |
-|    Permuted MNIST     |      Synaptic Intelligence (SI)      | Domain-Incremental |   ACC=0.94    |
-|    Permuted MNIST     |    Less-Forgetful Learning (LFL)     | Domain-Incremental |   ACC=0.88    |
-|    Permuted MNIST     |  Elastic Weight Consolidation (EWC)  | Domain-Incremental |   ACC=0.87    |
-|    Permuted MNIST     |                 GEM                  | Domain-Incremental |   ACC=0.83    |
-|    Permuted MNIST     |          Average GEM (AGEM)          | Domain-Incremental |   ACC=0.81    |
-|    Permuted MNIST     |  Learning without Forgetting (LwF)   | Domain-Incremental |   ACC=0.51    |
-|    Split CIFAR-100    |                LaMAML                |  Task-Incremental  |   ACC=0.69    |
-|    Split CIFAR-100    |                 GEM                  | Class-Incremental  |   ACC=0.63    |
-|    Split CIFAR-100    |          Average GEM (AGEM)          |  Task-Incremental  |   ACC=0.62    |
-|    Split CIFAR-100    |                iCaRL                 | Class-Incremental  |   ACC=0.43    |
-|      Split MNIST      |      Synaptic Intelligence (SI)      |  Task-Incremental  |   ACC=0.97    |
-|      Split MNIST      |                GDumb                 | Class-Incremental  |   ACC=0.97    |
-|      Split MNIST      |                 CoPE                 | Class-Incremental  |   ACC=0.93    |
-|      Split MNIST      |              GSS_greedy              | Class-Incremental  |   ACC=0.78    |
-|      Split MNIST      |  Learning without Forgetting (LwF)   | Class-Incremental  |   ACC=0.31    |
-|  Split Tiny ImageNet  |                LaMAML                |  Task-Incremental  |   ACC=0.64    |
-|  Split Tiny ImageNet  |        Memory Aware Synapses         |  Task-Incremental  |   ACC=0.51    |
-|  Split Tiny ImageNet  |  Learning without Forgetting (LwF)   |  Task-Incremental  |   ACC=0.44    |
+|      Benchmarks       |               Strategy               |      Scenario      | Performance |
+|:---------------------:|:------------------------------------:|:------------------:|:-----------:|
+|        CORe50         |      Deep Streaming LDA (DSLDA)      | Class-Incremental  |  ACC=0.79   |
+|    Permuted MNIST     |      Synaptic Intelligence (SI)      | Domain-Incremental |  ACC=0.94   |
+|    Permuted MNIST     |    Less-Forgetful Learning (LFL)     | Domain-Incremental |  ACC=0.88   |
+|    Permuted MNIST     |  Elastic Weight Consolidation (EWC)  | Domain-Incremental |  ACC=0.87   |
+|    Permuted MNIST     |                 GEM                  | Domain-Incremental |  ACC=0.83   |
+|    Permuted MNIST     |          Average GEM (AGEM)          | Domain-Incremental |  ACC=0.81   |
+|    Permuted MNIST     |  Learning without Forgetting (LwF)   | Domain-Incremental |  ACC=0.72   |
+|    Split CIFAR-100    |                LaMAML                |  Task-Incremental  |  ACC=0.69   |
+|    Split CIFAR-100    |                 GEM                  | Class-Incremental  |  ACC=0.63   |
+|    Split CIFAR-100    |          Average GEM (AGEM)          |  Task-Incremental  |  ACC=0.62   |
+|    Split CIFAR-100    |                iCaRL                 | Class-Incremental  |  ACC=0.43   |
+|      Split MNIST      |      Synaptic Intelligence (SI)      |  Task-Incremental  |  ACC=0.97   |
+|      Split MNIST      |                GDumb                 | Class-Incremental  |  ACC=0.97   |
+|      Split MNIST      |                 CoPE                 | Class-Incremental  |  ACC=0.93   |
+|      Split MNIST      |              GSS_greedy              | Class-Incremental  |  ACC=0.78   |
+|      Split MNIST      |  Learning without Forgetting (LwF)   | Class-Incremental  |  ACC=0.23   |
+|  Split Tiny ImageNet  |                LaMAML                |  Task-Incremental  |  ACC=0.64   |
+|  Split Tiny ImageNet  |        Memory Aware Synapses         |  Task-Incremental  |  ACC=0.51   |
+|  Split Tiny ImageNet  |  Learning without Forgetting (LwF)   |  Task-Incremental  |  ACC=0.44   |
 
 
 
