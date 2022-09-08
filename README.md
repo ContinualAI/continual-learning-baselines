@@ -38,7 +38,7 @@ ACC means the Average Accuracy on all experiences after training on the last exp
 |      Split MNIST      |                GDumb                 | Class-Incremental  |  ACC=0.97   |
 |      Split MNIST      |                 CoPE                 | Class-Incremental  |  ACC=0.93   |
 |      Split MNIST      |              GSS_greedy              | Class-Incremental  |  ACC=0.78   |
-|      Split MNIST      |  Generative Replay (GR)              | Class-Incremental  |  ACC=0.63   |
+|      Split MNIST      |  Generative Replay (GR)              | Class-Incremental  |  ACC=0.75   |
 |      Split MNIST      |  Learning without Forgetting (LwF)   | Class-Incremental  |  ACC=0.20   |
 |  Split Tiny ImageNet  |                LaMAML                |  Task-Incremental  |  ACC=0.64   |
 |  Split Tiny ImageNet  |        Memory Aware Synapses         |  Task-Incremental  |  ACC=0.51   |

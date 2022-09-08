@@ -21,4 +21,4 @@ mas,stiny-imagenet,0.51
 lfl,pmnist,0.88
 lamaml,scifar100,0.69
 lamaml,stiny-imagenet,0.64
-generative_replay,smnist,0.63
+generative_replay,smnist,0.75
