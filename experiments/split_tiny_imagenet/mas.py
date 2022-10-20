@@ -14,6 +14,12 @@ import avalanche as avl
 
 
 def mas_stinyimagenet(override_args=None):
+    """
+    Experiment adapted by
+    "A continual learning survey: Defying forgetting in classification tasks"
+    by De Lange et al.
+    https://doi.org/10.1109/TPAMI.2021.3057446
+    """
     args = create_default_args(
         {'cuda': 0, 'lambda_reg': 2., 'alpha': 0.5,
          'verbose': True, 'learning_rate': 0.005,
@@ -50,7 +56,7 @@ def mas_stinyimagenet(override_args=None):
         forgetting_metrics(
             experience=True, stream=True
         ),
-        loggers=[interactive_logger], benchmark=benchmark)
+        loggers=[interactive_logger])
 
     cl_strategy = avl.training.MAS(
         model,

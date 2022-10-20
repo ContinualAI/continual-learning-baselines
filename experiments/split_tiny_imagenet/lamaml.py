@@ -7,11 +7,17 @@ from avalanche.training.storage_policy import ReservoirSamplingBuffer
 from avalanche.training.plugins import ReplayPlugin
 from avalanche.training.supervised.lamaml import LaMAML
 
-from models.models_lamaml import ConvCIFAR
+from models.models_lamaml import MTConvCIFAR
 from experiments.utils import set_seed, create_default_args
 
 
 def lamaml_stinyimagenet(override_args=None):
+    """
+    "La-MAML: Look-ahead Meta Learning for Continual Learning",
+    Gunshi Gupta, Karmesh Yadav, Liam Paull;
+    NeurIPS, 2020
+    https://arxiv.org/abs/2007.13904
+    """
     # Args
     args = create_default_args(
         {'cuda': 0, 'n_inner_updates': 5, 'second_order': True,
@@ -33,7 +39,7 @@ def lamaml_stinyimagenet(override_args=None):
 
     evaluation_plugin = avl.training.plugins.EvaluationPlugin(
         metrics.accuracy_metrics(epoch=True, experience=True, stream=True),
-        loggers=[interactive_logger], benchmark=benchmark)
+        loggers=[interactive_logger])
 
     # Buffer
     rs_buffer = ReservoirSamplingBuffer(max_size=args.mem_size)
@@ -46,7 +52,7 @@ def lamaml_stinyimagenet(override_args=None):
     )
 
     # Strategy
-    model = ConvCIFAR()
+    model = MTConvCIFAR()
     cl_strategy = LaMAML(
         model,
         torch.optim.SGD(model.parameters(), lr=args.lr),

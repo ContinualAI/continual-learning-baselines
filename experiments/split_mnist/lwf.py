@@ -1,7 +1,7 @@
 import avalanche as avl
 import torch
 from torch.nn import CrossEntropyLoss
-from torch.optim import Adam, SGD
+from torch.optim import SGD
 from avalanche.evaluation import metrics as metrics
 from models import MLP
 from experiments.utils import set_seed, create_default_args

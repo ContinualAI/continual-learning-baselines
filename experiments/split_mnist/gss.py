@@ -19,6 +19,9 @@ from models import MLP_gss
 
 
 def gss_smnist(override_args=None):
+    """
+    https://arxiv.org/abs/1903.08671
+    """
     args = create_default_args({
         'cuda': 0, 'lr': 0.05,
         'train_mb_size': 10, 'mem_strength': 10,
