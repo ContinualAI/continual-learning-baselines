@@ -6,14 +6,13 @@ si,smnist,0.97
 si,pmnist,0.94
 cope,smnist,0.93
 dslda,core50,0.79
-ewc,pmnist,0.83
+ewc,pmnist,0.87
 agem,pmnist,0.81
 agem,scifar100,0.62
 gem,pmnist,0.83
 gem,scifar100,0.63
-lwf,smnist,0.31
-lwf,pmnist,0.51
-lwf,stiny-imagenet,0.44
+lwf,smnist,0.23
+lwf,stiny-imagenet,0.35
 gss,smnist,0.78
 iCaRL,scifar100,0.62
 gdumb,smnist,0.97

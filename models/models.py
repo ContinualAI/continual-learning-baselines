@@ -1,3 +1,4 @@
+import avalanche.models
 from avalanche.models import MultiHeadClassifier, MultiTaskModule, BaseModel
 from torch import nn
 
@@ -31,7 +32,11 @@ class MultiHeadMLP(MultiTaskModule):
 
 class MLP(nn.Module, BaseModel):
     def __init__(self, input_size=28 * 28, hidden_size=256, hidden_layers=2,
-                 output_size=10, drop_rate=0, relu_act=True):
+                 output_size=10, drop_rate=0, relu_act=True, initial_out_features=0):
+        """
+        :param initial_out_features: if >0 override output size and build an
+            IncrementalClassifier with `initial_out_features` units as first.
+        """
         super().__init__()
         self._input_size = input_size
 
@@ -46,7 +51,12 @@ class MLP(nn.Module, BaseModel):
                       nn.Dropout(p=drop_rate))))
 
         self.features = nn.Sequential(*layers)
-        self.classifier = nn.Linear(hidden_size, output_size)
+
+        if initial_out_features > 0:
+            self.classifier = avalanche.models.IncrementalClassifier(in_features=hidden_size,
+                                                                     initial_out_features=initial_out_features)
+        else:
+            self.classifier = nn.Linear(hidden_size, output_size)
 
     def forward(self, x):
         x = x.contiguous()
