@@ -8,7 +8,7 @@ from avalanche.evaluation.metrics import (
     loss_metrics
 )
 from avalanche.training.plugins import EvaluationPlugin
-from models import MultiHeadVGGSmall
+from models import MultiHeadVGG
 from experiments.utils import set_seed, create_default_args
 import avalanche as avl
 
@@ -41,7 +41,7 @@ def mas_stinyimagenet(override_args=None):
     """
     benchmark = avl.benchmarks.SplitTinyImageNet(
         10, return_task_id=True, dataset_root=args.dataset_root)
-    model = MultiHeadVGGSmall(n_classes=20)
+    model = MultiHeadVGG(n_classes=20)
     criterion = CrossEntropyLoss()
 
     interactive_logger = avl.logging.InteractiveLogger()
