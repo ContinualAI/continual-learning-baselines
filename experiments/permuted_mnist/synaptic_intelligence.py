@@ -3,7 +3,7 @@ import torch
 from torch.nn import CrossEntropyLoss
 from torch.optim import Adam
 from avalanche.evaluation import metrics as metrics
-from models import MultiHeadMLP
+from models import MLP
 from experiments.utils import set_seed, create_default_args
 
 
@@ -20,7 +20,7 @@ def synaptic_intelligence_pmnist(override_args=None):
                           args.cuda >= 0 else "cpu")
 
     benchmark = avl.benchmarks.PermutedMNIST(10)
-    model = MultiHeadMLP(hidden_size=2000, hidden_layers=2)
+    model = MLP(hidden_size=2000, hidden_layers=2)
     criterion = CrossEntropyLoss()
 
     interactive_logger = avl.logging.InteractiveLogger()

@@ -11,4 +11,5 @@ from .iCARL import iCARL
 from .gdumb import GDumb
 from .lfl import LFL
 from .lamaml import LaMAML
+from .rwalk import RWalk
 from . import utils

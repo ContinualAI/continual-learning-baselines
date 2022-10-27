@@ -19,7 +19,7 @@ class SynapticIntelligence(unittest.TestCase):
 
         target_acc = float(get_target_result('si', 'smnist'))
         if target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.01)
 
     def test_pmnist(self):
         """Permuted MNIST benchmark"""
