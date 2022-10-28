@@ -12,7 +12,7 @@ def synaptic_intelligence_smnist(override_args=None):
     "Continual Learning Through Synaptic Intelligence" by Zenke et. al. (2017).
     http://proceedings.mlr.press/v70/zenke17a.html
     """
-    args = create_default_args({'cuda': 0, 'si_lambda': 1, 'si_eps': 0.001, 'epochs': 10,
+    args = create_default_args({'cuda': 0, 'si_lambda': 1, 'si_eps': 0.1, 'epochs': 10,
                                 'learning_rate': 0.001, 'train_mb_size': 64, 'seed': 0}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
@@ -29,7 +29,7 @@ def synaptic_intelligence_smnist(override_args=None):
         metrics.accuracy_metrics(epoch=True, experience=True, stream=True),
         loggers=[interactive_logger])
 
-    cl_strategy = avl.training.Naive(
+    cl_strategy = avl.training.SynapticIntelligence(
         model, Adam(model.parameters(), lr=args.learning_rate), criterion,
         si_lambda=args.si_lambda, eps=args.si_eps,
         train_mb_size=args.train_mb_size, train_epochs=args.epochs, eval_mb_size=128,
