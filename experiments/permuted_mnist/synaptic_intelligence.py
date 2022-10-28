@@ -7,10 +7,6 @@ from models import MLP
 from experiments.utils import set_seed, create_default_args
 
 
-class MySynapticIntelligence(avl.training.SynapticIntelligence):
-    def make_optimizer(self, **kwargs):
-        super().make_optimizer(**kwargs)
-
 def synaptic_intelligence_pmnist(override_args=None):
     """
     "Continual Learning Through Synaptic Intelligence" by Zenke et. al. (2017).
@@ -33,7 +29,7 @@ def synaptic_intelligence_pmnist(override_args=None):
         metrics.accuracy_metrics(epoch=True, experience=True, stream=True),
         loggers=[interactive_logger])
 
-    cl_strategy = MySynapticIntelligence(
+    cl_strategy = avl.training.SynapticIntelligence(
         model, Adam(model.parameters(), lr=args.learning_rate), criterion,
         si_lambda=args.si_lambda, eps=args.si_eps,
         train_mb_size=args.train_mb_size, train_epochs=args.epochs, eval_mb_size=128,
