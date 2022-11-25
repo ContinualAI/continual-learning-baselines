@@ -37,7 +37,8 @@ def lwf_smnist(override_args=None):
                                 'lwf_alpha': [0, 0.5, 1.33333, 2.25, 3.2],
                                 'lwf_temperature': 2, 'epochs': 21,
                                 'layers': 1, 'hidden_size': 200,
-                                'learning_rate': 0.001, 'train_mb_size': 128, 'seed': 0}, override_args)
+                                'learning_rate': 0.001, 'train_mb_size': 128,
+                                'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

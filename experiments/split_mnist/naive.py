@@ -13,7 +13,8 @@ def naive_smnist(override_args=None):
     http://proceedings.mlr.press/v70/zenke17a.html
     """
     args = create_default_args({'cuda': 0, 'epochs': 10,
-                                'learning_rate': 0.001, 'train_mb_size': 64, 'seed': 0,
+                                'learning_rate': 0.001, 'train_mb_size': 64,
+                                'seed': None,
                                 'task-incremental': False}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"

@@ -1,7 +1,6 @@
 import unittest
 from tests.utils import get_average_metric, get_target_result
 from experiments.split_mnist import lwf_smnist
-from experiments.permuted_mnist import lwf_pmnist
 from experiments.split_tiny_imagenet import lwf_stinyimagenet
 
 
@@ -24,7 +23,7 @@ class LwF(unittest.TestCase):
 
     def test_smnist(self):
         """Split MNIST benchmark"""
-        res = lwf_smnist()
+        res = lwf_smnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"LwF-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
@@ -34,7 +33,7 @@ class LwF(unittest.TestCase):
 
     def test_stinyimagenet(self):
         """Split Tiny ImageNet benchmark"""
-        res = lwf_stinyimagenet()
+        res = lwf_stinyimagenet({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"LwF-SplitTinyImageNet Average Stream Accuracy: {avg_stream_acc:.2f}")
 

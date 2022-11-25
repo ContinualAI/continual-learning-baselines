@@ -7,7 +7,7 @@ from avalanche.training.storage_policy import ReservoirSamplingBuffer
 from avalanche.training.plugins import ReplayPlugin
 from avalanche.training.supervised.lamaml import LaMAML
 
-from models.models_lamaml import MTConvCIFAR
+from models.models_lamaml import MTConvTinyImageNet
 from experiments.utils import set_seed, create_default_args
 
 
@@ -23,7 +23,7 @@ def lamaml_stinyimagenet(override_args=None):
         {'cuda': 0, 'n_inner_updates': 5, 'second_order': True,
          'grad_clip_norm': 1.0, 'learn_lr': True, 'lr_alpha': 0.4,
          'sync_update': False, 'mem_size': 400, 'lr': 0.1, 'train_mb_size': 10,
-         'train_epochs': 10, 'seed': 0}, override_args
+         'train_epochs': 10, 'seed': None}, override_args
     )
 
     set_seed(args.seed)
@@ -52,7 +52,7 @@ def lamaml_stinyimagenet(override_args=None):
     )
 
     # Strategy
-    model = MTConvCIFAR()
+    model = MTConvTinyImageNet()
     cl_strategy = LaMAML(
         model,
         torch.optim.SGD(model.parameters(), lr=args.lr),

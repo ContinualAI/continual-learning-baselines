@@ -1,6 +1,5 @@
 import torch
 from torch.nn import CrossEntropyLoss
-from torch.optim import SGD
 
 from avalanche.evaluation.metrics import (
     accuracy_metrics,
@@ -8,7 +7,7 @@ from avalanche.evaluation.metrics import (
     loss_metrics
 )
 from avalanche.training.plugins import EvaluationPlugin
-from models import MultiHeadVGG
+from models import MultiHeadVGGSmall
 from experiments.utils import set_seed, create_default_args
 import avalanche as avl
 
@@ -21,9 +20,9 @@ def mas_stinyimagenet(override_args=None):
     https://doi.org/10.1109/TPAMI.2021.3057446
     """
     args = create_default_args(
-        {'cuda': 0, 'lambda_reg': 2., 'alpha': 0.5,
-         'verbose': True, 'learning_rate': 0.005,
-         'train_mb_size': 200, 'epochs': 70, 'seed': 0,
+        {'cuda': 0, 'lambda_reg': 1., 'alpha': 0.5,
+         'verbose': True, 'learning_rate': 0.001,
+         'train_mb_size': 200, 'epochs': 50, 'seed': None,
          'dataset_root': None}, override_args)
 
     set_seed(args.seed)
@@ -41,7 +40,7 @@ def mas_stinyimagenet(override_args=None):
     """
     benchmark = avl.benchmarks.SplitTinyImageNet(
         10, return_task_id=True, dataset_root=args.dataset_root)
-    model = MultiHeadVGG(n_classes=20)
+    model = MultiHeadVGGSmall()
     criterion = CrossEntropyLoss()
 
     interactive_logger = avl.logging.InteractiveLogger()
@@ -58,9 +57,10 @@ def mas_stinyimagenet(override_args=None):
         ),
         loggers=[interactive_logger])
 
+    optimizer = torch.optim.SGD(model.parameters(), lr=args.learning_rate, momentum=0.9)
     cl_strategy = avl.training.MAS(
         model,
-        SGD(model.parameters(), lr=args.learning_rate, momentum=0.9),
+        optimizer,
         criterion, lambda_reg=args.lambda_reg, alpha=args.alpha,
         verbose=args.verbose, train_mb_size=args.train_mb_size,
         train_epochs=args.epochs, eval_mb_size=128, device=device,

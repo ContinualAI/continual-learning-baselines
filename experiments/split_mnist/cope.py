@@ -12,7 +12,7 @@ def cope_smnist(override_args=None):
     """
     args = create_default_args({'cuda': 0, 'nb_tasks': 5, 'batch_size': 10, 'epochs': 1,
                                 'mem_size': 2000, 'alpha': 0.99, 'T': 0.1, 'featsize': 32,
-                                'seed': 0}, override_args)
+                                'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

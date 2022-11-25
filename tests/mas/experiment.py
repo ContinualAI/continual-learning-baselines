@@ -13,7 +13,7 @@ class MAS(unittest.TestCase):
 
     def test_stinyimagenet(self):
         """Split Tiny ImageNet benchmark"""
-        res = mas_stinyimagenet()
+        res = mas_stinyimagenet({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print("MAS-SplitTinyImageNet Average "
               f"Stream Accuracy: {avg_stream_acc:.2f}")

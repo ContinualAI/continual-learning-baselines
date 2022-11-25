@@ -17,7 +17,7 @@ def lfl_pmnist(override_args=None):
     """
     args = create_default_args({'cuda': 0, 'lambda_e': [0.0001], 'epochs': 3,
                                 'hidden_size': 256, 'hidden_layers': 1,
-                                'learning_rate': 0.01, 'train_mb_size': 128, 'seed': 0}, override_args)
+                                'learning_rate': 0.01, 'train_mb_size': 128, 'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

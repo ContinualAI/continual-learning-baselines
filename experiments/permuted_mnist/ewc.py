@@ -16,7 +16,7 @@ def ewc_pmnist(override_args=None):
                                 'hidden_layers': 2, 'epochs': 30, 'dropout': 0,
                                 'ewc_mode': 'separate', 'ewc_decay': None,
                                 'learning_rate': 0.001, 'train_mb_size': 256,
-                                'seed': 0}, override_args)
+                                'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

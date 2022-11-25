@@ -26,7 +26,7 @@ def gss_smnist(override_args=None):
         'cuda': 0, 'lr': 0.05,
         'train_mb_size': 10, 'mem_strength': 10,
         'input_size': [1, 28, 28], 'train_epochs': 3, 'eval_mb_size': 10,
-        'mem_size': 300, 'seed': 0}, override_args)
+        'mem_size': 300, 'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

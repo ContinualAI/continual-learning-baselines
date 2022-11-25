@@ -16,7 +16,7 @@ def agem_pmnist(override_args=None):
                                 'hidden_layers': 2, 'epochs': 1, 'dropout': 0,
                                 'sample_size': 256,
                                 'learning_rate': 0.1, 'train_mb_size': 10,
-                                'seed': 0}, override_args)
+                                'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

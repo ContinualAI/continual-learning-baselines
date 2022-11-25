@@ -14,10 +14,10 @@ class AGEM(unittest.TestCase):
     We train on the last 17 experiences since we apply the evaluation protocol defined
     in the paper but we do not perform model selection.
     """
-
+    @unittest.skip("AGEM is slow")
     def test_pmnist(self):
         """Permuted MNIST benchmark"""
-        res = agem_pmnist()
+        res = agem_pmnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"AGEM-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
@@ -25,9 +25,10 @@ class AGEM(unittest.TestCase):
         if target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
+    @unittest.skip("AGEM is slow")
     def test_scifar100(self):
         """Split CIFAR-100 benchmark"""
-        res = agem_scifar100()
+        res = agem_scifar100({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"AGEM-SCIFAR100 Average Stream Accuracy: {avg_stream_acc:.2f}")
 

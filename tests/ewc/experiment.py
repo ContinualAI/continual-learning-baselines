@@ -12,7 +12,7 @@ class EWC(unittest.TestCase):
 
     def test_pmnist(self):
         """Permuted MNIST benchmark"""
-        res = ewc_pmnist()
+        res = ewc_pmnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"EWC-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
