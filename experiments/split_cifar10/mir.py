@@ -43,7 +43,6 @@ def mir_scifar10(override_args=None):
         eval_transform=transforms.ToTensor(),
         shuffle=True,
         class_ids_from_zero_in_each_exp=False,
-        dataset_root="/DATA/data/",
     )
     scenario = benchmark_with_validation_stream(scenario, 0.05)
     input_size = (3, 32, 32)

@@ -41,7 +41,6 @@ def mir_pmnist(override_args=None):
         seed=0,
         train_transform=transforms.ToTensor(),
         eval_transform=transforms.ToTensor(),
-        dataset_root="/DATA/data/",
     )
 
     scenario = benchmark_with_validation_stream(scenario, 0.05)
