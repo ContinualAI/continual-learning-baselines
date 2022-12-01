@@ -21,6 +21,8 @@ from models import MLP_gss
 def gss_smnist(override_args=None):
     """
     https://arxiv.org/abs/1903.08671
+
+    Expected accuracy is 82% which is slightly higher than the one we achieve.
     """
     args = create_default_args({
         'cuda': 0, 'lr': 0.05,

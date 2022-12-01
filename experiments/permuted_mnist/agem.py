@@ -1,7 +1,7 @@
 import avalanche as avl
 import torch
 from torch.nn import CrossEntropyLoss
-from torch.optim import SGD
+from torch.optim import SGD, Adam
 from avalanche.evaluation import metrics as metrics
 from models import MLP
 from experiments.utils import set_seed, create_default_args
@@ -13,7 +13,7 @@ def agem_pmnist(override_args=None):
     https://openreview.net/pdf?id=Hkf2_sC5FX
     """
     args = create_default_args({'cuda': 0, 'patterns_per_exp': 250, 'hidden_size': 256,
-                                'hidden_layers': 2, 'epochs': 1, 'dropout': 0,
+                                'hidden_layers': 1, 'epochs': 1, 'dropout': 0,
                                 'sample_size': 256,
                                 'learning_rate': 0.1, 'train_mb_size': 10,
                                 'seed': None}, override_args)
@@ -39,7 +39,7 @@ def agem_pmnist(override_args=None):
         train_mb_size=args.train_mb_size, train_epochs=args.epochs, eval_mb_size=128,
         device=device, evaluator=evaluation_plugin)
 
-    res = None
+    res = None 
     for experience in benchmark.train_stream:
         cl_strategy.train(experience)
         res = cl_strategy.eval(benchmark.test_stream)

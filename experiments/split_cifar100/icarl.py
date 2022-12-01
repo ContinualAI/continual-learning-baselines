@@ -39,6 +39,8 @@ def icarl_scifar100(override_args=None):
     Proceedings of the IEEE Conference on
     Computer Vision and Pattern Recognition (CVPR), 2017, pp. 2001-2010
     https://openaccess.thecvf.com/content_cvpr_2017/html/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.html
+
+    The expected performance is 50%, while we achieve a lower score.
     """
     args = create_default_args({'cuda': 0, 'batch_size': 128, 'nb_exp': 10,
                                 'memory_size': 2000, 'epochs': 70, 'lr_base': 2.,

@@ -9,6 +9,8 @@ def cope_smnist(override_args=None):
     "Continual prototype evolution: Learning online from non-stationary data streams"
     by De Lange et. al. (2021).
     https://arxiv.org/abs/2009.00919
+
+    Expected performance is 93%, which is higher than what we achieve.
     """
     args = create_default_args({'cuda': 0, 'nb_tasks': 5, 'batch_size': 10, 'epochs': 1,
                                 'mem_size': 2000, 'alpha': 0.99, 'T': 0.1, 'featsize': 32,

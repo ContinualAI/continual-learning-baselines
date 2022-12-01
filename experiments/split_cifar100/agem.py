@@ -31,7 +31,7 @@ def agem_scifar100(override_args=None):
         loggers=[interactive_logger])
 
     cl_strategy = avl.training.AGEM(
-        model, Adam(model.parameters(), lr=args.learning_rate), criterion,
+        model, SGD(model.parameters(), lr=args.learning_rate), criterion,
         patterns_per_exp=args.patterns_per_exp, sample_size=args.sample_size,
         train_mb_size=args.train_mb_size, train_epochs=args.epochs, eval_mb_size=128,
         device=device, evaluator=evaluation_plugin, plugins=[])

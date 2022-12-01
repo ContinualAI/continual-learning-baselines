@@ -17,6 +17,8 @@ def lamaml_stinyimagenet(override_args=None):
     Gunshi Gupta, Karmesh Yadav, Liam Paull;
     NeurIPS, 2020
     https://arxiv.org/abs/2007.13904
+
+    Expected performance is 66%, which is higher than what we achieve.
     """
     # Args
     args = create_default_args(

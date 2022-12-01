@@ -25,7 +25,6 @@ class LaMAML(unittest.TestCase):
         if target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
-    @unittest.skip("LaMAML is slow")
     def test_stinyimagenet(self):
         """
             stinyimagenet, multi-pass

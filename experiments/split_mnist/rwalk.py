@@ -13,6 +13,8 @@ def rwalk_smnist(override_args=None):
     "Riemannian Walk for Incremental Learning:
     Understanding Forgetting and Intransigence" by Chaudhry et. al. (2018).
     https://openaccess.thecvf.com/content_ECCV_2018/html/Arslan_Chaudhry__Riemannian_Walk_ECCV_2018_paper.html
+
+    The expected value is 99%, which is higher than the achieved one.
     """
     args = create_default_args({'cuda': 0, 'ewc_lambda': 0.1, 'ewc_alpha': 0.9, 'delta_t': 10,
                                 'epochs': 10, 'learning_rate': 0.001,
