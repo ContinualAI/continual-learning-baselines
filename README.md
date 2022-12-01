@@ -41,6 +41,7 @@ If the `Performance` is much worse than the expected one, the `bug` tag is used 
 |     Split MNIST     |     Synaptic Intelligence (SI)     |  Task-Incremental  |  ACC=0.97   | ✅          |
 |     Split MNIST     |               GDumb                | Class-Incremental  |  ACC=0.97   | ✅          |
 |     Split MNIST     |             GSS_greedy             | Class-Incremental  |  ACC=0.78   | ❌          |
+|     Split MNIST     |         Generative Replay (GR)     | Class-Incremental  |  ACC=0.75   | ✅          |
 |     Split MNIST     | Learning without Forgetting (LwF)  | Class-Incremental  |  ACC=0.23   | ✅          |
 |     Split MNIST     |                CoPE                | Class-Incremental  |  ACC=0.23   | ❌ `bug`    |
 | Split Tiny ImageNet |               LaMAML               |  Task-Incremental  |  ACC=0.54   | ❌          |
@@ -163,3 +164,4 @@ directory and an optional parameter specifying the path to a particular unittest
 If the second parameter is not given, all the unit tests will be run.
 4. The terminal output will tell you which commit introduced the bug
 5. You can change the `HEAD` and `v0.1.0` ref to any avalanche commit.
+
