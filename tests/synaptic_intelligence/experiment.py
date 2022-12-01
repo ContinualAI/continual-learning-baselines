@@ -13,17 +13,17 @@ class SynapticIntelligence(unittest.TestCase):
 
     def test_smnist(self):
         """Split MNIST benchmark"""
-        res = synaptic_intelligence_smnist()
+        res = synaptic_intelligence_smnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"SI-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('si', 'smnist'))
         if target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.01)
 
     def test_pmnist(self):
         """Permuted MNIST benchmark"""
-        res = synaptic_intelligence_pmnist()
+        res = synaptic_intelligence_pmnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"SI-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 

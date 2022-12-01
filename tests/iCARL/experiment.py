@@ -17,7 +17,7 @@ class iCARL(unittest.TestCase):
         """
             scifar100 with 10 batches
         """
-        dict_iCaRL_aia = icarl_scifar100()
+        dict_iCaRL_aia = icarl_scifar100({'seed': 0})
         avg_ia = get_average_metric(dict_iCaRL_aia)
         target_acc = get_target_result('iCaRL', 'scifar100')
         print(f"scifar100-batch=10 Average Incremental Accuracy: {avg_ia:.5f}")

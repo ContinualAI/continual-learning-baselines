@@ -1,7 +1,6 @@
 import unittest
 from tests.utils import get_average_metric, get_target_result
 from experiments.split_mnist import lwf_smnist
-from experiments.permuted_mnist import lwf_pmnist
 from experiments.split_tiny_imagenet import lwf_stinyimagenet
 
 
@@ -12,7 +11,7 @@ class LwF(unittest.TestCase):
     http://arxiv.org/abs/1606.09282
     Since experimental setup of the paper is quite outdated and not
     easily reproducible, this class reproduces LwF experiments
-    on Split MNIST and Permuted MNIST from
+    on Split MNIST from
     "Three scenarios for continual learning" by van de Ven et. al. (2018).
     https://arxiv.org/pdf/1904.07734.pdf
     We managed to surpass the performances reported in the paper by slightly
@@ -24,27 +23,17 @@ class LwF(unittest.TestCase):
 
     def test_smnist(self):
         """Split MNIST benchmark"""
-        res = lwf_smnist()
+        res = lwf_smnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"LwF-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
         target_acc = float(get_target_result('lwf', 'smnist'))
         if target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
-
-    def test_pmnist(self):
-        """Permuted MNIST benchmark"""
-        res = lwf_pmnist()
-        avg_stream_acc = get_average_metric(res)
-        print(f"LwF-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
-
-        target_acc = float(get_target_result('lwf', 'pmnist'))
-        if target_acc > avg_stream_acc:
-            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.05)
+            self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.01)
 
     def test_stinyimagenet(self):
         """Split Tiny ImageNet benchmark"""
-        res = lwf_stinyimagenet()
+        res = lwf_stinyimagenet({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"LwF-SplitTinyImageNet Average Stream Accuracy: {avg_stream_acc:.2f}")
 

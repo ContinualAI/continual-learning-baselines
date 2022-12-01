@@ -16,10 +16,13 @@ def lwf_stinyimagenet(override_args=None):
     "A continual learning survey: Defying forgetting in classification tasks"
     De Lange et. al. (2021).
     https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9349197
+
+    We use a VGG network, which leads a lower performance than the one from
+    De Lange et. al. (2021).
     """
     args = create_default_args({'cuda': 0,
-                                'lwf_alpha': 10, 'lwf_temperature': 2, 'epochs': 20,
-                                'learning_rate': 0.01, 'train_mb_size': 200, 'seed': 0,
+                                'lwf_alpha': 1, 'lwf_temperature': 2, 'epochs': 70,
+                                'learning_rate': 1e-3, 'train_mb_size': 200, 'seed': None,
                                 'dataset_root': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
@@ -28,7 +31,7 @@ def lwf_stinyimagenet(override_args=None):
 
     benchmark = avl.benchmarks.SplitTinyImageNet(
         10, return_task_id=True, dataset_root=args.dataset_root)
-    model = MultiHeadVGGSmall(n_classes=20)
+    model = MultiHeadVGGSmall(n_classes=200)
     criterion = CrossEntropyLoss()
 
     interactive_logger = avl.logging.InteractiveLogger()
@@ -38,7 +41,9 @@ def lwf_stinyimagenet(override_args=None):
         loggers=[interactive_logger])
 
     cl_strategy = avl.training.LwF(
-        model, SGD(model.parameters(), lr=args.learning_rate, momentum=0.9), criterion,
+        model,
+        SGD(model.parameters(), lr=args.learning_rate, momentum=0.9),
+        criterion,
         alpha=args.lwf_alpha, temperature=args.lwf_temperature,
         train_mb_size=args.train_mb_size, train_epochs=args.epochs, eval_mb_size=128,
         device=device, evaluator=evaluation_plugin)

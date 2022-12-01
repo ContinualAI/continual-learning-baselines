@@ -14,7 +14,7 @@ def deep_slda_core50(override_args=None):
     https://arxiv.org/abs/1909.01520
     """
     args = create_default_args({'cuda': 0, 'feature_size': 512, 'batch_size': 512,
-                                'shrinkage': 1e-4, 'plastic_cov': True, 'seed': 0}, override_args)
+                                'shrinkage': 1e-4, 'plastic_cov': True, 'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and
