@@ -13,7 +13,7 @@ def agem_pmnist(override_args=None):
     https://openreview.net/pdf?id=Hkf2_sC5FX
     """
     args = create_default_args({'cuda': 0, 'patterns_per_exp': 250, 'hidden_size': 256,
-                                'hidden_layers': 1, 'epochs': 1, 'dropout': 0,
+                                'hidden_layers': 2, 'epochs': 1, 'dropout': 0,
                                 'sample_size': 256,
                                 'learning_rate': 0.1, 'train_mb_size': 10,
                                 'seed': None}, override_args)
