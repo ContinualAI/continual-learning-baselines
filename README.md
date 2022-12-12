@@ -35,7 +35,7 @@ If the `Performance` is much worse than the expected one, the `bug` tag is used 
 |   Permuted MNIST    |     Synaptic Intelligence (SI)     | Domain-Incremental |  ACC=0.83   | ❌          |
  |   Permuted MNIST    |         Average GEM (AGEM)         | Domain-Incremental |  ACC=0.81   | ✅          | 
 |   Split CIFAR-100   |               LaMAML               |  Task-Incremental  |  ACC=0.70   | ✅          |
-|   Split CIFAR-100   |                GEM                 | Class-Incremental  |  ACC=0.63   | ✅          |
+|   Split CIFAR-100   |                GEM                 |  Task-Incremental  |  ACC=0.63   | ✅          |
 |   Split CIFAR-100   |         Average GEM (AGEM)         |  Task-Incremental  |  ACC=0.62   | ✅          |
 |   Split CIFAR-100   |               iCaRL                | Class-Incremental  |  ACC=0.44   | ❌          |
 |     Split MNIST     |               RWalk                |  Task-Incremental  |  ACC=0.92   | ❌          |
