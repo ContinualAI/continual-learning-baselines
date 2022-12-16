@@ -11,7 +11,7 @@ from avalanche.evaluation.metrics import accuracy_metrics, loss_metrics
 from avalanche.logging import InteractiveLogger
 from avalanche.models import SimpleMLP
 from avalanche.models.dynamic_modules import IncrementalClassifier
-from avalanche.training.plugins import EvaluationPlugin, MIRPlugin
+from avalanche.training.plugins import EvaluationPlugin, MIRPlugin, ReplayPlugin
 from avalanche.training.supervised import Naive, OnlineNaive
 from experiments.utils import create_default_args, set_seed, restrict_dataset_size
 
@@ -36,11 +36,11 @@ def mir_pmnist(override_args=None):
         f"cuda:{args.cuda}" if torch.cuda.is_available() and args.cuda >= 0 else "cpu"
     )
     scenario = PermutedMNIST(
-        5,
+        10,
         return_task_id=False,
         seed=0,
-        train_transform=transforms.ToTensor(),
-        eval_transform=transforms.ToTensor(),
+        train_transform=None,
+        eval_transform=None,
     )
 
     scenario = benchmark_with_validation_stream(scenario, 0.05)

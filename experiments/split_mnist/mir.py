@@ -39,8 +39,8 @@ def mir_smnist(override_args=None):
         5,
         return_task_id=False,
         seed=0,
-        train_transform=transforms.ToTensor(),
-        eval_transform=transforms.ToTensor(),
+        train_transform=None,
+        eval_transform=None,
     )
     scenario = benchmark_with_validation_stream(scenario, 0.05)
 
