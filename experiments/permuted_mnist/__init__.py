@@ -1,5 +1,4 @@
 from .synaptic_intelligence import synaptic_intelligence_pmnist
-from .lwf import lwf_pmnist
 from .gem import gem_pmnist
 from .ewc import ewc_pmnist
 from .agem import agem_pmnist

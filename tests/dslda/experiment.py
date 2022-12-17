@@ -12,7 +12,7 @@ class DSLDA(unittest.TestCase):
     """
     def test_core50(self):
         """CORe50 New Classes benchmark"""
-        res = deep_slda_core50()
+        res = deep_slda_core50({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"DSLDA-CORe50 Average Stream Accuracy: {avg_stream_acc:.2f}")
 

@@ -13,7 +13,7 @@ def naive_pmnist(override_args=None):
     http://proceedings.mlr.press/v70/zenke17a.html
     """
     args = create_default_args({'cuda': 0, 'epochs': 20,
-                                'learning_rate': 0.001, 'train_mb_size': 256, 'seed': 0}, override_args)
+                                'learning_rate': 0.001, 'train_mb_size': 256, 'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

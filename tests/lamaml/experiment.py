@@ -17,7 +17,7 @@ class LaMAML(unittest.TestCase):
         """
             scifar100, multi-pass
         """
-        res = lamaml_scifar100()
+        res = lamaml_scifar100({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"LaMAML-SCIFAR100 Average Stream Accuracy: {avg_stream_acc:.2f}")
 
@@ -29,11 +29,11 @@ class LaMAML(unittest.TestCase):
         """
             stinyimagenet, multi-pass
         """
-        res = lamaml_stinyimagenet()
+        res = lamaml_stinyimagenet({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"LaMAML-SplitTinyImageNet Average Stream Accuracy: " + \
               f"{avg_stream_acc:.2f}")
 
-        target_acc = float(get_target_result('lamaml', 'stinyimagenet'))
+        target_acc = float(get_target_result('lamaml', 'stiny-imagenet'))
         if target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)

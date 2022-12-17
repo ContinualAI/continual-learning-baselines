@@ -23,7 +23,7 @@ def lamaml_scifar100(override_args=None):
         {'cuda': 0, 'n_inner_updates': 5, 'second_order': True,
          'grad_clip_norm': 1.0, 'learn_lr': True, 'lr_alpha': 0.25,
          'sync_update': False, 'mem_size': 200, 'lr': 0.1,
-         'train_mb_size': 10, 'train_epochs': 10, 'seed': 0}, override_args
+         'train_mb_size': 10, 'train_epochs': 10, 'seed': None}, override_args
     )
 
     set_seed(args.seed)

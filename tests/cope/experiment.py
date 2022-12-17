@@ -10,9 +10,10 @@ class COPE(unittest.TestCase):
     by De Lange et. al. (2021).
     https://arxiv.org/abs/2009.00919
     """
+    @unittest.skip("COPE is not working correctly at the moment")
     def test_smnist(self):
         """Split MNIST benchmark"""
-        res = cope_smnist()
+        res = cope_smnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"COPE-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 

@@ -30,7 +30,7 @@ def gem_pmnist(override_args=None):
     args = create_default_args({'cuda': 0, 'patterns_per_exp': 1000, 'hidden_size': 100,
                             'hidden_layers': 2, 'epochs': 1, 'dropout': 0,
                             'mem_strength': 0.5,
-                            'learning_rate': 0.1, 'train_mb_size': 10, 'seed': 0}, override_args)
+                            'learning_rate': 0.1, 'train_mb_size': 10, 'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

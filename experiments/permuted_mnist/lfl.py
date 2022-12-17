@@ -11,13 +11,14 @@ def lfl_pmnist(override_args=None):
     Heechul Jung, Jeongwoo Ju, Minju Jung and Junmo Kim;
     arXiv, 2016, https://arxiv.org/pdf/1607.00122.pdf
 
-    Note that the model must be a subclass of Avalanche `BaseModel` and must implement
-    the `get_features` method which, given an input `x`, returns the model hidden features
-    before the final classifier.
+    The Permuted MNIST benchmark was not used in the original paper.
+    We run LFL on Permuted MNIST for proper comparison with other strategies,
+    since the benchmarks used in the original papers are not commonly used in
+    Continual Learning.
     """
     args = create_default_args({'cuda': 0, 'lambda_e': [0.0001], 'epochs': 3,
                                 'hidden_size': 256, 'hidden_layers': 1,
-                                'learning_rate': 0.01, 'train_mb_size': 128, 'seed': 0}, override_args)
+                                'learning_rate': 0.01, 'train_mb_size': 128, 'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

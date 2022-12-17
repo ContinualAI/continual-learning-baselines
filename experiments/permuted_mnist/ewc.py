@@ -11,12 +11,14 @@ def ewc_pmnist(override_args=None):
     """
     "Overcoming catastrophic forgetting in neural networks" by Kirkpatrick et. al. (2017).
     https://www.pnas.org/content/114/13/3521
+
+    Results are below the original paper, which scores around 94%.
     """
-    args = create_default_args({'cuda': 0, 'ewc_lambda': 1, 'hidden_size': 1000,
-                                'hidden_layers': 2, 'epochs': 30, 'dropout': 0,
+    args = create_default_args({'cuda': 0, 'ewc_lambda': 1, 'hidden_size': 512,
+                                'hidden_layers': 1, 'epochs': 10, 'dropout': 0,
                                 'ewc_mode': 'separate', 'ewc_decay': None,
                                 'learning_rate': 0.001, 'train_mb_size': 256,
-                                'seed': 0}, override_args)
+                                'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

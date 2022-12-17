@@ -3,7 +3,7 @@ import torch
 from torch.nn import CrossEntropyLoss
 from torch.optim import Adam
 from avalanche.evaluation import metrics as metrics
-from models import MultiHeadVGG
+from models import MultiHeadVGGSmall
 from experiments.utils import set_seed, create_default_args
 
 
@@ -21,7 +21,7 @@ def naive_stinyimagenet(override_args=None):
     De Lange et. al. (2021).
     """
     args = create_default_args({'cuda': 0, 'epochs': 30,
-                                'learning_rate': 1e-3, 'train_mb_size': 200, 'seed': 0,
+                                'learning_rate': 1e-3, 'train_mb_size': 200, 'seed': None,
                                 'dataset_root': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
@@ -30,7 +30,7 @@ def naive_stinyimagenet(override_args=None):
 
     benchmark = avl.benchmarks.SplitTinyImageNet(
         10, return_task_id=True, dataset_root=args.dataset_root)
-    model = MultiHeadVGG(n_classes=20)
+    model = MultiHeadVGGSmall(n_classes=200)
     criterion = CrossEntropyLoss()
 
     interactive_logger = avl.logging.InteractiveLogger()

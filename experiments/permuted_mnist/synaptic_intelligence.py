@@ -11,16 +11,18 @@ def synaptic_intelligence_pmnist(override_args=None):
     """
     "Continual Learning Through Synaptic Intelligence" by Zenke et. al. (2017).
     http://proceedings.mlr.press/v70/zenke17a.html
+
+    Results are below the original paper, which has a score around 97%
     """
-    args = create_default_args({'cuda': 0, 'si_lambda': 1, 'si_eps': 0.1, 'epochs': 20,
-                                'learning_rate': 0.001, 'train_mb_size': 256, 'seed': 0}, override_args)
+    args = create_default_args({'cuda': 0, 'si_lambda': 10, 'si_eps': 0.1, 'epochs': 10,
+                                'learning_rate': 0.001, 'train_mb_size': 256, 'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and
                           args.cuda >= 0 else "cpu")
 
     benchmark = avl.benchmarks.PermutedMNIST(10)
-    model = MLP(hidden_size=2000, hidden_layers=2, relu_act=True)
+    model = MLP(hidden_size=1000, hidden_layers=1, relu_act=True)
     criterion = CrossEntropyLoss()
 
     interactive_logger = avl.logging.InteractiveLogger()

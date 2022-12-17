@@ -13,7 +13,7 @@ class RWalk(unittest.TestCase):
 
     def test_smnist(self):
         """Split MNIST benchmark"""
-        res = rwalk_smnist()
+        res = rwalk_smnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"RWALK-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 

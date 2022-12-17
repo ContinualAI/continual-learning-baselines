@@ -1,3 +1,3 @@
 from .models import *
 from .reduced_resnet18 import *
-from .vgg import MultiHeadVGG
+from .vgg import MultiHeadVGG, MultiHeadVGGSmall

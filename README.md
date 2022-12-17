@@ -19,34 +19,35 @@ Feel free to check it out and support the project!
 
 ## Experiments
 The table below describes all the experiments currently implemented in the `experiments` folder, along with their result.  
-ACC means the Average Accuracy on all experiences after training on the last experience.
+ACC means the Average Accuracy on all experiences after training on the last experience.  
+If an experiment reproduces exactly the results of a paper in terms of `Performance` (even if with different hyper-parameters), it is marked with ✅ on the `Reproduced` column. Otherwise, it is marked with ❌. 
+Check the comments in each experiment for more details.  
 
-|     Benchmarks      |              Strategy              |      Scenario      | Performance |
-|:-------------------:|:----------------------------------:|:------------------:|:-----------:|
-|       CORe50        |     Deep Streaming LDA (DSLDA)     | Class-Incremental  |  ACC=0.79   |
-|   Permuted MNIST    |   Less-Forgetful Learning (LFL)    | Domain-Incremental |  ACC=0.88   |
-|   Permuted MNIST    | Elastic Weight Consolidation (EWC) | Domain-Incremental |  ACC=0.87   |
-|   Permuted MNIST    |                GEM                 | Domain-Incremental |  ACC=0.83   |
-|   Permuted MNIST    |         Average GEM (AGEM)         | Domain-Incremental |  ACC=0.81   |
-|   Permuted MNIST    |     Synaptic Intelligence (SI)     | Domain-Incremental |  ACC=0.79   |
- |   Permuted MNIST    |               Naive                | Domain-Incremental |  ACC=0.47   |
-|   Permuted MNIST    | Learning without Forgetting (LwF)  | Domain-Incremental |  ACC=0.43   |
-|   Split CIFAR-100   |               LaMAML               |  Task-Incremental  |  ACC=0.69   |
-|   Split CIFAR-100   |                GEM                 | Class-Incremental  |  ACC=0.63   |
-|   Split CIFAR-100   |         Average GEM (AGEM)         |  Task-Incremental  |  ACC=0.62   |
-|   Split CIFAR-100   |               iCaRL                | Class-Incremental  |  ACC=0.43   |
-|     Split MNIST     |               RWalk                |  Task-Incremental  |  ACC=0.99   |
-|     Split MNIST     |     Synaptic Intelligence (SI)     |  Task-Incremental  |  ACC=0.98   |
-|     Split MNIST     |               GDumb                | Class-Incremental  |  ACC=0.97   |
-|     Split MNIST     |               Naive                |  Task-Incremental  |  ACC=0.97   |
-|     Split MNIST     |                CoPE                | Class-Incremental  |  ACC=0.93   |
-|     Split MNIST     |             GSS_greedy             | Class-Incremental  |  ACC=0.78   |
-|     Split MNIST     | Learning without Forgetting (LwF)  | Class-Incremental  |  ACC=0.24   |
-|     Split MNIST     |               Naive                | Class-Incremental  |  ACC=0.20   | 
-| Split Tiny ImageNet |               LaMAML               |  Task-Incremental  |  ACC=0.64   |
-| Split Tiny ImageNet |       Memory Aware Synapses        |  Task-Incremental  |  ACC=0.51   |
-| Split Tiny ImageNet | Learning without Forgetting (LwF)  |  Task-Incremental  |  ACC=0.35   |
- | Split Tiny ImageNet |               Naive                |  Task-Incremental  |  ACC=0.20   | 
+If the `Performance` is much worse than the expected one, the `bug` tag is used in the `Reproduced` column.
+
+
+|     Benchmarks      |              Strategy              |      Scenario      | Performance | Reproduced |
+|:-------------------:|:----------------------------------:|:------------------:|:-----------:|:-----------|
+|       CORe50        |     Deep Streaming LDA (DSLDA)     | Class-Incremental  |  ACC=0.79   | ✅          | 
+|   Permuted MNIST    |   Less-Forgetful Learning (LFL)    | Domain-Incremental |  ACC=0.88   | ❌          | 
+|   Permuted MNIST    | Elastic Weight Consolidation (EWC) | Domain-Incremental |  ACC=0.83   | ❌          |
+|   Permuted MNIST    |                GEM                 | Domain-Incremental |  ACC=0.83   | ✅          |
+|   Permuted MNIST    |     Synaptic Intelligence (SI)     | Domain-Incremental |  ACC=0.83   | ❌          |
+ |   Permuted MNIST    |         Average GEM (AGEM)         | Domain-Incremental |  ACC=0.81   | ✅          | 
+|   Split CIFAR-100   |               LaMAML               |  Task-Incremental  |  ACC=0.70   | ✅          |
+|   Split CIFAR-100   |                GEM                 |  Task-Incremental  |  ACC=0.63   | ✅          |
+|   Split CIFAR-100   |         Average GEM (AGEM)         |  Task-Incremental  |  ACC=0.62   | ✅          |
+|   Split CIFAR-100   |               iCaRL                | Class-Incremental  |  ACC=0.44   | ❌          |
+|     Split MNIST     |               RWalk                |  Task-Incremental  |  ACC=0.92   | ❌          |
+|     Split MNIST     |     Synaptic Intelligence (SI)     |  Task-Incremental  |  ACC=0.97   | ✅          |
+|     Split MNIST     |               GDumb                | Class-Incremental  |  ACC=0.97   | ✅          |
+|     Split MNIST     |             GSS_greedy             | Class-Incremental  |  ACC=0.78   | ❌          |
+|     Split MNIST     |       Generative Replay (GR)       | Class-Incremental  |  ACC=0.75   | ✅          |
+|     Split MNIST     | Learning without Forgetting (LwF)  | Class-Incremental  |  ACC=0.23   | ✅          |
+|     Split MNIST     |                CoPE                | Class-Incremental  |  ACC=0.23   | ❌ `bug`    |
+| Split Tiny ImageNet |               LaMAML               |  Task-Incremental  |  ACC=0.54   | ❌          |
+| Split Tiny ImageNet | Learning without Forgetting (LwF)  |  Task-Incremental  |  ACC=0.44   | ✅          |
+| Split Tiny ImageNet |    Memory Aware Synapses (MAS)     |  Task-Incremental  |  ACC=0.40   | ✅          |
 
 
 
@@ -164,3 +165,4 @@ directory and an optional parameter specifying the path to a particular unittest
 If the second parameter is not given, all the unit tests will be run.
 4. The terminal output will tell you which commit introduced the bug
 5. You can change the `HEAD` and `v0.1.0` ref to any avalanche commit.
+
