@@ -43,41 +43,26 @@ def mir_smnist(override_args=None):
         eval_transform=None,
     )
     scenario = benchmark_with_validation_stream(scenario, 0.05)
-
-    # Restrict scenario to be 1000 samples per task
     scenario = restrict_dataset_size(scenario, args.dataset_size)
-
     model = SimpleMLP(10, hidden_size=400, hidden_layers=1)
     optimizer = SGD(model.parameters(), lr=args.lr)
-
     interactive_logger = InteractiveLogger()
-
     loggers = [interactive_logger]
-
     training_metrics = []
-
     evaluation_metrics = [
         accuracy_metrics(epoch=True, stream=True),
         loss_metrics(epoch=True, stream=True),
     ]
-
-    # Create main evaluator that will be used by the training actor
     evaluator = EvaluationPlugin(
         *training_metrics,
         *evaluation_metrics,
         loggers=loggers,
     )
-
     plugins = [
         MIRPlugin(
             args.mem_size, subsample=args.subsample, batch_size_mem=args.batch_size_mem
         )
     ]
-
-    #######################
-    #  Strategy Creation  #
-    #######################
-
     cl_strategy = OnlineNaive(
         model=model,
         optimizer=optimizer,
@@ -87,41 +72,22 @@ def mir_smnist(override_args=None):
         train_mb_size=args.train_mb_size,
         eval_mb_size=64,
     )
-
-    ###################
-    #  TRAINING LOOP  #
-    ###################
-
-    print("Starting experiment...")
-
-    print([p.__class__.__name__ for p in cl_strategy.plugins])
-
-    # For online scenario
     batch_streams = scenario.streams.values()
-
     for t, experience in enumerate(scenario.train_stream):
-        print("Start of experience: ", experience.current_experience)
-        print("Current Classes: ", experience.classes_in_this_experience)
-
         ocl_scenario = OnlineCLScenario(
             original_streams=batch_streams,
             experiences=experience,
             experience_size=10,
             access_task_boundaries=False,
         )
-
         cl_strategy.train(
             ocl_scenario.train_stream,
             eval_streams=[],
             num_workers=0,
             drop_last=True,
         )
-
         cl_strategy.eval(scenario.test_stream[: t + 1])
-
-    # Only evaluate at the end on the test stream
     results = cl_strategy.eval(scenario.test_stream)
-
     return results
 
 
