@@ -33,7 +33,6 @@ def erace_scifar10(override_args=None):
     device = torch.device(
         f"cuda:{args.cuda}" if torch.cuda.is_available() and args.cuda >= 0 else "cpu"
     )
-
     scenario = SplitCIFAR10(
         5,
         return_task_id=False,
@@ -42,40 +41,24 @@ def erace_scifar10(override_args=None):
         shuffle=True,
         class_ids_from_zero_in_each_exp=False,
     )
-
     scenario = benchmark_with_validation_stream(scenario, 0.05)
     input_size = (3, 32, 32)
-    model = SlimResNet18(10)
-    # following line does not work because online exp don't 
-    # have classes_in_this_experience attribute
-    # in current avalanche version
-    # model.linear = IncrementalClassifier(model.linear.in_features, 1)
+    model = SlimResNet18(1)
+    model.linear = IncrementalClassifier(model.linear.in_features, 1)
     optimizer = SGD(model.parameters(), lr=args.lr)
-
     interactive_logger = InteractiveLogger()
-
     loggers = [interactive_logger]
-
     training_metrics = []
-
     evaluation_metrics = [
         accuracy_metrics(epoch=True, stream=True),
         loss_metrics(epoch=True, stream=True),
     ]
-
-    # Create main evaluator that will be used by the training actor
     evaluator = EvaluationPlugin(
         *training_metrics,
         *evaluation_metrics,
         loggers=loggers,
     )
-
     plugins = []
-
-    #######################
-    #  Strategy Creation  #
-    #######################
-
     cl_strategy = ER_ACE(
         model=model,
         optimizer=optimizer,
@@ -87,33 +70,14 @@ def erace_scifar10(override_args=None):
         mem_size=args.mem_size,
         batch_size_mem=args.batch_size_mem,
     )
-
-    ###################
-    #  TRAINING LOOP  #
-    ###################
-
-    print("Starting experiment...")
-
-    print([p.__class__.__name__ for p in cl_strategy.plugins])
-
-    # For online scenario
-    batch_streams = scenario.streams.values()
-
     for t, experience in enumerate(scenario.train_stream):
-        print("Start of experience: ", experience.current_experience)
-        print("Current Classes: ", experience.classes_in_this_experience)
-
         cl_strategy.train(
             experience,
             num_workers=0,
             drop_last=True,
         )
-
         cl_strategy.eval(scenario.test_stream[: t + 1])
-
-    # Only evaluate at the end on the test stream
     results = cl_strategy.eval(scenario.test_stream)
-
     return results
 
 
