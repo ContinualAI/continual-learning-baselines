@@ -6,4 +6,4 @@ from .cope import cope_smnist
 from .generative_replay import generative_replay_smnist
 from .rwalk import rwalk_smnist
 from .naive import naive_smnist
-
+from .mir import mir_smnist
