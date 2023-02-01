@@ -22,3 +22,7 @@ lfl,pmnist,0.88
 lamaml,scifar100,0.70
 lamaml,stiny-imagenet,0.54
 generative_replay,smnist,0.75
+replay, scifar100, 0.32
+online_replay, scifar100, 0.21
+online_replay, scifar10, 0.50
+online_replay, smnist, 0.92
