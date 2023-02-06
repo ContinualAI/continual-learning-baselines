@@ -19,6 +19,9 @@ gdumb,smnist,0.97
 rwalk,smnist,0.92
 mas,stiny-imagenet,0.4
 lfl,pmnist,0.88
+mir,scifar10,0.46
+mir,smnist,0.87
+mir,pmnist,0.80
 lamaml,scifar100,0.70
 lamaml,stiny-imagenet,0.54
 generative_replay,smnist,0.75
