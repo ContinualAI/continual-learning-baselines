@@ -27,3 +27,7 @@ lamaml,stiny-imagenet,0.54
 generative_replay,smnist,0.75
 er_ace,scifar10,0.48
 er_ace,scifar100,0.26
+replay, scifar100, 0.32
+online_replay, scifar100, 0.21
+online_replay, scifar10, 0.50
+online_replay, smnist, 0.92
