@@ -43,13 +43,9 @@ def eracl_scifar10(override_args=None):
         class_ids_from_zero_in_each_exp=False,
     )
 
-    scenario = benchmark_with_validation_stream(scenario, 0.05)
     input_size = (3, 32, 32)
-    model = SlimResNet18(10)
-    # following line does not work because online exp don't 
-    # have classes_in_this_experience attribute
-    # in current avalanche version
-    # model.linear = IncrementalClassifier(model.linear.in_features, 1)
+    model = SlimResNet18(1)
+    model.linear = IncrementalClassifier(model.linear.in_features, 1)
     optimizer = SGD(model.parameters(), lr=args.lr)
 
     interactive_logger = InteractiveLogger()

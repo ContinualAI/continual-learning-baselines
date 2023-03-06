@@ -34,15 +34,7 @@ def erace_scifar100(override_args=None):
     device = torch.device(
         f"cuda:{args.cuda}" if torch.cuda.is_available() and args.cuda >= 0 else "cpu"
     )
-    train_transform = transforms.Compose(
-        [
-            ToTensor(),
-            transforms.Normalize(
-                (0.5071, 0.4866, 0.4409), (0.2009, 0.1984, 0.2023)
-            ),
-        ]
-    )
-    test_transform = transforms.Compose(
+    unique_transform = transforms.Compose(
         [
             ToTensor(),
             transforms.Normalize(
@@ -57,10 +49,9 @@ def erace_scifar100(override_args=None):
         fixed_class_order=fixed_class_order,
         shuffle=True,
         class_ids_from_zero_in_each_exp=False,
-        train_transform=train_transform,
-        eval_transform=test_transform,
+        train_transform=unique_transform,
+        eval_transform=unique_transform,
     )
-    scenario = benchmark_with_validation_stream(scenario, 0.05)
     input_size = (3, 32, 32)
     model = SlimResNet18(1)
     model.linear = IncrementalClassifier(model.linear.in_features, 1)

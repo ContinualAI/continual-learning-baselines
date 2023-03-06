@@ -33,6 +33,16 @@ def erace_scifar10(override_args=None):
     device = torch.device(
         f"cuda:{args.cuda}" if torch.cuda.is_available() and args.cuda >= 0 else "cpu"
     )
+
+    unique_transform = transforms.Compose(
+        [
+            transforms.ToTensor(),
+            transforms.Normalize(
+                (0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)
+            ),
+        ]
+    )
+    
     scenario = SplitCIFAR10(
         5,
         return_task_id=False,
@@ -40,8 +50,10 @@ def erace_scifar10(override_args=None):
         fixed_class_order=fixed_class_order,
         shuffle=True,
         class_ids_from_zero_in_each_exp=False,
+        train_transform=unique_transform,
+        eval_transform=unique_transform,
     )
-    scenario = benchmark_with_validation_stream(scenario, 0.05)
+
     input_size = (3, 32, 32)
     model = SlimResNet18(1)
     model.linear = IncrementalClassifier(model.linear.in_features, 1)
