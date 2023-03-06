@@ -1,7 +1,12 @@
-from types import SimpleNamespace
-import torch
-import numpy as np
 import random
+from types import SimpleNamespace
+from typing import Dict, Union
+
+import numpy as np
+import torch
+
+from avalanche.benchmarks import dataset_benchmark
+from avalanche.benchmarks.utils import AvalancheSubset
 
 
 def set_seed(seed):
@@ -25,3 +30,35 @@ def create_default_args(args_dict, additional_args=None):
         for k, v in additional_args.items():
             args.__dict__[k] = v
     return args
+
+
+def restrict_dataset_size(scenario, size: int):
+    """
+    Util used to restrict the size of the datasets coming from a scenario
+    param: size: size of the reduced training dataset
+    """
+    modified_train_ds = []
+    modified_test_ds = []
+    modified_valid_ds = []
+
+    for i, train_ds in enumerate(scenario.train_stream):
+        train_ds_idx, _ = torch.utils.data.random_split(
+            torch.arange(len(train_ds.dataset)),
+            (size, len(train_ds.dataset) - size),
+        )
+        dataset = AvalancheSubset(train_ds.dataset, train_ds_idx)
+
+        modified_train_ds.append(dataset)
+        modified_test_ds.append(scenario.test_stream[i].dataset)
+        if hasattr(scenario, "valid_stream"):
+            modified_valid_ds.append(scenario.valid_stream[i].dataset)
+
+    scenario = dataset_benchmark(
+        modified_train_ds,
+        modified_test_ds,
+        other_streams_datasets={"valid": modified_valid_ds}
+        if len(modified_valid_ds) > 0
+        else None,
+    )
+
+    return scenario
