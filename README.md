@@ -47,7 +47,7 @@ If the `Performance` is much worse than the expected one, the `bug` tag is used 
 |     Split MNIST     |             GSS_greedy             | Class-Incremental  |  ACC=0.78   | ❌          |
 |     Split MNIST     |       Generative Replay (GR)       | Class-Incremental  |  ACC=0.75   | ✅          |
 |     Split MNIST     | Learning without Forgetting (LwF)  | Class-Incremental  |  ACC=0.23   | ✅          |
-|     Split MNIST     |                CoPE                | Class-Incremental  |  ACC=0.23   | ❌ `bug`    |
+|     Split MNIST     |                CoPE                | Class-Incremental  |  ACC=0.93   | ✅          |
 |     Split MNIST     |           Online Replay            | Class-Incremental  |  ACC=0.92   |            |
 | Split Tiny ImageNet |               LaMAML               |  Task-Incremental  |  ACC=0.54   | ❌          |
 | Split Tiny ImageNet | Learning without Forgetting (LwF)  |  Task-Incremental  |  ACC=0.44   | ✅          |
