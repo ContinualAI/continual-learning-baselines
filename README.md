@@ -33,14 +33,14 @@ If the `Performance` is much worse than the expected one, the `bug` tag is used 
 |   Permuted MNIST    | Elastic Weight Consolidation (EWC) | Domain-Incremental |  ACC=0.83   | ❌          |
 |   Permuted MNIST    |                GEM                 | Domain-Incremental |  ACC=0.83   | ✅          |
 |   Permuted MNIST    |     Synaptic Intelligence (SI)     | Domain-Incremental |  ACC=0.83   | ❌          |
-|   Split CIFAR-10   |               Online Replay              | Class-Incremental  |  ACC=0.50   |       |
+|   Split CIFAR-10    |           Online Replay            | Class-Incremental  |  ACC=0.50   |            |
  |   Permuted MNIST    |         Average GEM (AGEM)         | Domain-Incremental |  ACC=0.81   | ✅          | 
 |   Split CIFAR-100   |               LaMAML               |  Task-Incremental  |  ACC=0.70   | ✅          |
 |   Split CIFAR-100   |                GEM                 |  Task-Incremental  |  ACC=0.63   | ✅          |
 |   Split CIFAR-100   |         Average GEM (AGEM)         |  Task-Incremental  |  ACC=0.62   | ✅          |
-|   Split CIFAR-100   |               iCaRL                | Class-Incremental  |  ACC=0.44   | ❌          |
-|   Split CIFAR-100   |               Replay                | Class-Incremental  |  ACC=0.32   |       |
-|   Split CIFAR-100   |               Online Replay              | Class-Incremental  |  ACC=0.21   |       |
+|   Split CIFAR-100   |               iCaRL                | Class-Incremental  |  ACC=0.59   | ✅          |
+|   Split CIFAR-100   |               Replay               | Class-Incremental  |  ACC=0.32   |            |
+|   Split CIFAR-100   |           Online Replay            | Class-Incremental  |  ACC=0.21   |            |
 |     Split MNIST     |               RWalk                |  Task-Incremental  |  ACC=0.92   | ❌          |
 |     Split MNIST     |     Synaptic Intelligence (SI)     |  Task-Incremental  |  ACC=0.97   | ✅          |
 |     Split MNIST     |               GDumb                | Class-Incremental  |  ACC=0.97   | ✅          |
@@ -48,7 +48,7 @@ If the `Performance` is much worse than the expected one, the `bug` tag is used 
 |     Split MNIST     |       Generative Replay (GR)       | Class-Incremental  |  ACC=0.75   | ✅          |
 |     Split MNIST     | Learning without Forgetting (LwF)  | Class-Incremental  |  ACC=0.23   | ✅          |
 |     Split MNIST     |                CoPE                | Class-Incremental  |  ACC=0.23   | ❌ `bug`    |
-|     Split MNIST     |                Online Replay                | Class-Incremental  |  ACC=0.92   |  |
+|     Split MNIST     |           Online Replay            | Class-Incremental  |  ACC=0.92   |            |
 | Split Tiny ImageNet |               LaMAML               |  Task-Incremental  |  ACC=0.54   | ❌          |
 | Split Tiny ImageNet | Learning without Forgetting (LwF)  |  Task-Incremental  |  ACC=0.44   | ✅          |
 | Split Tiny ImageNet |    Memory Aware Synapses (MAS)     |  Task-Incremental  |  ACC=0.40   | ✅          |
