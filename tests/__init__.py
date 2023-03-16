@@ -7,6 +7,7 @@ from .agem import AGEM
 from .gem import GEM
 from .lwf import LwF
 from .gss import GSS
+from .mir import MIR
 from .iCARL import iCARL
 from .gdumb import GDumb
 from .lfl import LFL
