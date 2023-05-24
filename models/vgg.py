@@ -2,7 +2,6 @@ import torch
 from torch import nn
 import torchvision
 from avalanche.models import MultiTaskModule, MultiHeadClassifier
-from avalanche.benchmarks.utils.dataset_utils import ConstantSequence
 
 
 class MultiHeadVGG(MultiTaskModule):
