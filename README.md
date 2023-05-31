@@ -19,32 +19,38 @@ Feel free to check it out and support the project!
 
 ## Experiments
 The tables below describes all the experiments currently implemented in the `experiments` folder, along with their result.
-ACC means the Average Accuracy on all experiences after training on the last experience.  
-If an experiment reproduces exactly the results of a paper in terms of `Performance` (even if with different hyper-parameters), it is marked with ✅ on the `Reproduced` column. Otherwise, it is marked with ❌. `Avalanche` means that we could not find any specific paper as reference and we used the performance of Avalanche obtained when the strategy was first add to the library.
-If the `Performance` is much worse than the expected one, the `bug` tag is used in the `Reproduced` column.  
+The tables are not meant to compare different methods but rather as a reference for their performance. Different methods may use 
+slightly different setups (e.g., starting from a pre-trained model or from scratch), so it does not always make sense to compare them.
+
+If an experiment reproduces exactly the results of a paper in terms of `Performance` (even if with different hyper-parameters), it is marked with ✅ on the `Reproduced` column. Otherwise, it is marked with ❌.   
+`Avalanche` means that we could not find any specific paper as reference and we used the performance of Avalanche obtained when the strategy was first add to the library.  
+If the `Performance` is much worse than the expected one, the `bug` tag is used in the `Reproduced` column.    
 Finally, the `Reference` column reports the expected performance, together with a link to the associated paper (if any). Note that the link does not always point to the paper which introduced the strategy, since it sometimes differs from the one we used to get the target performance.
+
+ACC means the Average Accuracy on all experiences after training on the last experience.   
+IA-ACC is the incremental average accuracy, as used in the [iCarl paper](https://openaccess.thecvf.com/content_cvpr_2017/html/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.html).  
 
 First, we report the results for the **non-online** continual learning case (a.k.a. batch continual learning). Then, we report the results for the **online continual learning** case.
 
 ### Batch Continual Learning (non-online)
 
-|     Benchmarks      |              Strategy               |      Scenario      | Performance | Reference                                                                                                                  | Reproduced     |
-|:-------------------:|:-----------------------------------:|:------------------:|:-----------:|:---------------------------------------------------------------------------------------------------------------------------|:---------------|
-|   Permuted MNIST    |    Less-Forgetful Learning (LFL)    | Domain-Incremental |  ACC=0.88   | ACC=0.88                                                                                                                   | ✅ `Avalanche`  | 
-|   Permuted MNIST    | Elastic Weight Consolidation (EWC)  | Domain-Incremental |  ACC=0.83   | [ACC=0.94](https://www.pnas.org/content/114/13/3521)                                                                       | ❌              |
-|   Permuted MNIST    |     Synaptic Intelligence (SI)      | Domain-Incremental |  ACC=0.83   | [ACC=0.95](http://proceedings.mlr.press/v70/zenke17a.html)                                                                 | ❌              |
-|   Split CIFAR-100   |               LaMAML                |  Task-Incremental  |  ACC=0.70   | [ACC=0.70](https://arxiv.org/abs/2007.13904)                                                                               | ✅              |
-|   Split CIFAR-100   |                iCaRL                | Class-Incremental  |  ACC=0.59   | [ACC=0.59](https://openaccess.thecvf.com/content_cvpr_2017/html/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.html) | ✅              |
-|   Split CIFAR-100   |               Replay                | Class-Incremental  |  ACC=0.32   | ACC=0.32                                                                                                                   | ✅ `Avalanche`  |
-|     Split MNIST     |                RWalk                |  Task-Incremental  |  ACC=0.92   | [ACC=0.99](https://openaccess.thecvf.com/content_ECCV_2018/html/Arslan_Chaudhry__Riemannian_Walk_ECCV_2018_paper.html)     | ❌              |
-|     Split MNIST     |     Synaptic Intelligence (SI)      |  Task-Incremental  |  ACC=0.97   | [ACC=0.97](http://proceedings.mlr.press/v70/zenke17a.html)                                                                 | ✅              |
-|     Split MNIST     |                GDumb                | Class-Incremental  |  ACC=0.97   | [ACC=0.97](https://link.springer.com/chapter/10.1007/978-3-030-58536-5_31)                                                 | ✅              |
-|     Split MNIST     |             GSS_greedy              | Class-Incremental  |  ACC=0.82   | [ACC=0.78](https://arxiv.org/abs/1903.08671)                                                                               | ❌              |
-|     Split MNIST     |       Generative Replay (GR)        | Class-Incremental  |  ACC=0.75   | [ACC=0.75](https://arxiv.org/abs/1705.08690)                                                                               | ✅              |
-|     Split MNIST     |  Learning without Forgetting (LwF)  | Class-Incremental  |  ACC=0.23   | [ACC=0.23](https://arxiv.org/pdf/1904.07734.pdf)                                                                           | ✅              |
-| Split Tiny ImageNet |               LaMAML                |  Task-Incremental  |  ACC=0.54   | [ACC=0.66](https://arxiv.org/abs/2007.13904)                                                                               | ❌              |
-| Split Tiny ImageNet |  Learning without Forgetting (LwF)  |  Task-Incremental  |  ACC=0.44   | [ACC=0.44](https://arxiv.org/pdf/1904.07734.pdf)                                                                           | ✅              |
-| Split Tiny ImageNet |     Memory Aware Synapses (MAS)     |  Task-Incremental  |  ACC=0.40   | [ACC=0.40](https://doi.org/10.1109/TPAMI.2021.3057446)                                                                     | ✅              |
+|     Benchmarks      |              Strategy               |      Scenario      | Performance | Reference                                                                                                                     | Reproduced     |
+|:-------------------:|:-----------------------------------:|:------------------:|:-----------:|:------------------------------------------------------------------------------------------------------------------------------|:---------------|
+|   Permuted MNIST    |    Less-Forgetful Learning (LFL)    | Domain-Incremental |  ACC=0.88   | ACC=0.88                                                                                                                      | ✅ `Avalanche`  | 
+|   Permuted MNIST    | Elastic Weight Consolidation (EWC)  | Domain-Incremental |  ACC=0.83   | [ACC=0.94](https://www.pnas.org/content/114/13/3521)                                                                          | ❌              |
+|   Permuted MNIST    |     Synaptic Intelligence (SI)      | Domain-Incremental |  ACC=0.83   | [ACC=0.95](http://proceedings.mlr.press/v70/zenke17a.html)                                                                    | ❌              |
+|   Split CIFAR-100   |               LaMAML                |  Task-Incremental  |  ACC=0.70   | [ACC=0.70](https://arxiv.org/abs/2007.13904)                                                                                  | ✅              |
+|   Split CIFAR-100   |                iCaRL                | Class-Incremental  | IA-ACC=0.59 | [IA-ACC=0.59](https://openaccess.thecvf.com/content_cvpr_2017/html/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.html) | ✅              |
+|   Split CIFAR-100   |               Replay                | Class-Incremental  |  ACC=0.32   | ACC=0.32                                                                                                                      | ✅ `Avalanche`  |
+|     Split MNIST     |                RWalk                |  Task-Incremental  |  ACC=0.92   | [ACC=0.99](https://openaccess.thecvf.com/content_ECCV_2018/html/Arslan_Chaudhry__Riemannian_Walk_ECCV_2018_paper.html)        | ❌              |
+|     Split MNIST     |     Synaptic Intelligence (SI)      |  Task-Incremental  |  ACC=0.97   | [ACC=0.97](http://proceedings.mlr.press/v70/zenke17a.html)                                                                    | ✅              |
+|     Split MNIST     |                GDumb                | Class-Incremental  |  ACC=0.97   | [ACC=0.97](https://link.springer.com/chapter/10.1007/978-3-030-58536-5_31)                                                    | ✅              |
+|     Split MNIST     |             GSS_greedy              | Class-Incremental  |  ACC=0.82   | [ACC=0.78](https://arxiv.org/abs/1903.08671)                                                                                  | ❌              |
+|     Split MNIST     |       Generative Replay (GR)        | Class-Incremental  |  ACC=0.75   | [ACC=0.75](https://arxiv.org/abs/1705.08690)                                                                                  | ✅              |
+|     Split MNIST     |  Learning without Forgetting (LwF)  | Class-Incremental  |  ACC=0.23   | [ACC=0.23](https://arxiv.org/pdf/1904.07734.pdf)                                                                              | ✅              |
+| Split Tiny ImageNet |               LaMAML                |  Task-Incremental  |  ACC=0.54   | [ACC=0.66](https://arxiv.org/abs/2007.13904)                                                                                  | ❌              |
+| Split Tiny ImageNet |  Learning without Forgetting (LwF)  |  Task-Incremental  |  ACC=0.44   | [ACC=0.44](https://arxiv.org/pdf/1904.07734.pdf)                                                                              | ✅              |
+| Split Tiny ImageNet |     Memory Aware Synapses (MAS)     |  Task-Incremental  |  ACC=0.40   | [ACC=0.40](https://doi.org/10.1109/TPAMI.2021.3057446)                                                                        | ✅              |
 
 ### Online Continual Learning
 
