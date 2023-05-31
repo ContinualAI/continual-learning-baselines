@@ -14,5 +14,6 @@ from .lfl import LFL
 from .lamaml import LaMAML
 from .generative_replay import GenerativeReplay
 from .rwalk import RWalk
+from .scr import SCR
+from .er_ace import ER_ACE
 from . import utils
-
