@@ -24,7 +24,9 @@ If an experiment reproduces exactly the results of a paper in terms of `Performa
 If the `Performance` is much worse than the expected one, the `bug` tag is used in the `Reproduced` column.  
 Finally, the `Reference` column reports the expected performance, together with a link to the associated paper (if any). Note that the link does not always point to the paper which introduced the strategy, since it sometimes differs from the one we used to get the target performance.
 
-First, we report the results for the **non-online** continual learning case (a.k.a. batch continual learning)
+First, we report the results for the **non-online** continual learning case (a.k.a. batch continual learning). Then, we report the results for the **online continual learning** case.
+
+### Batch Continual Learning (non-online)
 
 |     Benchmarks      |              Strategy               |      Scenario      | Performance | Reference                                                                                                                  | Reproduced     |
 |:-------------------:|:-----------------------------------:|:------------------:|:-----------:|:---------------------------------------------------------------------------------------------------------------------------|:---------------|
@@ -44,7 +46,7 @@ First, we report the results for the **non-online** continual learning case (a.k
 | Split Tiny ImageNet |  Learning without Forgetting (LwF)  |  Task-Incremental  |  ACC=0.44   | [ACC=0.44](https://arxiv.org/pdf/1904.07734.pdf)                                                                           | ✅              |
 | Split Tiny ImageNet |     Memory Aware Synapses (MAS)     |  Task-Incremental  |  ACC=0.40   | [ACC=0.40](https://doi.org/10.1109/TPAMI.2021.3057446)                                                                     | ✅              |
 
-Then, we report the results for the **online continual learning** case.
+### Online Continual Learning
 
 |     Benchmarks      |              Strategy               |      Scenario      | Performance | Reference                                                                                                 | Reproduced    |
 |:-------------------:|:-----------------------------------:|:------------------:|:-----------:|:----------------------------------------------------------------------------------------------------------|:--------------|
