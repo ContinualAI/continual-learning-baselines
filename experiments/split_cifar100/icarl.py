@@ -102,3 +102,4 @@ def icarl_scifar100(override_args=None):
 if __name__ == '__main__':
     res = icarl_scifar100()
     print(res)
+    print("Final Incremental Average Accuracy", sum(res.values()) / float(len(res.values())))

@@ -14,7 +14,7 @@ class MIR(unittest.TestCase):
 
     def test_pmnist(self):
         """Permuted MNIST benchmark"""
-        res = mir_pmnist()
+        res = mir_pmnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"MIR-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
@@ -24,7 +24,7 @@ class MIR(unittest.TestCase):
 
     def test_smnist(self):
         """Split MNIST benchmark"""
-        res = mir_smnist()
+        res = mir_smnist({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"MIR-SMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 
@@ -34,7 +34,7 @@ class MIR(unittest.TestCase):
 
     def test_scifar10(self):
         """Split CIFAR-10 benchmark"""
-        res = mir_scifar10()
+        res = mir_scifar10({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"MIR-SCIFAR10 Average Stream Accuracy: {avg_stream_acc:.2f}")
 

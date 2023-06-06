@@ -31,7 +31,7 @@ def replay_scifar100(override_args=None):
             "weight_decay": 0.0002,
             "lr": 0.1,
             "train_mb_size": 128,
-            "seed": 0,
+            "seed": None,
             "batch_size_mem": 128,
         },
         override_args
