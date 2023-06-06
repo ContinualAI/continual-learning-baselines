@@ -24,7 +24,7 @@ def online_replay_smnist(override_args=None):
             "mem_size": 1000,
             "lr": 0.1,
             "train_mb_size": 10,
-            "seed": 0,
+            "seed": None,
             "batch_size_mem": 10,
         },
         override_args

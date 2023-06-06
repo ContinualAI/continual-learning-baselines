@@ -14,7 +14,7 @@ class ER_ACE(unittest.TestCase):
 
     def test_scifar10(self):
         """Split CIFAR-10 benchmark"""
-        res = erace_scifar10()
+        res = erace_scifar10({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"ER_ACE-SCIFAR10 Average Stream Accuracy: {avg_stream_acc:.2f}")
 
@@ -24,7 +24,7 @@ class ER_ACE(unittest.TestCase):
 
     def test_scifar100(self):
         """Split CIFAR-100 benchmark"""
-        res = erace_scifar100()
+        res = erace_scifar100({'seed': 0})
         avg_stream_acc = get_average_metric(res)
         print(f"ER_ACE-SCIFAR100 Average Stream Accuracy: {avg_stream_acc:.2f}")
 

@@ -36,7 +36,7 @@ def online_scr_scifar10(override_args=None):
             "mem_size": 200,
             "lr": 0.1,
             "train_mb_size": 10,
-            "seed": 0,
+            "seed": None,
             "batch_size_mem": 100,
             "review_trick": False
         },
@@ -48,7 +48,6 @@ def online_scr_scifar10(override_args=None):
     device = torch.device(
         f"cuda:{args.cuda}" if torch.cuda.is_available() and args.cuda >= 0 else "cpu"
     )
-
 
     data_transform = transforms.Compose([
         transforms.ToTensor(),
@@ -81,7 +80,7 @@ def online_scr_scifar10(override_args=None):
     loggers = [interactive_logger]
     training_metrics = []
 
-    # training accuracy cannot be monitored with SCR
+    # training accuracy cannot be directly monitored with SCR
     # training loss and eval loss are two different ones
     evaluation_metrics = [
         accuracy_metrics(experience=True, stream=True),
@@ -114,17 +113,14 @@ def online_scr_scifar10(override_args=None):
     )
 
     batch_streams = scenario.streams.values()
-
     for t, experience in enumerate(scenario.train_stream):
-        # ocl_scenario = OnlineCLScenario(
-        #     original_streams=batch_streams,
-        #     experiences=experience,
-        #     experience_size=args.train_mb_size,
-        #     access_task_boundaries=False,
-        # )
-        #
-        # cl_strategy.train(ocl_scenario.train_stream)
-        cl_strategy.train(experience)
+        ocl_scenario = OnlineCLScenario(
+            original_streams=batch_streams,
+            experiences=experience,
+            experience_size=args.train_mb_size,
+            access_task_boundaries=False,
+        )
+        cl_strategy.train(ocl_scenario.train_stream)
 
         # # cannot test on future experiences,
         # # since NCM has no class means for unseen classes

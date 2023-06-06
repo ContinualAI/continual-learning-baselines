@@ -14,7 +14,7 @@ def generative_replay_smnist(override_args=None):
     """
     args = create_default_args({'cuda': 0, 'hidden_size': 400,
                                 'hidden_layers': 2, 'epochs': 10, 'dropout': 0,
-                                'learning_rate': 0.001, 'train_mb_size': 16, 'seed': 0}, override_args)
+                                'learning_rate': 0.001, 'train_mb_size': 16, 'seed': None}, override_args)
     set_seed(args.seed)
     device = torch.device(f"cuda:{args.cuda}"
                           if torch.cuda.is_available() and

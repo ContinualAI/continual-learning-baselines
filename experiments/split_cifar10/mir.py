@@ -23,7 +23,7 @@ def mir_scifar10(override_args=None):
             "mem_size": 1000,
             "lr": 0.05,
             "train_mb_size": 10,
-            "seed": 0,
+            "seed": None,
             "subsample": 50,
             "batch_size_mem": 10,
         },
@@ -62,7 +62,7 @@ def mir_scifar10(override_args=None):
     )
     plugins = [
         MIRPlugin(
-            args.mem_size, subsample=args.subsample, batch_size_mem=args.batch_size_mem
+            mem_size=args.mem_size, subsample=args.subsample, batch_size_mem=args.batch_size_mem
         )
     ]
     cl_strategy = OnlineNaive(
