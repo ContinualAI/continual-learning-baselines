@@ -13,7 +13,7 @@ class GEM(unittest.TestCase):
 
     def test_pmnist(self):
         """Permuted MNIST benchmark"""
-        res = gem_pmnist({'seed': 0})
+        res = gem_pmnist({'seed': 0, 'n_exp': 5})
         avg_stream_acc = get_average_metric(res)
         print(f"GEM-PMNIST Average Stream Accuracy: {avg_stream_acc:.2f}")
 

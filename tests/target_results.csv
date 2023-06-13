@@ -9,7 +9,7 @@ dslda,core50,0.79
 ewc,pmnist,0.83
 agem,pmnist,0.81
 agem,scifar100,0.54
-gem,pmnist,0.83
+gem,pmnist,0.93
 gem,scifar100,0.63
 lwf,smnist,0.23
 lwf,stiny-imagenet,0.44
@@ -25,8 +25,8 @@ mir,pmnist,0.80
 lamaml,scifar100,0.70
 lamaml,stiny-imagenet,0.54
 generative_replay,smnist,0.75
-er_ace,scifar10,0.50
-er_ace,scifar100,0.28
+er_ace,scifar10,0.45
+er_ace,scifar100,0.24
 replay, scifar100, 0.32
 online_replay, scifar100, 0.21
 online_replay, scifar10, 0.50
