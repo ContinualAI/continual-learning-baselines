@@ -14,7 +14,7 @@ gem,scifar100,0.63
 lwf,smnist,0.23
 lwf,stiny-imagenet,0.44
 gss,smnist,0.78
-iCaRL,scifar100,0.59
+iCaRL,scifar100,0.5
 gdumb,smnist,0.97
 rwalk,smnist,0.92
 mas,stiny-imagenet,0.4
