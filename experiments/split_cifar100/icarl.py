@@ -15,6 +15,8 @@ from avalanche.logging.interactive_logging import InteractiveLogger
 from avalanche.training import ICaRL
 
 
+
+
 def icarl_cifar100_augment_data(img):
     img = img.numpy()
     padded = np.pad(img, ((0, 0), (4, 4), (4, 4)), mode='constant')
@@ -45,8 +47,9 @@ def icarl_scifar100(override_args=None):
     args = create_default_args({'cuda': 0, 'batch_size': 128, 'nb_exp': 10,
                                 'memory_size': 2000, 'epochs': 70, 'lr_base': 2.,
                                 'lr_milestones': [49, 63], 'lr_factor': 5.,
-                                'wght_decay': 0.00001, 'train_mb_size': 256,
+                                'wght_decay': 0.00001, 'train_mb_size': 128,
                                 'seed': None}, override_args)
+
     # class incremental learning: classes mutual exclusive
     fixed_class_order = [87, 0, 52, 58, 44, 91, 68, 97, 51, 15,
                          94, 92, 10, 72, 49, 78, 61, 14, 8, 86,
@@ -63,8 +66,24 @@ def icarl_scifar100(override_args=None):
                           if torch.cuda.is_available() and
                              args.cuda >= 0 else "cpu")
 
-    benchmark = SplitCIFAR100(n_experiences=args.nb_exp, seed=args.seed,
-                  fixed_class_order=fixed_class_order)
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        icarl_cifar100_augment_data,
+    ])
+
+    transform_prototypes = transforms.Compose([
+        icarl_cifar100_augment_data,
+    ])
+
+    transform_test = transforms.Compose([
+        transforms.ToTensor(),
+    ])
+    benchmark = SplitCIFAR100(
+        n_experiences=args.nb_exp, seed=args.seed,
+        fixed_class_order=fixed_class_order,
+        train_transform=transform,
+        eval_transform=transform_test
+    )
 
     interactive_logger = InteractiveLogger()
     eval_plugin = EvaluationPlugin(
@@ -83,23 +102,19 @@ def icarl_scifar100(override_args=None):
     strategy = ICaRL(
         model.feature_extractor, model.classifier, optim,
         args.memory_size,
-        buffer_transform=transforms.Compose([icarl_cifar100_augment_data]),
+        buffer_transform=transform_prototypes,
         fixed_memory=True, train_mb_size=args.batch_size,
         train_epochs=args.epochs, eval_mb_size=args.batch_size,
         plugins=[sched], device=device, evaluator=eval_plugin
     )
-    # Dict to iCaRL Evaluation Protocol: Average Incremental Accuracy
-    dict_iCaRL_aia = {}
-    # ___________________________________________train and eval
+
     for i, exp in enumerate(benchmark.train_stream):
         strategy.train(exp, num_workers=4)
-        res = strategy.eval(benchmark.test_stream[:i + 1], num_workers=4)
-        dict_iCaRL_aia['Top1_Acc_Stream/Exp'+str(i)] = res['Top1_Acc_Stream/eval_phase/test_stream/Task000']
+        res = strategy.eval(benchmark.test_stream, num_workers=4)
 
-    return dict_iCaRL_aia
+    return res
 
 
 if __name__ == '__main__':
     res = icarl_scifar100()
     print(res)
-    print("Final Incremental Average Accuracy", sum(res.values()) / float(len(res.values())))

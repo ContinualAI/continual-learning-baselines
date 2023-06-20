@@ -17,10 +17,10 @@ class iCARL(unittest.TestCase):
         """
             scifar100 with 10 batches
         """
-        dict_iCaRL_aia = icarl_scifar100({'seed': 0})
-        avg_ia = get_average_metric(dict_iCaRL_aia)
+        res = icarl_scifar100({'seed': 0})
+        acc = get_average_metric(res)
         target_acc = get_target_result('iCaRL', 'scifar100')
-        print(f"scifar100-batch=10 Average Incremental Accuracy: {avg_ia:.5f}")
+        print(f"iCarl SCIFAR-100: ACC: {acc:.5f}")
 
-        if target_acc > avg_ia:
-            self.assertAlmostEqual(target_acc, avg_ia, delta=0.03)
+        if target_acc > acc:
+            self.assertAlmostEqual(target_acc, acc, delta=0.03)
