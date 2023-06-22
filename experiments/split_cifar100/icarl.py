@@ -47,8 +47,7 @@ def icarl_scifar100(override_args=None):
     args = create_default_args({'cuda': 0, 'batch_size': 128, 'nb_exp': 10,
                                 'memory_size': 2000, 'epochs': 70, 'lr_base': 2.,
                                 'lr_milestones': [49, 63], 'lr_factor': 5.,
-                                'wght_decay': 0.00001, 'train_mb_size': 128,
-                                'seed': None}, override_args)
+                                'wght_decay': 0.00001, 'seed': None}, override_args)
 
     # class incremental learning: classes mutual exclusive
     fixed_class_order = [87, 0, 52, 58, 44, 91, 68, 97, 51, 15,
@@ -66,23 +65,13 @@ def icarl_scifar100(override_args=None):
                           if torch.cuda.is_available() and
                              args.cuda >= 0 else "cpu")
 
-    transform = transforms.Compose([
-        transforms.ToTensor(),
-        icarl_cifar100_augment_data,
-    ])
-
     transform_prototypes = transforms.Compose([
         icarl_cifar100_augment_data,
     ])
 
-    transform_test = transforms.Compose([
-        transforms.ToTensor(),
-    ])
     benchmark = SplitCIFAR100(
         n_experiences=args.nb_exp, seed=args.seed,
         fixed_class_order=fixed_class_order,
-        train_transform=transform,
-        eval_transform=transform_test
     )
 
     interactive_logger = InteractiveLogger()
