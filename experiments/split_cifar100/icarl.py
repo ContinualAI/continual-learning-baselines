@@ -15,8 +15,6 @@ from avalanche.logging.interactive_logging import InteractiveLogger
 from avalanche.training import ICaRL
 
 
-
-
 def icarl_cifar100_augment_data(img):
     img = img.numpy()
     padded = np.pad(img, ((0, 0), (4, 4), (4, 4)), mode='constant')
@@ -69,9 +67,15 @@ def icarl_scifar100(override_args=None):
         icarl_cifar100_augment_data,
     ])
 
+    train_trsf = transforms.Compose([transforms.ToTensor(),
+                                     icarl_cifar100_augment_data])
+    test_trsf = transforms.Compose([transforms.ToTensor()])
+
     benchmark = SplitCIFAR100(
         n_experiences=args.nb_exp, seed=args.seed,
         fixed_class_order=fixed_class_order,
+        train_transform=train_trsf,
+        eval_transform=test_trsf
     )
 
     interactive_logger = InteractiveLogger()
