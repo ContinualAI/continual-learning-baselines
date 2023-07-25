@@ -1,7 +1,7 @@
+import torch
 from avalanche.models import MultiHeadClassifier, MultiTaskModule
 from torch import nn, relu
 from torch.nn.functional import avg_pool2d
-
 
 """
 START: FROM GEM CODE https://github.com/facebookresearch/GradientEpisodicMemory/
@@ -10,7 +10,9 @@ CLASSIFIER REMOVED AND SUBSTITUTED WITH AVALANCHE MULTI-HEAD CLASSIFIER
 
 
 def conv3x3(in_planes, out_planes, stride=1):
-    return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=True)
+    return nn.Conv2d(
+        in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=True
+    )
 
 
 class BasicBlock(nn.Module):
@@ -26,9 +28,14 @@ class BasicBlock(nn.Module):
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion * planes:
             self.shortcut = nn.Sequential(
-                nn.Conv2d(in_planes, self.expansion * planes, kernel_size=1,
-                          stride=stride, bias=True),
-                nn.BatchNorm2d(self.expansion * planes)
+                nn.Conv2d(
+                    in_planes,
+                    self.expansion * planes,
+                    kernel_size=1,
+                    stride=stride,
+                    bias=True,
+                ),
+                nn.BatchNorm2d(self.expansion * planes),
             )
 
     def forward(self, x):
@@ -75,11 +82,27 @@ END: FROM GEM CODE
 """
 
 
+class SingleHeadReducedResNet18(torch.nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.resnet = ResNet(BasicBlock, [2, 2, 2, 2], 20)
+        self.classifier = nn.Linear(160, num_classes)
+
+    def feature_extractor(self, x):
+        out = self.resnet(x)
+        return out.view(out.size(0), -1)
+
+    def forward(self, x):
+        out = self.feature_extractor(x)
+        return self.classifier(out)
+
+
 class MultiHeadReducedResNet18(MultiTaskModule):
     """
     As from GEM paper, a smaller version of ResNet18, with three times less feature maps across all layers.
     It employs multi-head output layer.
     """
+
     def __init__(self, size_before_classifier=160):
         super().__init__()
         self.resnet = ResNet(BasicBlock, [2, 2, 2, 2], 20)
@@ -91,4 +114,4 @@ class MultiHeadReducedResNet18(MultiTaskModule):
         return self.classifier(out, task_labels)
 
 
-__all__ = ['MultiHeadReducedResNet18']
+__all__ = ["MultiHeadReducedResNet18"]
