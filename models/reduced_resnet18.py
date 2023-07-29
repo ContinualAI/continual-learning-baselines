@@ -112,4 +112,4 @@ class MultiHeadReducedResNet18(MultiTaskModule):
         return self.classifier(out, task_labels)
 
 
-__all__ = ["MultiHeadReducedResNet18"]
+__all__ = ["SingleHeadReducedResNet18", "MultiHeadReducedResNet18"]

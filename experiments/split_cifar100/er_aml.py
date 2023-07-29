@@ -6,17 +6,12 @@ from torch.optim import SGD
 from torchvision.transforms import ToTensor
 
 from avalanche.benchmarks.classic import SplitCIFAR100
-from avalanche.benchmarks.generators import benchmark_with_validation_stream
-from avalanche.benchmarks.scenarios.online_scenario import OnlineCLScenario
 from avalanche.evaluation.metrics import accuracy_metrics, loss_metrics
 from avalanche.logging import InteractiveLogger
-from avalanche.models import SlimResNet18
-from avalanche.models.dynamic_modules import IncrementalClassifier
 from avalanche.training.plugins import EvaluationPlugin
 from avalanche.training.supervised import ER_AML
 from experiments.utils import create_default_args, set_seed
-
-from models.reduced_resnet18 import SingleHeadReducedResNet18
+from models import SingleHeadReducedResNet18
 
 
 def eraml_scifar100(override_args=None):
