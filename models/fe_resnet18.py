@@ -1,16 +1,12 @@
-from avalanche.models import MultiHeadClassifier, MultiTaskModule
+import torch
 from torch import nn, relu
 from torch.nn.functional import avg_pool2d
 
 
-"""
-START: FROM GEM CODE https://github.com/facebookresearch/GradientEpisodicMemory/
-CLASSIFIER REMOVED AND SUBSTITUTED WITH AVALANCHE MULTI-HEAD CLASSIFIER
-"""
-
-
 def conv3x3(in_planes, out_planes, stride=1):
-    return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=True)
+    return nn.Conv2d(
+        in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=True
+    )
 
 
 class BasicBlock(nn.Module):
@@ -26,9 +22,14 @@ class BasicBlock(nn.Module):
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion * planes:
             self.shortcut = nn.Sequential(
-                nn.Conv2d(in_planes, self.expansion * planes, kernel_size=1,
-                          stride=stride, bias=True),
-                nn.BatchNorm2d(self.expansion * planes)
+                nn.Conv2d(
+                    in_planes,
+                    self.expansion * planes,
+                    kernel_size=1,
+                    stride=stride,
+                    bias=True,
+                ),
+                nn.BatchNorm2d(self.expansion * planes),
             )
 
     def forward(self, x):
@@ -67,28 +68,24 @@ class ResNet(nn.Module):
         out = self.layer3(out)
         out = self.layer4(out)
         out = avg_pool2d(out, 4)
+        out = out.view(out.size(0), -1)
         return out
 
 
-"""
-END: FROM GEM CODE
-"""
-
-
-class MultiHeadReducedResNet18(MultiTaskModule):
+class FEResNet18(torch.nn.Module):
     """
-    As from GEM paper, a smaller version of ResNet18, with three times less feature maps across all layers.
-    It employs multi-head output layer.
+    Feature extractor ResNet18 used in tests of ER-AML strategy. This module provides feature extractor and classifier
+    that could be used separately in a simple way. In ER-AML is used the feature extractor of ResNet18 for the
+    computation of the contrastive loss of the new minibatch.
     """
-    def __init__(self, size_before_classifier=160):
+    def __init__(self, num_classes):
         super().__init__()
-        self.resnet = ResNet(BasicBlock, [2, 2, 2, 2], 20)
-        self.classifier = MultiHeadClassifier(size_before_classifier)
+        self.feature_extractor = ResNet(BasicBlock, [2, 2, 2, 2], 20)
+        self.classifier = nn.Linear(160, num_classes)
 
-    def forward(self, x, task_labels):
-        out = self.resnet(x)
-        out = out.view(out.size(0), -1)
-        return self.classifier(out, task_labels)
+    def forward(self, x):
+        out = self.feature_extractor(x)
+        return self.classifier(out)
 
 
-__all__ = ['MultiHeadReducedResNet18']
+__all__ = ["FEResNet18"]
