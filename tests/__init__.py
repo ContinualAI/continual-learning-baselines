@@ -16,4 +16,5 @@ from .generative_replay import GenerativeReplay
 from .rwalk import RWalk
 from .scr import SCR
 from .er_ace import ER_ACE
+from .er_aml import ER_AML
 from . import utils

@@ -12,6 +12,7 @@ class ER_AML(unittest.TestCase):
     https://openreview.net/forum?id=N8MaByOzUfb
     """
 
+    @unittest.skip("ER-AML is not yet in avalanche")
     def test_scifar10(self):
         """Split CIFAR-10 benchmark"""
         res = eraml_scifar10({"seed": 0})
@@ -22,6 +23,7 @@ class ER_AML(unittest.TestCase):
         if target_acc > avg_stream_acc:
             self.assertAlmostEqual(target_acc, avg_stream_acc, delta=0.03)
 
+    @unittest.skip("ER-AML is not yet in avalanche")
     def test_scifar100(self):
         """Split CIFAR-100 benchmark"""
         res = eraml_scifar100({"seed": 0})

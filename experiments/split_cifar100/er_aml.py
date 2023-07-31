@@ -15,6 +15,12 @@ from models import SingleHeadReducedResNet18
 
 
 def eraml_scifar100(override_args=None):
+    """
+    Reproducing ER-AML experiments from paper
+    "New insights on Reducing Abrupt Representation Change in Online Continual Learning"
+    by Lucas Caccia et. al
+    https://openreview.net/forum?id=N8MaByOzUfb
+    """
     args = create_default_args(
         {
             "cuda": 0,
