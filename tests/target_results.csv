@@ -16,7 +16,7 @@ lwf,stiny-imagenet,0.44
 gss,smnist,0.78
 iCaRL,scifar100,0.48
 gdumb,smnist,0.97
-rwalk,smnist,0.92
+rwalk,smnist,0.99
 mas,stiny-imagenet,0.4
 lfl,pmnist,0.88
 mir,scifar10,0.46
