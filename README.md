@@ -53,20 +53,22 @@ First, we report the results for the **non-online** continual learning case (a.k
 
 ### Online Continual Learning
 
-|     Benchmarks      |              Strategy               |      Scenario      | Performance | Reference                                                                                                 | Reproduced    |
-|:-------------------:|:-----------------------------------:|:------------------:|:-----------:|:----------------------------------------------------------------------------------------------------------|:--------------|
-|       CORe50        |     Deep Streaming LDA (DSLDA)      | Class-Incremental  |  ACC=0.79   | [ACC=0.79](https://arxiv.org/abs/1909.01520)                                                              | ✅             | 
-|   Permuted MNIST    |                 GEM                 | Domain-Incremental |  ACC=0.80   | [ACC=0.83](https://proceedings.neurips.cc/paper/2017/hash/f87522788a2be2d171666752f97ddebb-Abstract.html) | ✅             |
-|   Split CIFAR-10    |               ER-ACE                | Class-Incremental  |  ACC=0.45   | [ACC=0.52](https://openreview.net/forum?id=N8MaByOzUfb)                                                   | ✅             |
-|   Split CIFAR-10    |            Online Replay            | Class-Incremental  |  ACC=0.50   | ACC=0.50                                                                                                  | ✅ `Avalanche` |
-|   Split CIFAR-10    | Supervised Contrastive Replay (SCR) | Class-Incremental  |  ACC=0.36   | [ACC=0.48](https://ieeexplore.ieee.org/document/9522763)                                                  | ✅ `Avalanche` |
-|   Permuted MNIST    |         Average GEM (AGEM)          | Domain-Incremental |  ACC=0.81   | [ACC=0.81](https://openreview.net/pdf?id=Hkf2_sC5FX)                                                      | ✅             | 
-|   Split CIFAR-100   |                 GEM                 |  Task-Incremental  |  ACC=0.63   | [ACC=0.63](https://proceedings.neurips.cc/paper/2017/hash/f87522788a2be2d171666752f97ddebb-Abstract.html) | ✅             |
-|   Split CIFAR-100   |         Average GEM (AGEM)          |  Task-Incremental  |  ACC=0.62   | [ACC=0.62](https://openreview.net/pdf?id=Hkf2_sC5FX)                                                      | ✅             |
-|   Split CIFAR-100   |               ER-ACE                | Class-Incremental  |  ACC=0.24   | [ACC=0.25](https://openreview.net/forum?id=N8MaByOzUfb)                                                   | ✅             |
-|   Split CIFAR-100   |            Online Replay            | Class-Incremental  |  ACC=0.21   | ACC=0.21                                                                                                  | ✅ `Avalanche` |
-|     Split MNIST     |                CoPE                 | Class-Incremental  |  ACC=0.93   | [ACC=0.93](https://arxiv.org/abs/2009.00919)                                                              | ✅             |
-|     Split MNIST     |            Online Replay            | Class-Incremental  |  ACC=0.92   | ACC=0.92                                                                                                  | ✅ `Avalanche` |
+|   Benchmarks    |              Strategy               |      Scenario      | Performance | Reference                                                                                                 | Reproduced    |
+|:---------------:|:-----------------------------------:|:------------------:|:-----------:|:----------------------------------------------------------------------------------------------------------|:--------------|
+|     CORe50      |     Deep Streaming LDA (DSLDA)      | Class-Incremental  |  ACC=0.79   | [ACC=0.79](https://arxiv.org/abs/1909.01520)                                                              | ✅             | 
+| Permuted MNIST  |                 GEM                 | Domain-Incremental |  ACC=0.80   | [ACC=0.83](https://proceedings.neurips.cc/paper/2017/hash/f87522788a2be2d171666752f97ddebb-Abstract.html) | ✅             |
+| Split CIFAR-10  |            Online Replay            | Class-Incremental  |  ACC=0.50   | ACC=0.50                                                                                                  | ✅ `Avalanche` |
+| Split CIFAR-10  |               ER-AML                | Class-Incremental  |  ACC=0.47   | [ACC=0.47](https://openreview.net/forum?id=N8MaByOzUfb)                                                   | ✅             |
+| Split CIFAR-10  |               ER-ACE                | Class-Incremental  |  ACC=0.45   | [ACC=0.52](https://openreview.net/forum?id=N8MaByOzUfb)                                                   | ✅             |
+| Split CIFAR-10  | Supervised Contrastive Replay (SCR) | Class-Incremental  |  ACC=0.36   | [ACC=0.48](https://ieeexplore.ieee.org/document/9522763)                                                  | ✅ `Avalanche` |
+| Permuted MNIST  |         Average GEM (AGEM)          | Domain-Incremental |  ACC=0.81   | [ACC=0.81](https://openreview.net/pdf?id=Hkf2_sC5FX)                                                      | ✅             | 
+| Split CIFAR-100 |                 GEM                 |  Task-Incremental  |  ACC=0.63   | [ACC=0.63](https://proceedings.neurips.cc/paper/2017/hash/f87522788a2be2d171666752f97ddebb-Abstract.html) | ✅             |
+| Split CIFAR-100 |         Average GEM (AGEM)          |  Task-Incremental  |  ACC=0.62   | [ACC=0.62](https://openreview.net/pdf?id=Hkf2_sC5FX)                                                      | ✅             |
+| Split CIFAR-100 |               ER-ACE                | Class-Incremental  |  ACC=0.24   | [ACC=0.25](https://openreview.net/forum?id=N8MaByOzUfb)                                                   | ✅             |
+| Split CIFAR-100 |               ER-AML                | Class-Incremental  |  ACC=0.24   | [ACC=0.24](https://openreview.net/forum?id=N8MaByOzUfb)                                                   | ✅             |
+| Split CIFAR-100 |            Online Replay            | Class-Incremental  |  ACC=0.21   | ACC=0.21                                                                                                  | ✅ `Avalanche` |
+|   Split MNIST   |                CoPE                 | Class-Incremental  |  ACC=0.93   | [ACC=0.93](https://arxiv.org/abs/2009.00919)                                                              | ✅             |
+|   Split MNIST   |            Online Replay            | Class-Incremental  |  ACC=0.92   | ACC=0.92                                                                                                  | ✅ `Avalanche` |
 
 ## Python dependencies for experiments
 Outside Python standard library, the main packages required to run the experiments are PyTorch, Avalanche and Pandas. 
