@@ -10,7 +10,7 @@ from avalanche.logging import InteractiveLogger
 from avalanche.training.plugins import EvaluationPlugin
 from avalanche.training.supervised import ER_AML
 from experiments.utils import create_default_args, set_seed
-from models import FEResNet18
+from models import SingleHeadReducedResNet18
 
 
 def eraml_scifar10(override_args=None):
@@ -51,7 +51,7 @@ def eraml_scifar10(override_args=None):
     )
 
     input_size = (3, 32, 32)
-    model = FEResNet18(10)
+    model = SingleHeadReducedResNet18(10)
     optimizer = SGD(model.parameters(), lr=args.lr)
     interactive_logger = InteractiveLogger()
     loggers = [interactive_logger]

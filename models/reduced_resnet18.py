@@ -1,7 +1,7 @@
+import torch
 from avalanche.models import MultiHeadClassifier, MultiTaskModule
 from torch import nn, relu
 from torch.nn.functional import avg_pool2d
-
 
 """
 START: FROM GEM CODE https://github.com/facebookresearch/GradientEpisodicMemory/
@@ -80,6 +80,7 @@ class MultiHeadReducedResNet18(MultiTaskModule):
     As from GEM paper, a smaller version of ResNet18, with three times less feature maps across all layers.
     It employs multi-head output layer.
     """
+
     def __init__(self, size_before_classifier=160):
         super().__init__()
         self.resnet = ResNet(BasicBlock, [2, 2, 2, 2], 20)
@@ -91,4 +92,19 @@ class MultiHeadReducedResNet18(MultiTaskModule):
         return self.classifier(out, task_labels)
 
 
-__all__ = ['MultiHeadReducedResNet18']
+class SingleHeadReducedResNet18(torch.nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.resnet = ResNet(BasicBlock, [2, 2, 2, 2], 20)
+        self.classifier = nn.Linear(160, num_classes)
+
+    def feature_extractor(self, x):
+        out = self.resnet(x)
+        return out.view(out.size(0), -1)
+
+    def forward(self, x):
+        out = self.feature_extractor(x)
+        return self.classifier(out)
+
+
+__all__ = ['MultiHeadReducedResNet18', 'SingleHeadReducedResNet18']
