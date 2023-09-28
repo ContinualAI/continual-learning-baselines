@@ -17,4 +17,5 @@ from .rwalk import RWalk
 from .scr import SCR
 from .er_ace import ER_ACE
 from .er_aml import ER_AML
+from .packnet import PackNet
 from . import utils
