@@ -34,3 +34,4 @@ online_replay, smnist, 0.92
 scr,scifar10,0.36
 er_aml,scifar10,0.47
 er_aml,scifar100,0.24
+packnet,stiny-imagenet,0.46
