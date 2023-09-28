@@ -72,3 +72,22 @@ class MultiHeadVGGSmall(MultiTaskModule):
         x = torch.flatten(x, 1)
         x = self.feedforward(x)
         return self.classifier(x, task_labels)
+
+
+class SingleHeadVGGSmall(nn.Module):
+    def __init__(self, n_classes=200, hidden_size=128):
+        super().__init__()
+        self.vgg = VGGSmall()
+        self.feedforward = nn.Sequential(
+            nn.Linear(128 * 4 * 4, hidden_size),
+            nn.ReLU(True),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(True),
+        )
+        self.classifier = nn.Linear(hidden_size, n_classes)
+
+    def forward(self, x):
+        x = self.vgg(x)
+        x = torch.flatten(x, 1)
+        x = self.feedforward(x)
+        return self.classifier(x)

@@ -50,6 +50,7 @@ First, we report the results for the **non-online** continual learning case (a.k
 | Split Tiny ImageNet |               LaMAML                |  Task-Incremental  |  ACC=0.54   | [ACC=0.66](https://arxiv.org/abs/2007.13904)                                                                               | ❌             |
 | Split Tiny ImageNet |  Learning without Forgetting (LwF)  |  Task-Incremental  |  ACC=0.44   | [ACC=0.44](https://arxiv.org/pdf/1904.07734.pdf)                                                                           | ✅             |
 | Split Tiny ImageNet |     Memory Aware Synapses (MAS)     |  Task-Incremental  |  ACC=0.40   | [ACC=0.40](https://doi.org/10.1109/TPAMI.2021.3057446)                                                                     | ✅             |
+| Split Tiny ImageNet |              PackNet                |  Task-Incremental  |  ACC=0.46   | [ACC=0.47](https://arxiv.org/pdf/1904.07734.pdf) (Table 4 `SMALL`)                                                         | ✅             |
 
 ### Online Continual Learning
 
