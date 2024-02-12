@@ -2,8 +2,7 @@ import torch.nn as nn
 
 from avalanche.benchmarks import CLExperience
 from avalanche.benchmarks.classic import SplitMNIST
-from avalanche.benchmarks.generators.benchmark_generators import \
-    data_incremental_benchmark
+from avalanche.benchmarks import data_incremental_benchmark
 from avalanche.evaluation.metrics import \
     accuracy_metrics, \
     loss_metrics
@@ -11,7 +10,6 @@ from avalanche.logging import InteractiveLogger
 from avalanche.training.plugins import EvaluationPlugin
 from avalanche.training import GSS_greedy
 import torch
-from avalanche.benchmarks.utils import AvalancheSubset
 from torch.nn import CrossEntropyLoss
 from torch.optim import SGD
 from experiments.utils import set_seed, create_default_args
@@ -73,8 +71,7 @@ def shrinking_experience_size_split_strategy(
             torch.randperm(len(exp_indices))
         ].tolist()
 
-    result_datasets.append(AvalancheSubset(
-        exp_dataset, indices=exp_indices[0:experience_size]))
+    result_datasets.append(exp_dataset.subset(exp_indices[0:experience_size]))
 
     return result_datasets
 

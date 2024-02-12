@@ -11,7 +11,7 @@ from avalanche.training.plugins import EvaluationPlugin
 import kornia.augmentation as K
 
 from experiments.utils import create_default_args, set_seed
-from avalanche.benchmarks.scenarios.online_scenario import OnlineCLScenario
+from avalanche.benchmarks.scenarios import OnlineCLScenario
 from torch.utils.data import DataLoader
 from avalanche.training.losses import SCRLoss
 
