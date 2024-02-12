@@ -3,8 +3,8 @@ import torch
 from torch.optim import SGD
 
 from avalanche.benchmarks.classic import SplitCIFAR10
-from avalanche.benchmarks.generators import benchmark_with_validation_stream
-from avalanche.benchmarks.scenarios.online_scenario import OnlineCLScenario
+from avalanche.benchmarks import benchmark_with_validation_stream
+from avalanche.benchmarks.scenarios import OnlineCLScenario
 from avalanche.evaluation.metrics import accuracy_metrics, loss_metrics
 from avalanche.logging import InteractiveLogger
 from avalanche.models import SlimResNet18

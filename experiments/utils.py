@@ -1,12 +1,10 @@
 import random
 from types import SimpleNamespace
-from typing import Dict, Union
 
 import numpy as np
 import torch
 
 from avalanche.benchmarks import dataset_benchmark
-from avalanche.benchmarks.utils import AvalancheSubset
 
 
 def set_seed(seed):
@@ -46,7 +44,7 @@ def restrict_dataset_size(scenario, size: int):
             torch.arange(len(train_ds.dataset)),
             (size, len(train_ds.dataset) - size),
         )
-        dataset = AvalancheSubset(train_ds.dataset, train_ds_idx)
+        dataset = train_ds.dataset.subset(train_ds_idx)
 
         modified_train_ds.append(dataset)
         modified_test_ds.append(scenario.test_stream[i].dataset)

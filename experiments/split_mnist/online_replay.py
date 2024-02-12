@@ -1,16 +1,13 @@
-#!/usr/bin/env python3
 import numpy as np
 import torch
-import torchvision.transforms as transforms
 from torch.optim import SGD
 
 from avalanche.benchmarks.classic import SplitMNIST
-from avalanche.benchmarks.generators import benchmark_with_validation_stream
-from avalanche.benchmarks.scenarios.online_scenario import OnlineCLScenario
+from avalanche.benchmarks import benchmark_with_validation_stream
+from avalanche.benchmarks.scenarios import OnlineCLScenario
 from avalanche.evaluation.metrics import accuracy_metrics, loss_metrics
 from avalanche.logging import InteractiveLogger
 from avalanche.models import SimpleMLP
-from avalanche.models.dynamic_modules import IncrementalClassifier
 from avalanche.training.plugins import EvaluationPlugin, ReplayPlugin
 from avalanche.training.storage_policy import ClassBalancedBuffer
 from avalanche.training.supervised import OnlineNaive
