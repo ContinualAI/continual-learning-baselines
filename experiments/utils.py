@@ -39,6 +39,9 @@ def restrict_dataset_size(scenario, size: int):
     modified_test_ds = []
     modified_valid_ds = []
 
+    if hasattr(scenario, "valid_stream"):
+        valid_list = list(scenario.valid_stream)
+
     for i, train_ds in enumerate(scenario.train_stream):
         train_ds_idx, _ = torch.utils.data.random_split(
             torch.arange(len(train_ds.dataset)),
@@ -49,7 +52,7 @@ def restrict_dataset_size(scenario, size: int):
         modified_train_ds.append(dataset)
         modified_test_ds.append(scenario.test_stream[i].dataset)
         if hasattr(scenario, "valid_stream"):
-            modified_valid_ds.append(scenario.valid_stream[i].dataset)
+            modified_valid_ds.append(valid_list[i].dataset)
 
     scenario = dataset_benchmark(
         modified_train_ds,

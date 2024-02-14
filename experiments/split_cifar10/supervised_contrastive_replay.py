@@ -11,7 +11,7 @@ from avalanche.training.plugins import EvaluationPlugin
 import kornia.augmentation as K
 
 from experiments.utils import create_default_args, set_seed
-from avalanche.benchmarks.scenarios import OnlineCLScenario
+from avalanche.benchmarks.scenarios import split_online_stream
 from torch.utils.data import DataLoader
 from avalanche.training.losses import SCRLoss
 
@@ -112,21 +112,16 @@ def online_scr_scifar10(override_args=None):
         batch_size_mem=args.batch_size_mem
     )
 
-    batch_streams = scenario.streams.values()
-    for t, experience in enumerate(scenario.train_stream):
-        ocl_scenario = OnlineCLScenario(
-            original_streams=batch_streams,
-            experiences=experience,
-            experience_size=args.train_mb_size,
-            access_task_boundaries=False,
-        )
-        cl_strategy.train(ocl_scenario.train_stream)
+    ocl_scenario = split_online_stream(
+        original_stream=scenario,
+        experience_size=args.train_mb_size,
+        access_task_boundaries=False,
+    )
 
-        # # cannot test on future experiences,
-        # # since NCM has no class means for unseen classes
-        cl_strategy.eval(scenario.test_stream[:t+1])
+    for t, experience in enumerate(ocl_scenario):
+        cl_strategy.train(experience)
 
-        if args.review_trick:
+        if args.review_trick and experience.is_last_subexp:  # at the end of each macro experience
             buffer = cl_strategy.replay_plugin.storage_policy.buffer
             dl = DataLoader(buffer, batch_size=args.batch_size_mem, shuffle=True, drop_last=True)
             model.train()
