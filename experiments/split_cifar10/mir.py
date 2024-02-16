@@ -73,7 +73,7 @@ def mir_scifar10(override_args=None):
     )
 
     ocl_scenario = split_online_stream(
-        original_stream=scenario,
+        original_stream=scenario.train_stream,
         experience_size=10,
         access_task_boundaries=False,
     )

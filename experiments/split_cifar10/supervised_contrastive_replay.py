@@ -113,7 +113,7 @@ def online_scr_scifar10(override_args=None):
     )
 
     ocl_scenario = split_online_stream(
-        original_stream=scenario,
+        original_stream=scenario.train_stream,
         experience_size=args.train_mb_size,
         access_task_boundaries=False,
     )
