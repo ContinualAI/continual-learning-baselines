@@ -4,12 +4,12 @@ from torch.optim import SGD
 
 from avalanche.benchmarks.classic import PermutedMNIST
 from avalanche.benchmarks import benchmark_with_validation_stream
-from avalanche.benchmarks.scenarios import OnlineCLScenario
+from avalanche.benchmarks.scenarios import split_online_stream
 from avalanche.evaluation.metrics import accuracy_metrics, loss_metrics
 from avalanche.logging import InteractiveLogger
 from avalanche.models import SimpleMLP
 from avalanche.training.plugins import EvaluationPlugin, MIRPlugin, ReplayPlugin
-from avalanche.training.supervised import Naive, OnlineNaive
+from avalanche.training.supervised import Naive
 from experiments.utils import create_default_args, set_seed, restrict_dataset_size
 
 
@@ -28,7 +28,6 @@ def mir_pmnist(override_args=None):
         override_args
     )
     set_seed(args.seed)
-    fixed_class_order = np.arange(10)
     device = torch.device(
         f"cuda:{args.cuda}" if torch.cuda.is_available() and args.cuda >= 0 else "cpu"
     )
@@ -60,7 +59,7 @@ def mir_pmnist(override_args=None):
             mem_size=args.mem_size, subsample=args.subsample, batch_size_mem=args.batch_size_mem
         )
     ]
-    cl_strategy = OnlineNaive(
+    cl_strategy = Naive(
         model=model,
         optimizer=optimizer,
         plugins=plugins,
@@ -69,23 +68,20 @@ def mir_pmnist(override_args=None):
         train_mb_size=args.train_mb_size,
         eval_mb_size=64,
     )
-    batch_streams = scenario.streams.values()
-    for t, experience in enumerate(scenario.train_stream):
-        print("Start of experience: ", experience.current_experience)
-        print("Current Classes: ", experience.classes_in_this_experience)
-        ocl_scenario = OnlineCLScenario(
-            original_streams=batch_streams,
-            experiences=experience,
-            experience_size=10,
-            access_task_boundaries=False,
-        )
+
+    ocl_scenario = split_online_stream(
+        original_stream=scenario.train_stream,
+        experience_size=10,
+        access_task_boundaries=False,
+    )
+
+    for t, experience in enumerate(ocl_scenario):
         cl_strategy.train(
-            ocl_scenario.train_stream,
+            experience,
             eval_streams=[],
             num_workers=0,
             drop_last=True,
         )
-        cl_strategy.eval(scenario.test_stream[: t + 1])
     results = cl_strategy.eval(scenario.test_stream)
     return results
 

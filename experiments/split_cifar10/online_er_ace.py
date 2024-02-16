@@ -5,13 +5,13 @@ import torchvision.transforms as transforms
 from torch.optim import SGD
 
 from avalanche.benchmarks.classic import SplitCIFAR10
-from avalanche.benchmarks.scenarios import OnlineCLScenario
+from avalanche.benchmarks.scenarios import split_online_stream
 from avalanche.evaluation.metrics import accuracy_metrics, loss_metrics
 from avalanche.logging import InteractiveLogger
 from avalanche.models import SlimResNet18
 from avalanche.models.dynamic_modules import IncrementalClassifier
 from avalanche.training.plugins import EvaluationPlugin
-from avalanche.training.supervised import OnlineNaive, OnlineER_ACE
+from avalanche.training.supervised import Naive, OnlineER_ACE
 from experiments.utils import create_default_args, set_seed
 
 
@@ -42,7 +42,6 @@ def eracl_scifar10(override_args=None):
         class_ids_from_zero_in_each_exp=False,
     )
 
-    input_size = (3, 32, 32)
     model = SlimResNet18(1)
     model.linear = IncrementalClassifier(model.linear.in_features, 1)
     optimizer = SGD(model.parameters(), lr=args.lr)
@@ -91,33 +90,19 @@ def eracl_scifar10(override_args=None):
 
     print([p.__class__.__name__ for p in cl_strategy.plugins])
 
-    # For online scenario
-    batch_streams = scenario.streams.values()
-
-    for t, experience in enumerate(scenario.train_stream):
-        print("Start of experience: ", experience.current_experience)
-        print("Current Classes: ", experience.classes_in_this_experience)
-
-        ocl_scenario = OnlineCLScenario(
-            original_streams=batch_streams,
-            experiences=experience,
-            experience_size=10,
-            access_task_boundaries=False,
-        )
-
-        # Set this to inform strat
-        cl_strategy.classes_in_this_experience = experience.classes_in_this_experience
-
+    ocl_scenario = split_online_stream(
+        original_stream=scenario.train_stream,
+        experience_size=10,
+        access_task_boundaries=False,
+    )
+    for t, experience in enumerate(ocl_scenario):
         cl_strategy.train(
-            ocl_scenario.train_stream,
+            experience,
             eval_streams=[],
             num_workers=0,
             drop_last=True,
         )
 
-        cl_strategy.eval(scenario.test_stream[: t + 1])
-
-    # Only evaluate at the end on the test stream
     results = cl_strategy.eval(scenario.test_stream)
 
     return results

@@ -10,7 +10,7 @@ from avalanche.logging import InteractiveLogger
 from avalanche.models import SlimResNet18
 from avalanche.models.dynamic_modules import IncrementalClassifier
 from avalanche.training.plugins import EvaluationPlugin
-from avalanche.training.supervised import OnlineNaive, ER_ACE
+from avalanche.training.supervised import Naive, ER_ACE
 from experiments.utils import create_default_args, set_seed
 
 

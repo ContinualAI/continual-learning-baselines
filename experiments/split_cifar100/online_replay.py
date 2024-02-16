@@ -5,13 +5,13 @@ from torch.optim import SGD
 
 from avalanche.benchmarks.classic import SplitCIFAR100
 from avalanche.benchmarks import benchmark_with_validation_stream
-from avalanche.benchmarks.scenarios import OnlineCLScenario
+from avalanche.benchmarks.scenarios import split_online_stream
 from avalanche.evaluation.metrics import accuracy_metrics, loss_metrics
 from avalanche.logging import InteractiveLogger
 from avalanche.models import SlimResNet18
 from avalanche.training.plugins import EvaluationPlugin, ReplayPlugin
 from avalanche.training.storage_policy import ClassBalancedBuffer
-from avalanche.training.supervised import OnlineNaive
+from avalanche.training.supervised import Naive
 from experiments.utils import create_default_args, set_seed
 
 
@@ -62,7 +62,6 @@ def online_replay_scifar100(override_args=None):
     )
 
     scenario = benchmark_with_validation_stream(scenario, 0.05)
-    input_size = (3, 32, 32)
     model = SlimResNet18(100)
     optimizer = SGD(model.parameters(), lr=args.lr)
 
@@ -87,7 +86,7 @@ def online_replay_scifar100(override_args=None):
     plugins = [ReplayPlugin(args.mem_size, storage_policy=storage_policy)]
 
 
-    cl_strategy = OnlineNaive(
+    cl_strategy = Naive(
         model=model,
         optimizer=optimizer,
         plugins=plugins,
@@ -97,35 +96,21 @@ def online_replay_scifar100(override_args=None):
         eval_mb_size=64,
     )
 
-    # For online scenario
-    batch_streams = scenario.streams.values()
+    ocl_scenario = split_online_stream(
+        original_stream=scenario,
+        experience_size = args.train_mb_size,
+        access_task_boundaries = False
+    )
 
-    for t, experience in enumerate(scenario.train_stream):
-        print("Start of experience: ", experience.current_experience)
-        print("Current Classes: ", experience.classes_in_this_experience)
-
-        ocl_scenario = OnlineCLScenario(
-            original_streams=batch_streams,
-            experiences=experience,
-            experience_size=args.train_mb_size,
-            access_task_boundaries=False,
-        )
-
-        # Set this to inform strat
-        cl_strategy.classes_in_this_experience = experience.classes_in_this_experience
-
+    for t, experience in enumerate(ocl_scenario):
         cl_strategy.train(
-            ocl_scenario.train_stream,
+            experience,
             eval_streams=[],
             num_workers=0,
             drop_last=True,
         )
 
-        cl_strategy.eval(scenario.test_stream[: t + 1])
-
-    # Only evaluate at the end on the test stream
     results = cl_strategy.eval(scenario.test_stream)
-
     return results
 
 
