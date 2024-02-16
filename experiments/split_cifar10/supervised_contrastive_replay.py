@@ -100,8 +100,8 @@ def online_scr_scifar10(override_args=None):
     )
     # should achieve around 48% final accuracy
     cl_strategy = SCR(
-        model,
-        optimizer,
+        model=model,
+        optimizer=optimizer,
         augmentations=scr_transforms,
         plugins=None,
         evaluator=evaluator,
