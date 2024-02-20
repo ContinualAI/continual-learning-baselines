@@ -5,7 +5,7 @@ from torch.nn import CrossEntropyLoss
 from avalanche.evaluation import metrics as metrics
 from avalanche.training.storage_policy import ReservoirSamplingBuffer
 from avalanche.training.plugins import ReplayPlugin
-from avalanche.training.supervised.lamaml import LaMAML
+from avalanche.training.supervised.lamaml_v2 import LaMAML
 
 from models.models_lamaml import MTConvCIFAR
 from experiments.utils import set_seed, create_default_args
