@@ -23,7 +23,7 @@ class GEM(unittest.TestCase):
 
     def test_scifar100(self):
         """Split CIFAR-100 benchmark"""
-        res = gem_scifar100({'seed': 0})
+        res = gem_scifar100({'seed': 435342})
         avg_stream_acc = get_average_metric(res)
         print(f"GEM-SCIFAR100 Average Stream Accuracy: {avg_stream_acc:.2f}")
 
