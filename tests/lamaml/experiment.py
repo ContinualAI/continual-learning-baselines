@@ -17,7 +17,7 @@ class LaMAML(unittest.TestCase):
         """
             scifar100, multi-pass
         """
-        res = lamaml_scifar100({'seed': 0})
+        res = lamaml_scifar100({'seed': 498235})
         avg_stream_acc = get_average_metric(res)
         print(f"LaMAML-SCIFAR100 Average Stream Accuracy: {avg_stream_acc:.2f}")
 
